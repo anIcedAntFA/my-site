@@ -1,0 +1,98 @@
+/**
+ * Safe Wrangler Configuration Template
+ * For more details: https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "blog",
+	"main": "./dist/_worker.js/index.js",
+	"compatibility_date": "2025-03-20",
+	"compatibility_flags": ["nodejs_compat"],
+
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist",
+	},
+
+	"observability": {
+		"enabled": true,
+	},
+
+	/**
+	 * Routes - Safe to commit (public information)
+	 */
+	"routes": [
+		{
+			"pattern": "blog.ngockhoi96.dev",
+			"custom_domain": true,
+		},
+	],
+
+	/**
+	 * KV Namespaces - IDs are safe to commit (they're not secrets)
+	 * These are like database table names, not credentials
+	 */
+	"kv_namespaces": [
+		{
+			"binding": "MY_TEST_KV",
+			"id": "dbc60903f1124f808ff7426fc18dc2fc",
+		},
+	],
+
+	/**
+	 * R2 Buckets - Bucket names are safe to commit
+	 */
+	"r2_buckets": [
+		{
+			"binding": "BLOG_IMAGES",
+			"bucket_name": "blog-images",
+		},
+	],
+
+	/**
+	 * Images binding - Safe to commit
+	 */
+	"images": {
+		"binding": "IMAGES",
+	},
+
+	/**
+	 * Environment Variables - ONLY NON-SENSITIVE DATA
+	 * Use these for:
+	 * - Public URLs
+	 * - Timeouts and limits
+	 * - Public configuration
+	 * - Feature flags
+	 */
+	"vars": {
+		"VIEW_TTL_SECONDS": "86400",
+		"VIEW_DELAY_MS": "10000",
+		"R2_PUBLIC_URL": "https://assets.ngockhoi96.dev",
+		"R2_BUCKET_NAME": "blog-images",
+		"API_VERSION": "v1",
+		"ENABLE_ANALYTICS": "true",
+		"MAX_UPLOAD_SIZE_MB": "50",
+	},
+
+	/**
+	 * ⚠️ SECRETS MANAGEMENT:
+	 *
+	 * For sensitive data, use Wrangler secrets (NOT in this file):
+	 *
+	 * Development:
+	 * - Create .dev.vars file (git-ignored)
+	 * - Add: DATABASE_URL=your-dev-url
+	 *
+	 * Production:
+	 * - wrangler secret put DATABASE_URL
+	 * - wrangler secret put JWT_SECRET
+	 * - wrangler secret put EXTERNAL_API_KEY
+	 *
+	 * Never put these in wrangler.jsonc:
+	 * - API keys/tokens
+	 * - Database URLs with credentials
+	 * - JWT secrets
+	 * - Webhook secrets
+	 * - Encryption keys
+	 */
+}

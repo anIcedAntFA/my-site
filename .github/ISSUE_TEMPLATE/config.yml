@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Discussions
+    url: https://github.com/anIcedAntFA/my-site/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📚 Documentation
+    url: https://github.com/anIcedAntFA/my-site/blob/main/README.md
+    about: Check our project documentation and setup guides
+  - name: 🔒 Security Issues
+    url: https://github.com/anIcedAntFA/my-site/security/advisories/new
+    about: Report security vulnerabilities privately

@@ -1,0 +1,27 @@
+pre-commit:
+  parallel: true
+  commands:
+    format:
+      glob: '**/*.{ts,tsx,js,jsx,json,md,astro,yml,yaml}'
+      run: npx prettier --check {staged_files}
+    linter:
+      glob: '**/*.{ts,tsx,js,jsx,astro}'
+      run: npx eslint {staged_files}
+    check-types:
+      run: bun run check:types
+
+pre-push:
+  parallel: true
+  commands:
+    gitLeaks:
+      run: bun run gitleaks
+    check-circular-deps:
+      glob: '**/*.{ts,tsx,js,jsx,astro}'
+      run: bun run check:circular-deps
+    check-branch-name:
+      run: npx validate-branch-name
+
+commit-msg:
+  commands:
+    commitlint:
+      run: bunx commitlint --edit {1}

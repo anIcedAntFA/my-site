@@ -1,13 +1,28 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-"exclude": [
-    "dist"
-],
-"compilerOptions": {
-    "types": [
-        "./worker-configuration.d.ts",
-        "node"
-    ]
-}
+	"extends": "astro/tsconfigs/strict",
+	"include": [".astro/types.d.ts", "**/*", "styled-system"],
+	"exclude": ["dist"],
+	"compilerOptions": {
+		"types": ["./worker-configuration.d.ts", "node"],
+		// To enforce type imports
+		"verbatimModuleSyntax": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "@builder.io/qwik",
+		"plugins": [
+			{
+				"name": "@astrojs/ts-plugin"
+			}
+		],
+		"paths": {
+			"@ui/*": ["./src/ui/*"],
+			"@assets/*": ["./src/assets/*"],
+			"@content/*": ["./src/content/*"],
+			"@config": ["./src/config"],
+			"@data/*": ["./src/data/*"],
+			"@lib/*": ["./src/lib/*"],
+			"@layout/*": ["./src/layout/*"],
+			"@style/*": ["./src/style/*"],
+			"@styled-system/*": ["./styled-system/*"]
+		}
+	}
 }

@@ -8,14 +8,90 @@
 		"preview": "astro build && wrangler pages dev",
 		"astro": "astro",
 		"deploy": "astro build && wrangler pages deploy",
-		"cf-typegen": "wrangler types"
+		"cf-typegen": "wrangler types",
+		"check:types": "astro check",
+		"check:circular-deps": "dpdm './src/**/*.{ts,tsx,js,jsx,md,mdx}' --exit-code circular:1 --no-tree --no-warning",
+		"format": "prettier --check .",
+		"format:fix": "prettier --write \"**/*\" --ignore-unknown --cache",
+		"lint": "eslint .",
+		"lint:fix": "eslint . --fix --cache",
+		"panda:gen": "panda codegen",
+		"panda:jsx": "panda codegen --clean",
+		"check:all": "bun run format && bun run lint && bun run check:types && bun run check:circular-deps",
+		"ci:quality": "bun run format && bun run lint && bun run check:circular-deps",
+		"test:ci": "bun run panda:gen && bun run ci:quality && bun run check:types && bun run build",
+		"taze": "taze",
+		"taze:check": "taze -r",
+		"taze:apply": "taze -r --write --install",
+		"taze:ci": "taze -r --write --install",
+		"taze:prod": "taze -r --include prod --write --install",
+		"secrets:scan": "npx gitleaks detect --config .gitleaks.toml --verbose",
+		"secrets:setup": "cp .dev.vars.example .dev.vars && echo '✅ Created .dev.vars from example. Please fill with real values.'",
+		"secrets:production": "echo '🚀 Deploy secrets to production:' && echo 'wrangler secret put DATABASE_URL' && echo 'wrangler secret put JWT_SECRET' && echo 'wrangler secret put EXTERNAL_API_KEY'",
+		"secrets:list": "wrangler secret list",
+		"gitleaks": "bunx gitleaks detect -v",
+		"prepare": "lefthook install",
+		"commit": "cz",
+		"prune": "rimraf --glob 'node_modules' 'bun.lock' '.astro' 'dist'"
 	},
 	"dependencies": {
+		"@astrojs/check": "^0.9.4",
 		"@astrojs/cloudflare": "^12.6.9",
-		"astro": "^5.14.1"
+		"@astrojs/ts-plugin": "^1.10.4",
+		"@builder.io/qwik": "^1.16.1",
+		"@qwikdev/astro": "^0.8.2",
+		"astro": "^5.14.1",
+		"typescript": "^5.9.3"
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^20.1.0",
+		"@eslint/js": "^9.36.0",
+		"@pandabox/prettier-plugin": "^0.1.3",
+		"@pandacss/dev": "^1.4.1",
+		"@pandacss/eslint-plugin": "^0.2.14",
+		"@types/bun": "^1.2.23",
 		"@types/node": "^24.6.1",
+		"@typescript-eslint/eslint-plugin": "^8.45.0",
+		"@typescript-eslint/parser": "^8.45.0",
+		"commitizen": "^4.3.1",
+		"commitlint-config-gitmoji": "^2.3.1",
+		"cz-git": "^1.12.0",
+		"dpdm": "^3.14.0",
+		"eslint": "^9.36.0",
+		"eslint-plugin-astro": "^1.3.1",
+		"eslint-plugin-import": "^2.32.0",
+		"eslint-plugin-jsx-a11y": "^6.10.2",
+		"eslint-plugin-qwik": "^1.16.1",
+		"eslint-plugin-simple-import-sort": "^12.1.1",
+		"globals": "^16.4.0",
+		"lefthook": "^1.13.6",
+		"prettier": "^3.6.2",
+		"prettier-plugin-astro": "^0.14.1",
+		"rimraf": "^6.0.1",
+		"taze": "^19.7.0",
+		"typescript-eslint": "^8.45.0",
+		"validate-branch-name": "^1.3.2",
 		"wrangler": "^4.40.3"
+	},
+	"config": {
+		"commitizen": {
+			"path": "node_modules/cz-git"
+		}
+	},
+	"validate-branch-name": {
+		"pattern": "^(main|develop){1}$|^(feat|fix|hotfix|release|chore)/.+$",
+		"errorMsg": "Branch name is invalid, please rename your current branch"
+	},
+	"engines": {
+		"node": ">=24.2.0",
+		"bun": ">=1.2.12",
+		"npm": "please-use-bun",
+		"yarn": "please-use-bun",
+		"pnpm": "please-use-bun"
+	},
+	"packageManager": "bun@1.2.20",
+	"volta": {
+		"node": "24.2.0",
+		"bun": "1.2.20"
 	}
 }

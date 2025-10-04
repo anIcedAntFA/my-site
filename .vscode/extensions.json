@@ -1,4 +1,16 @@
 {
-  "recommendations": ["astro-build.astro-vscode"],
-  "unwantedRecommendations": []
+	"recommendations": [
+		"astro-build.astro-vscode",
+		"chakra-ui.panda-css-vscode",
+		"aaron-bond.better-comments",
+		"streetsidesoftware.code-spell-checker",
+		"editorconfig.editorconfig",
+		"dbaeumer.vscode-eslint",
+		"ms-vscode.vscode-typescript-next",
+		"unifiedjs.vscode-mdx",
+		"esbenp.prettier-vscode",
+		"yoavbls.pretty-ts-errors",
+		"johnreemar.vscode-qwik-snippets"
+	],
+	"unwantedRecommendations": []
 }

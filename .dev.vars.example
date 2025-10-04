@@ -1,0 +1,17 @@
+# Wrangler Development Variables (DO NOT COMMIT)
+# Copy this to .dev.vars and fill with real values
+
+# Database
+DATABASE_URL=your-development-database-url
+
+# Cloudflare API
+CLOUDFLARE_API_TOKEN=your-development-api-token
+CLOUDFLARE_ZONE_ID=your-zone-id
+
+# External APIs
+EXTERNAL_API_KEY=your-external-api-key
+WEBHOOK_SECRET=your-webhook-secret
+
+# Custom secrets
+JWT_SECRET=your-jwt-secret
+ENCRYPTION_KEY=your-encryption-key
