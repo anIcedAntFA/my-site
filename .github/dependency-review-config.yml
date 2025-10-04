@@ -1,0 +1,36 @@
+# Configuration for Dependency Review Action
+# See: https://github.com/actions/dependency-review-action#configuration-options
+
+# Fail the action if any vulnerable dependencies are found
+fail-on-severity: moderate
+
+# Fail if any malicious packages are found
+fail-on-scopes:
+  - runtime
+  - development
+
+# Allow certain advisories (if needed)
+# allow-ghsas:
+#   - GHSA-xxxx-xxxx-xxxx
+
+# Allow certain licenses
+allow-licenses:
+  - MIT
+  - Apache-2.0
+  - BSD-2-Clause
+  - BSD-3-Clause
+  - ISC
+  - GPL-3.0
+  - LGPL-2.1
+
+# Deny specific licenses
+deny-licenses:
+  - AGPL-1.0
+  - AGPL-3.0
+  - GPL-2.0
+
+# Comment on PRs with the results
+comment-summary-in-pr: always
+
+# Show only vulnerabilities in summary
+summarize-vulnerability-counts: true

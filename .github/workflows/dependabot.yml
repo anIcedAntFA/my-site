@@ -1,0 +1,39 @@
+name: Dependabot Auto-merge
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    name: Auto-merge Dependabot PRs
+    runs-on: ubuntu-latest
+    if: github.actor == 'dependabot[bot]' && github.event.pull_request.draft == false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check PR metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-merge patch and minor updates
+        if: steps.metadata.outputs.update-type != 'version-update:semver-major'
+        run: |
+          # Enable auto-merge with squash
+          gh pr merge --auto --squash "${{ github.event.pull_request.html_url }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment on major updates
+        if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+        run: |
+          gh pr comment "${{ github.event.pull_request.html_url }}" --body "🚨 This is a **major version update**. Please review manually before merging."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

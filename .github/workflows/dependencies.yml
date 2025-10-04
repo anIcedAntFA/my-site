@@ -1,0 +1,70 @@
+name: Dependency Updates
+
+on:
+  schedule:
+    # Run weekly on Mondays at 9 AM UTC
+    - cron: '0 9 * * 1'
+  workflow_dispatch: # Allow manual trigger
+
+jobs:
+  dependency-review:
+    name: Dependency Review
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Dependency Review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: moderate
+          allow-ghsas: true
+          config-file: '.github/dependency-review-config.yml'
+
+  outdated-deps:
+    name: Check Outdated Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Check for outdated dependencies
+        run: |
+          echo "## 📦 Outdated Dependencies Report" >> $GITHUB_STEP_SUMMARY
+
+          # Check for outdated packages
+          if bun outdated --json > outdated.json 2>/dev/null; then
+            if [ -s outdated.json ]; then
+              echo "Found outdated dependencies:" >> $GITHUB_STEP_SUMMARY
+              echo '```json' >> $GITHUB_STEP_SUMMARY
+              cat outdated.json >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+            else
+              echo "✅ All dependencies are up to date!" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "❌ Failed to check dependencies" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Security audit
+        run: |
+          echo "## 🔒 Security Audit" >> $GITHUB_STEP_SUMMARY
+          bun audit --json > audit.json 2>/dev/null || true
+
+          if [ -s audit.json ]; then
+            vulnerabilities=$(jq '.vulnerabilities | length' audit.json 2>/dev/null || echo "0")
+            if [ "$vulnerabilities" -gt 0 ]; then
+              echo "⚠️ Found $vulnerabilities vulnerabilities" >> $GITHUB_STEP_SUMMARY
+              echo '```json' >> $GITHUB_STEP_SUMMARY
+              cat audit.json >> $GITHUB_STEP_SUMMARY
+              echo '```' >> $GITHUB_STEP_SUMMARY
+            else
+              echo "✅ No security vulnerabilities found!" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "✅ No security issues detected!" >> $GITHUB_STEP_SUMMARY
+          fi

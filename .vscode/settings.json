@@ -1,5 +1,52 @@
 {
 	"files.associations": {
 		"wrangler.json": "jsonc"
+	},
+
+	// Editor defaults
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"editor.tabSize": 2,
+	"editor.insertSpaces": true,
+	"editor.detectIndentation": false,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "explicit",
+		"source.organizeImports": "explicit"
+	},
+
+	// ESLint
+	"eslint.validate": [
+		"astro",
+		"typescript",
+		"typescriptreact",
+		"javascript",
+		"javascriptreact"
+	],
+
+	// Prettier
+	"prettier.documentSelectors": ["**/*.astro", "**/*.tsx", "**/*.ts"],
+
+	// Language-specific overrides
+	"[astro]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": "explicit",
+			"source.organizeImports": "never"
+		}
+	},
+	"[{typescript,typescriptreact,javascript,javascriptreact}]": {
+		"editor.codeActionsOnSave": {
+			"source.fixAll.eslint": "explicit",
+			"source.organizeImports": "explicit"
+		}
+	},
+	"[{json,jsonc}]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+
+	// Spell check
+	"cSpell.enabledFileTypes": {
+		"astro": true,
+		"mdx": true,
+		"astro-markdown": true
 	}
 }

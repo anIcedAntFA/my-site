@@ -1,0 +1,123 @@
+# Gitleaks configuration file
+# https://github.com/gitleaks/gitleaks#configuration
+
+title = "Gitleaks Configuration for my-site"
+
+[extend]
+# Extend default config
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)(?:api_key|apikey|api-key)[\s]*[:=][\s]*["\']?([a-z0-9]{32,})["\']?'''
+keywords = [
+    "api_key",
+    "apikey",
+    "api-key",
+]
+
+[[rules]]
+id = "cloudflare-api-token"
+description = "Cloudflare API Token"
+regex = '''(?i)(?:cf_api_token|CF_API_TOKEN|cloudflare.*token)[\s]*[:=][\s]*["\']?([A-Za-z0-9_-]{40})["\']?'''
+keywords = [
+    "cloudflare",
+    "cf_api_token",
+    "CF_API_TOKEN",
+]
+
+[[rules]]
+id = "environment-variables"
+description = "Common environment variables that might contain secrets"
+regex = '''(?i)(password|secret|token|key|api)[\s]*=[\s]*["\']?[a-zA-Z0-9_\-\.]+["\']?'''
+path = '''\.env.*'''
+
+[[rules]]
+id = "wrangler-secrets"
+description = "Wrangler secret environment variables"
+regex = '''(?i)(?:vars|secrets)[\s]*:[\s]*\{[^}]*["\']([A-Za-z0-9_-]{20,})["\'][^}]*\}'''
+path = '''wrangler\.jsonc?'''
+
+[[rules]]
+id = "wrangler-database-urls"
+description = "Database URLs in wrangler config"
+regex = '''(?i)"[^"]*(?:DATABASE_URL|DB_URL|CONNECTION_STRING)[^"]*"[\s]*:[\s]*"([^"]+)"'''
+path = '''wrangler\.jsonc?'''
+
+[[rules]]
+id = "wrangler-api-keys"
+description = "API keys in wrangler vars"
+regex = '''(?i)"[^"]*(?:API_KEY|TOKEN|SECRET)[^"]*"[\s]*:[\s]*"([A-Za-z0-9_-]{15,})"'''
+path = '''wrangler\.jsonc?'''
+
+[[rules]]
+id = "real-cloudflare-tokens"
+description = "Real Cloudflare API tokens (not examples)"
+regex = '''(?i)(?:token|api_token)[\s]*[:=][\s]*["\']?([A-Za-z0-9_-]{40})["\']?'''
+keywords = [
+    "CLOUDFLARE_API_TOKEN",
+    "CF_API_TOKEN",
+]
+
+[[rules]]
+id = "database-urls"
+description = "Database connection strings"
+regex = '''(?i)(?:database_url|db_url|connection_string)[\s]*[:=][\s]*["\']?([^"\'\s]+)["\']?'''
+keywords = [
+    "database_url",
+    "db_url",
+    "connection_string",
+]
+
+# Allowlist for common false positives
+[allowlist]
+description = "Allowlist for false positives"
+paths = [
+    '''node_modules/.*''',
+    '''\.git/.*''',
+    '''bun\.lock''',
+    '''package-lock\.json''',
+    '''styled-system/.*''',
+    '''dist/.*''',
+    '''\.astro/.*''',
+    '''worker-configuration\.d\.ts''',  # Cloudflare generated types
+]
+
+regexes = [
+    '''example''',
+    '''test''',
+    '''demo''',
+    '''placeholder''',
+    '''YOUR_.*''',
+    '''<.*>''',
+    '''\$\{.*\}''',
+    '''process\.env\..*''',
+    '''@example.*''',  # JSDoc examples
+    '''interface.*''', # TypeScript interfaces
+    '''type.*''',      # TypeScript types
+    '''Base_Ai_Cf_.*''', # Cloudflare AI types
+    '''IncomingRequestCf.*''', # Cloudflare request types
+    '''DurableObject.*''', # Cloudflare Durable Objects
+    '''TraceItem.*''', # Cloudflare trace items
+    '''44372ba35fa1270921d318f34c12f155dc87b682cf36a790cfaa3ba8737a1b5d''', # Example from docs
+    '''084ee802fe1348f688220e2a6040a05b2199a761f33cf753abb1b006792d3f8b''', # Example from docs
+    '''6b9109f323999e52259cda7373ff0b4d26bd232e''', # Example from docs
+    '''acf77cf37b4156a2708e34c4eb755f9b5dbbe5ebb55adfec8f11493438d19e6ad3f157f81fa3b98278453d5652b0c1fd1d71e5695ae4d709803a4d3f39de9dea''', # Example from docs
+    '''869ac3b4ce0f52ba3b2e0bc70c49089e''', # Example hash
+    '''your-development-database-url''', # From .dev.vars.example
+    '''your-dev-url''', # From wrangler example
+    '''your-.*''', # All placeholder values starting with 'your-'
+]
+
+# Files to ignore entirely
+[allowlist.files]
+# Test files and examples
+paths = [
+    '''.*test.*''',
+    '''.*spec.*''',
+    '''.*example.*''',
+    '''README\.md''',
+    '''\.gitignore''',
+    '''worker-configuration\.d\.ts''', # Cloudflare generated types file
+]

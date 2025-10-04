@@ -1,0 +1,64 @@
+version: 2
+updates:
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Etc/UTC"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "⬆️"
+      prefix-development: "⬆️"
+      include: "scope"
+    labels:
+      - "dependencies"
+      - "automated"
+    assignees:
+      - "anIcedAntFA"
+    # Group related updates
+    groups:
+      astro:
+        patterns:
+          - "@astrojs/*"
+          - "astro"
+      qwik:
+        patterns:
+          - "@builder.io/qwik*"
+          - "@qwikdev/*"
+      panda:
+        patterns:
+          - "@pandacss/*"
+          - "@pandabox/*"
+      eslint:
+        patterns:
+          - "eslint*"
+          - "@eslint/*"
+          - "@typescript-eslint/*"
+      typescript:
+        patterns:
+          - "typescript"
+          - "@types/*"
+      dev-tools:
+        patterns:
+          - "prettier*"
+          - "lefthook"
+          - "commitizen"
+          - "commitlint*"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Etc/UTC"
+    commit-message:
+      prefix: "⬆️"
+      include: "scope"
+    labels:
+      - "github-actions"
+      - "automated"
