@@ -15,8 +15,9 @@ export default [
 			'**/*.d.ts',
 			'node_modules/**',
 			'dist/**',
+			'.astro/**',
+			'.wrangler/**',
 			'styled-system/**',
-			'src/theme/**',
 			'server/**',
 			'tmp/**',
 			'panda.config.ts',
@@ -108,7 +109,7 @@ export default [
 
 						// 6) Internal aliases (your app code like @/..., treat as internal)
 						[
-							'^@/components(/.*|$)',
+							'^@/ui(/.*|$)',
 							'^@/pages(/.*|$)',
 							'^@/layout(/.*|$)',
 							'^@/lib(/.*|$)',
@@ -165,6 +166,18 @@ export default [
 		rules: {
 			// Allow default exports in Astro files
 			'import/no-default-export': 'off',
+		},
+	},
+
+	// ✅ PandaCSS theme folder exceptions
+	{
+		files: ['src/theme/**/*.{js,ts,jsx,tsx}'],
+		rules: {
+			// Allow Panda config functions in theme folder
+			'@pandacss/no-config-function-in-source': 'off',
+			// Allow any types in theme definitions (Panda utilities often use generic types)
+			'@typescript-eslint/no-unsafe-assignment': 'off',
+			'@typescript-eslint/no-explicit-any': 'off',
 		},
 	},
 

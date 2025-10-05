@@ -1,0 +1,13 @@
+import type { TextStyles } from '@pandacss/dev';
+
+export const textStyles: TextStyles = {
+	body: {
+		description: 'Body text style',
+		value: {
+			fontFamily: 'body',
+			fontSize: '1rem',
+			fontWeight: '1.5',
+			lineHeight: 'calc(1.5 / 1)',
+		},
+	},
+};
