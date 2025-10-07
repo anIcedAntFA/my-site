@@ -1,6 +1,9 @@
 import { defineGlobalStyles } from '@pandacss/dev';
 
 export const globalCSS = defineGlobalStyles({
+	html: {
+		'--global-color-border': 'colors.gray.400',
+	},
 	body: {
 		bg: 'bg',
 		color: 'fg',

@@ -1,23 +1,25 @@
 import { component$, type PropsOf, Slot } from '@builder.io/qwik';
 
-import { css, cx } from '@styled-system/css';
+import { cx } from '@brendon1555/panda-cx-deduplicator';
+import { css } from '@styled-system/css';
 import { inlineCode } from '@styled-system/recipes';
-import type { ColorPalette } from '@styled-system/tokens';
 
 interface InlineCodeProps extends PropsOf<'span'> {
-	// variant?: 'subtle' | 'surface';
 	size?: 'sm' | 'md' | 'lg';
-	colorPalette?: ColorPalette;
+	classes?: string;
 }
 
 export const InlineCode = component$(
-	({ size = 'md', colorPalette = 'base' }: InlineCodeProps) => {
-		const classes = inlineCode({ size });
-
-		const palletteClasses = css({ colorPalette });
+	({ size = 'md', classes }: InlineCodeProps) => {
+		const mergedClasses = cx(
+			inlineCode({ size }),
+			css({ ml: 3 }),
+			css({ ml: 1 }),
+			classes,
+		);
 
 		return (
-			<span class={cx(palletteClasses, classes)}>
+			<span class={mergedClasses}>
 				<Slot />
 			</span>
 		);

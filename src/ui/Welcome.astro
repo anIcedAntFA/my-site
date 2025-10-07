@@ -5,6 +5,7 @@ import { SonHayHoi } from './sonehayhoi';
 import { vstack, hstack } from '@styled-system/patterns';
 import { InlineCode } from './inline-code';
 import { Button } from './button';
+import { css } from '@styled-system/css';
 ---
 
 <div id='container'>
@@ -20,14 +21,16 @@ import { Button } from './button';
 				/></a
 			>
 
-			<div class={vstack({ gap: 4 })}>
+			<div class={vstack({ gap: 4, ml: 4 })}>
 				<InlineCode size='sm'>javascript</InlineCode>
 				<InlineCode>javascript</InlineCode>
-				<InlineCode colorPalette='base' size='lg'>javascript</InlineCode>
+				<InlineCode size='lg' classes={css({ ml: 4, pb: 5, bg: 'orange' })}
+					>javascript</InlineCode
+				>
 			</div>
 			<h1>
 				<InlineCode size='sm'>javascript</InlineCode> To get started, <InlineCode
-					colorPalette='accent'>javascript</InlineCode
+					>javascript</InlineCode
 				> open the <code><pre>src/pages</pre></code>
 				<InlineCode size='lg'>javascript</InlineCode> directory in your project.
 			</h1>
@@ -44,19 +47,15 @@ import { Button } from './button';
 			</div>
 			<br />
 			<div class={hstack({ gap: 4 })}>
-				<Button size='sm' colorPalette='accent'>javascript</Button>
-				<Button colorPalette='accent'>javascript</Button>
-				<Button size='lg' colorPalette='accent' disabled>javascript</Button>
+				<Button size='sm'>javascript</Button>
+				<Button>javascript</Button>
+				<Button size='lg' disabled>javascript</Button>
 			</div>
 			<br />
 			<div class={hstack({ gap: 4 })}>
-				<Button size='sm' variant='contained' colorPalette='primary'
-					>javascript</Button
-				>
-				<Button variant='contained' colorPalette='primary'>javascript</Button>
-				<Button size='lg' variant='contained' colorPalette='primary'
-					>javascript</Button
-				>
+				<Button size='sm' variant='contained'>javascript</Button>
+				<Button variant='contained' disabled>javascript</Button>
+				<Button size='lg' variant='contained'>javascript</Button>
 			</div>
 			<SonHayHoi />
 			<section id='links'>

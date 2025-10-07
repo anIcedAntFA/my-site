@@ -10,31 +10,17 @@ export const colors = defineSemanticTokens.colors({
 
 		// Very light background used to separate large layout areas (sidebar, page sections)
 		subtle: {
-			value: { base: '{colors.base.50}', _dark: '{colors.base.900}' },
+			value: { base: '{colors.slate.50}', _dark: '{colors.slate.950}' },
 		},
 
 		// Muted blocks (cards, post previews) — sits above subtle
 		muted: {
-			value: {
-				base: '{colors.base.100}',
-				_dark: '{colors.base.800}',
-			},
+			value: { base: '{colors.slate.100}', _dark: '{colors.slate.900}' },
 		},
 
 		// Slightly stronger emphasis for callouts, banners, or hover backgrounds
 		emphasized: {
-			value: { base: '{colors.base.200}', _dark: '{colors.base.700}' },
-		},
-
-		// Surface = the "paper" or container for main content (article frame, editor)
-		// Distinct from muted: surface is the primary content panel (usually pure white)
-		surface: {
-			value: { base: '{colors.white}', _dark: '{colors.base.900}' },
-		},
-
-		// Panel = elevated panels / modals / dialogs — slightly different dark mapping
-		panel: {
-			value: { base: '{colors.white}', _dark: '{colors.base.950}' },
+			value: { base: '{colors.slate.200}', _dark: '{colors.slate.800}' },
 		},
 
 		// Inverted background (for strong contrast sections / overlays)
@@ -42,127 +28,152 @@ export const colors = defineSemanticTokens.colors({
 			value: { base: '{colors.black}', _dark: '{colors.white}' },
 		},
 
-		// hover slate for emphasized surfaces
-		'emphasized.hover': {
-			value: {
-				base: '{colors.base.100}',
-				_dark: '{colors.base.700}',
-			},
+		// Panel = elevated panels / modals / dialogs — slightly different dark mapping
+		panel: {
+			value: { base: '{colors.white}', _dark: '{colors.slate.950}' },
+		},
+
+		// Surface = the "paper" or container for main content (article frame, editor)
+		// Distinct from muted: surface is the primary content panel (usually pure white)
+		surface: {
+			value: { base: '{colors.white}', _dark: '{colors.slate.900}' },
+		},
+
+		info: {
+			value: { base: '{colors.blue.50}', _dark: '{colors.blue.900}' },
+		},
+		success: {
+			value: { base: '{colors.emerald.50}', _dark: '{colors.emerald.900}' },
+		},
+		warning: {
+			value: { base: '{colors.amber.50}', _dark: '{colors.amber.900}' },
+		},
+		error: {
+			value: { base: '{colors.rose.50}', _dark: '{colors.rose.900}' },
 		},
 	},
 
-	// Foreground tokens
+	// Border tokens
+	border: {
+		DEFAULT: {
+			value: { base: '{colors.slate.200}', _dark: '{colors.slate.800}' },
+		},
+		subtle: {
+			value: { base: '{colors.slate.50}', _dark: '{colors.slate.950}' },
+		},
+		muted: {
+			value: { base: '{colors.slate.100}', _dark: '{colors.slate.900}' },
+		},
+		emphasized: {
+			value: { base: '{colors.slate.300}', _dark: '{colors.slate.700}' },
+		},
+		inverted: {
+			value: { base: '{colors.slate.800}', _dark: '{colors.slate.200}' },
+		},
+		info: {
+			value: { base: '{colors.blue.500}', _dark: '{colors.blue.400}' },
+		},
+		success: {
+			value: { base: '{colors.emerald.500}', _dark: '{colors.emerald.400}' },
+		},
+		warning: {
+			value: { base: '{colors.amber.500}', _dark: '{colors.amber.400}' },
+		},
+		error: {
+			value: { base: '{colors.rose.500}', _dark: '{colors.rose.400}' },
+		},
+	},
+
+	// Text tokens
 	fg: {
 		// primary readable text color
 		DEFAULT: {
-			value: { base: '{colors.base.900}', _dark: '{colors.base.50}' },
+			value: { base: '{colors.black}', _dark: '{colors.slate.50}' },
 		},
-
 		// muted / meta text
 		muted: {
-			value: { base: '{colors.base.600}', _dark: '{colors.base.400}' },
+			value: { base: '{colors.slate.600}', _dark: '{colors.slate.400}' },
 		},
-
 		// subtle (less emphasis than muted)
 		subtle: {
-			value: { base: '{colors.base.500}', _dark: '{colors.base.500}' },
+			value: { base: '{colors.slate.400}', _dark: '{colors.slate.500}' },
 		},
-
 		// inverted text (used on dark backgrounds)
 		inverted: {
-			value: { base: '{colors.white}', _dark: '{colors.black}' },
+			value: { base: '{colors.slate.50}', _dark: '{colors.black}' },
 		},
-
-		// headline — reserved for titles (optionally brand-colored in dark mode)
-		headline: {
-			value: { base: '{colors.base.950}', _dark: '{colors.primary.300}' },
+		info: {
+			value: { base: '{colors.blue.600}', _dark: '{colors.blue.300}' },
 		},
-	},
-
-	// Accent tokens (primary palette mappings)
-	accent: {
-		DEFAULT: {
-			value: { base: '{colors.primary.600}', _dark: '{colors.primary.500}' },
+		success: {
+			value: { base: '{colors.emerald.600}', _dark: '{colors.emerald.300}' },
 		},
-		contrast: {
-			value: {
-				base: 'white',
-				_dark: 'white',
-			},
+		warning: {
+			value: { base: '{colors.amber.600}', _dark: '{colors.amber.300}' },
 		},
-		fg: {
-			value: {
-				base: '{colors.emerald.700}',
-				_dark: '{colors.emerald.300}',
-			},
-		},
-		subtle: {
-			value: {
-				base: '{colors.emerald.100}',
-				_dark: '{colors.emerald.900}',
-			},
-		},
-		muted: {
-			value: {
-				base: '{colors.emerald.200}',
-				_dark: '{colors.emerald.800}',
-			},
-		},
-		emphasized: {
-			value: {
-				base: '{colors.emerald.300}',
-				_dark: '{colors.emerald.700}',
-			},
-		},
-		solid: {
-			value: {
-				base: '{colors.emerald.600}',
-				_dark: '{colors.emerald.600}',
-			},
+		error: {
+			value: { base: '{colors.rose.500}', _dark: '{colors.rose.400}' },
 		},
 	},
 
 	base: {
 		DEFAULT: {
-			value: {
-				base: '{colors.slate.600}',
-				_dark: '{colors.slate.500}',
-			},
+			value: { base: '{colors.slate.600}', _dark: '{colors.slate.600}' },
 		},
 		contrast: {
-			value: {
-				base: '{colors.white}',
-				_dark: '{colors.black}',
-			},
+			value: { base: '{colors.white}', _dark: '{colors.black}' },
 		},
 		fg: {
-			value: {
-				base: '{colors.slate.800}',
-				_dark: '{colors.slate.200}',
-			},
+			value: { base: '{colors.slate.800}', _dark: '{colors.slate.200}' },
 		},
 		subtle: {
-			value: {
-				base: '{colors.slate.100}',
-				_dark: '{colors.slate.900}',
-			},
+			value: { base: '{colors.slate.100}', _dark: '{colors.slate.900}' },
 		},
 		muted: {
-			value: {
-				base: '{colors.slate.200}',
-				_dark: '{colors.slate.800}',
-			},
+			value: { base: '{colors.slate.200}', _dark: '{colors.slate.800}' },
 		},
 		emphasized: {
-			value: {
-				base: '{colors.slate.300}',
-				_dark: '{colors.slate.700}',
-			},
+			value: { base: '{colors.slate.300}', _dark: '{colors.slate.700}' },
 		},
 		solid: {
+			value: { base: '{colors.slate.900}', _dark: '{colors.white}' },
+		},
+		focusRing: {
+			value: { base: '{colors.slate.400}', _dark: '{colors.slate.400}' },
+		},
+	},
+
+	// Accent tokens
+	accent: {
+		DEFAULT: {
+			value: { base: '{colors.indigo.600}', _dark: '{colors.indigo.500}' },
+		},
+		contrast: {
+			value: { base: '{colors.white}', _dark: '{colors.black}' },
+		},
+		fg: {
+			value: { base: '{colors.indigo.800}', _dark: '{colors.indigo.200}' },
+		},
+		subtle: {
+			value: { base: '{colors.indigo.100}', _dark: '{colors.indigo.900}' },
+		},
+		muted: {
+			value: { base: '{colors.indigo.200}', _dark: '{colors.indigo.800}' },
+		},
+		emphasized: {
+			value: { base: '{colors.indigo.300}', _dark: '{colors.indigo.700}' },
+		},
+		solid: {
+			value: { base: '{colors.indigo.600}', _dark: '{colors.indigo.600}' },
+		},
+		focusRing: {
+			value: { base: '{colors.indigo.500}', _dark: '{colors.indigo.500}' },
+		},
+		gradient: {
 			value: {
-				base: '{colors.slate.900}',
-				_dark: '{colors.white}',
+				base: 'linear-gradient(144deg, {colors.indigo.500} 20%, {colors.indigo.600} 80%)',
+				_dark:
+					'linear-gradient(144deg, {colors.indigo.400} 30%, {colors.indigo.500} 70%)',
 			},
 		},
 	},

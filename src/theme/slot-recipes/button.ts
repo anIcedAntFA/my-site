@@ -11,6 +11,10 @@ export const buttonRecipe = defineSlotRecipe({
 			fontWeight: 'medium',
 			textTransform: 'uppercase',
 			userSelect: 'none',
+			_disabled: {
+				opacity: 0.5,
+				pointerEvents: 'none',
+			},
 		},
 		content: {
 			display: 'inline-flex',
@@ -26,7 +30,7 @@ export const buttonRecipe = defineSlotRecipe({
 			contained: {
 				root: {
 					pos: 'relative',
-					bg: { base: 'colorPalette.900', _dark: 'colorPalette.700' },
+					bg: 'base.solid',
 					_supportHover: {
 						'&:hover > :first-child::before': {
 							opacity: 1,
@@ -35,16 +39,12 @@ export const buttonRecipe = defineSlotRecipe({
 					},
 				},
 				content: {
-					bdc: { base: 'colorPalette.900', _dark: 'colorPalette.700' },
-					color: { base: 'white', _dark: 'slate.900' },
-					bg: {
-						base: 'linear-gradient(135deg, {colors.colorPalette.400} 10%, {colors.colorPalette.500} 30%, {colors.colorPalette.600} 60%)',
-						_dark:
-							'linear-gradient(135deg, {colors.colorPalette.300} 10%, {colors.colorPalette.400} 30%, {colors.colorPalette.500} 60%)',
-					},
+					bdc: 'base.solid',
+					color: 'accent.contrast',
+					bg: 'accent.gradient',
 					overflow: 'hidden',
 					_before: {
-						zIndex: 0,
+						zIndex: 'base',
 						inset: 0,
 						pos: 'absolute',
 						left: '-100%',
@@ -53,7 +53,9 @@ export const buttonRecipe = defineSlotRecipe({
 						h: '100%',
 						bg: 'linear-gradient(90deg,transparent,rgb(255 255 255 / 40%),transparent)',
 						opacity: 0,
-						transition: 'opacity 0.15s ease-in-out',
+						transitionTimingFunction: 'ease-in-out',
+						transitionDuration: 'normal',
+						transitionProperty: 'opacity',
 						content: '""',
 						pointerEvents: 'none',
 					},
@@ -61,12 +63,12 @@ export const buttonRecipe = defineSlotRecipe({
 			},
 			outlined: {
 				root: {
-					bg: 'colorPalette',
+					bg: 'accent',
 				},
 				content: {
-					bdc: 'colorPalette',
-					color: 'base.900',
-					bg: 'base.50',
+					bdc: 'accent',
+					color: 'slate.900',
+					bg: 'slate.50',
 				},
 			},
 		},
@@ -81,9 +83,9 @@ export const buttonRecipe = defineSlotRecipe({
 				content: {
 					textStyle: 'sm',
 					rounded: 'md',
-					h: 9,
-					px: 4,
-					letterSpacing: 'normal',
+					h: '9',
+					px: '4',
+					letterSpacing: 'wide',
 				},
 			},
 			md: {
@@ -96,9 +98,9 @@ export const buttonRecipe = defineSlotRecipe({
 				content: {
 					textStyle: 'md',
 					rounded: 'lg',
-					h: 11,
-					px: 5,
-					letterSpacing: 'wide',
+					h: '11',
+					px: '5',
+					letterSpacing: 'wider',
 				},
 			},
 			lg: {
@@ -111,8 +113,8 @@ export const buttonRecipe = defineSlotRecipe({
 				content: {
 					textStyle: 'lg',
 					rounded: 'lg',
-					h: 14,
-					px: 6,
+					h: '14',
+					px: '6',
 					letterSpacing: 'wider',
 				},
 			},
