@@ -1,7 +1,6 @@
 import { component$, type PropsOf, Slot } from '@builder.io/qwik';
 
-import { cx } from '@brendon1555/panda-cx-deduplicator';
-import { css } from '@styled-system/css';
+import { cn } from '@lib/style/cn.lib';
 import { inlineCode } from '@styled-system/recipes';
 
 interface InlineCodeProps extends PropsOf<'span'> {
@@ -11,15 +10,8 @@ interface InlineCodeProps extends PropsOf<'span'> {
 
 export const InlineCode = component$(
 	({ size = 'md', classes }: InlineCodeProps) => {
-		const mergedClasses = cx(
-			inlineCode({ size }),
-			css({ ml: 3 }),
-			css({ ml: 1 }),
-			classes,
-		);
-
 		return (
-			<span class={mergedClasses}>
+			<span class={cn(inlineCode({ size }), classes)}>
 				<Slot />
 			</span>
 		);

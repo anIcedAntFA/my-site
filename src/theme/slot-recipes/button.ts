@@ -12,7 +12,7 @@ export const buttonRecipe = defineSlotRecipe({
 			textTransform: 'uppercase',
 			userSelect: 'none',
 			_disabled: {
-				opacity: 0.5,
+				opacity: 0.4,
 				pointerEvents: 'none',
 			},
 		},

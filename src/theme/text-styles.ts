@@ -6,7 +6,7 @@ export const textStyles: TextStyles = {
 		value: {
 			fontFamily: 'body',
 			fontSize: '1rem',
-			fontWeight: '1.5',
+			fontWeight: 'normal',
 			lineHeight: 'calc(1.5 / 1)',
 		},
 	},

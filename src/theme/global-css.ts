@@ -1,9 +1,6 @@
 import { defineGlobalStyles } from '@pandacss/dev';
 
 export const globalCSS = defineGlobalStyles({
-	html: {
-		'--global-color-border': 'colors.gray.400',
-	},
 	body: {
 		bg: 'bg',
 		color: 'fg',
@@ -26,7 +23,7 @@ export const globalCSS = defineGlobalStyles({
 				WebkitAppearance: 'none',
 			},
 	},
-	'*::selection': {
-		bg: 'accent.subtle/80',
-	},
+	// '*::selection': {
+	// 	bg: 'accent.subtle/80',
+	// },
 });
