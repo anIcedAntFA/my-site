@@ -7,7 +7,13 @@ export const SonHayHoi = component$(() => {
 	const isProblem = useSignal(false);
 
 	return (
-		<div class={stack({ gap: 4, alignItems: 'center', mt: '40px' })}>
+		<div
+			class={stack({
+				gap: 4,
+				alignItems: 'center',
+				mt: '40px',
+			})}
+		>
 			<Square size='100px' bg={isProblem.value ? 'red.400' : 'green.400'}>
 				SonHayHoi Component
 				{isProblem.value ? <p>Problem!</p> : <p>No Problem!</p>}

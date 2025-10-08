@@ -1,11 +1,15 @@
 ---
 import astroLogo from '@assets/astro.svg';
-import background from '@assets/background.svg';
+// import background from '@assets/background.svg';
 import { SonHayHoi } from './sonehayhoi';
+import { vstack, hstack } from '@styled-system/patterns';
+import { InlineCode } from './inline-code';
+import { Button } from './button';
+import { css } from '@styled-system/css';
 ---
 
 <div id='container'>
-	<img id='background' src={background.src} alt='' fetchpriority='high' />
+	<!-- <img id='background' src={background.src} alt='' fetchpriority='high' /> -->
 	<main>
 		<section id='hero'>
 			<a href='https://astro.build'
@@ -16,11 +20,45 @@ import { SonHayHoi } from './sonehayhoi';
 					alt='Astro Homepage'
 				/></a
 			>
+
+			<div class={vstack({ gap: 4, ml: 4 })}>
+				<InlineCode size='sm'>javascript</InlineCode>
+				<InlineCode>javascript</InlineCode>
+				<InlineCode size='lg' classes={css({ ml: 4, pb: 5, bg: 'orange' })}
+					>javascript</InlineCode
+				>
+			</div>
 			<h1>
-				To get started, open the <code><pre>src/pages</pre></code> directory in your
-				project.
+				<InlineCode size='sm'>javascript</InlineCode> To get started, <InlineCode
+					>javascript</InlineCode
+				> open the <code><pre>src/pages</pre></code>
+				<InlineCode size='lg'>javascript</InlineCode> directory in your project.
 			</h1>
+			<div class={hstack({ gap: 4 })}>
+				<Button size='sm'>javascript</Button>
+				<Button disabled>javascript</Button>
+				<Button size='lg'>javascript</Button>
+			</div>
+			<br />
+			<div class={hstack({ gap: 4 })}>
+				<Button size='sm' variant='contained'>javascript</Button>
+				<Button variant='contained'>javascript</Button>
+				<Button size='lg' variant='contained'>javascript</Button>
+			</div>
+			<br />
+			<div class={hstack({ gap: 4 })}>
+				<Button size='sm'>javascript</Button>
+				<Button>javascript</Button>
+				<Button size='lg' disabled>javascript</Button>
+			</div>
+			<br />
+			<div class={hstack({ gap: 4 })}>
+				<Button size='sm' variant='contained'>javascript</Button>
+				<Button variant='contained' disabled>javascript</Button>
+				<Button size='lg' variant='contained'>javascript</Button>
+			</div>
 			<SonHayHoi />
+
 			<section id='links'>
 				<a class='button' href='https://docs.astro.build'>Read our docs</a>
 				<a href='https://astro.build/chat'
@@ -52,7 +90,7 @@ import { SonHayHoi } from './sonehayhoi';
 </div>
 
 <style>
-	#background {
+	/* #background {
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -60,7 +98,7 @@ import { SonHayHoi } from './sonehayhoi';
 		height: 100%;
 		z-index: -1;
 		filter: blur(100px);
-	}
+	} */
 
 	#container {
 		font-family:
