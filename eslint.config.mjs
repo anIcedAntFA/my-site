@@ -154,6 +154,7 @@ export default [
 			'@pandacss/no-important': 'error',
 			'@pandacss/no-dynamic-styling': 'off',
 			'@pandacss/prefer-unified-property-style': 'off',
+			'@pandacss/no-unsafe-token-fn-usage': 'off',
 
 			// 🛠️ Qwik optional tweaks (if needed)
 			// 'qwik/no-use-visible-task': 'off',
