@@ -1,4 +1,5 @@
 import { defineConfig } from '@pandacss/dev';
+import { breakpoints } from './src/theme/breakpoints';
 import { conditions } from './src/theme/conditions';
 import { globalCSS } from './src/theme/global-css';
 import { globalVariables } from './src/theme/global-variables';
@@ -72,12 +73,12 @@ export default defineConfig({
 	// Decides which syntax to use when writing CSS.
 	syntax: 'object-literal',
 
-	// Whether to use lightningcss instead of postcss for css optimization.
-	lightningcss: true,
+	// // Whether to use lightningcss instead of postcss for css optimization.
+	// lightningcss: true,
 
-	// Browserslist query to target specific browsers.
-	// Only used when lightningcss is set to `true`.
-	browserslist: ['last 2 versions', 'not dead', 'not < 2%'],
+	// // Browserslist query to target specific browsers.
+	// // Only used when lightningcss is set to `true`.
+	// browserslist: ['last 2 versions', 'not dead', 'not < 2%'],
 
 	//==== Design token options ====
 
@@ -107,6 +108,7 @@ export default defineConfig({
 			keyframes,
 			recipes,
 			slotRecipes,
+			breakpoints,
 		},
 	},
 
