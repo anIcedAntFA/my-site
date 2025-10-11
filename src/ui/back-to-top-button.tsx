@@ -1,19 +1,16 @@
 import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 
 import { css, cx } from '@styled-system/css';
-import { flex } from '@styled-system/patterns';
+import { flex, square } from '@styled-system/patterns';
+import { button, icon } from '@styled-system/recipes';
 
 interface BackToTopButtonProps {
 	top?: number;
 	isSmooth?: boolean;
 }
 
-function pxToRem(px: number, base = 16): string {
-	return `${px / base}rem`;
-}
-
 export const BackToTopButton = component$<BackToTopButtonProps>(
-	({ top = 2, isSmooth = true }) => {
+	({ top = 200, isSmooth = true }) => {
 		const isVisible = useSignal(false);
 		const btnRef = useSignal<HTMLButtonElement>();
 
@@ -48,10 +45,13 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 			}
 		});
 
+		const btnClasses = button({ size: 'sm', variant: 'outlined' });
+		const iconClasses = icon({ mode: 'mask', size: 'md' });
+
 		return (
 			<div
 				class={flex({
-					zIndex: 50,
+					zIndex: 'tooltip',
 					pos: 'sticky',
 					left: '100%',
 					bottom: 'var(--btt-btn-size)',
@@ -72,13 +72,8 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 						opacity: 1,
 						pointerEvents: 'auto',
 					},
-					md: {
-						w: '100%',
-						maxW: pxToRem(160),
-					},
-					xs: {
-						'--btt-btn-size': 'sizes.12',
-					},
+					xs: { '--btt-btn-size': 'sizes.12' },
+					md: { w: 'fit-content' },
 					'--btt-btn-size': 'sizes.10',
 				})}
 				data-visible={isVisible.value}
@@ -88,77 +83,57 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 					aria-label='Back to top'
 					type='button'
 					class={cx(
+						btnClasses.root,
 						'group',
 						flex({
-							cursor: 'pointer',
 							pos: 'relative',
 							align: 'center',
-							border: 'md',
-							bdc: 'accent',
-							rounded: 'md',
-							w: '100%',
-							h: 'var(--btt-btn-size)',
-							color: 'slate.900',
-							// bg: 'slate.50/50',
-							shadow: '2px 4px {colors.accent}',
-							md: {
-								gap: '2',
-								px: '3',
-								backdropFilter: 'auto',
-								backdropBlur: 'sm',
-							},
+							boxSize: '{sizes.full}',
 						}),
 					)}
-					// style={{ backdropFilter: 'blur(8px)' }}
 					onClick$={scrollToTop}
 				>
-					<span
-						class={flex({
-							justify: 'center',
-							align: 'center',
-							w: '100%',
-							h: 'calc(var(--btt-btn-size) - 0.125rem)',
-							overflow: 'hidden',
-							md: {
-								w: 'auto',
-								h: 'calc(var(--btt-btn-size) - 0.5rem)',
-							},
-						})}
+					<div
+						class={cx(
+							btnClasses.content,
+							css({
+								justifyContent: 'center',
+								h: '{sizes.full}',
+								overflow: 'hidden',
+							}),
+						)}
 					>
-						<i
-							class={css({
-								display: 'inline-block',
-								w: '1.5em',
-								h: '1.5em',
-								bg: 'currentColor',
-								maskPosition: 'center',
-								maskRepeat: 'no-repeat',
-								maskImage: '{assets.arrowUp}',
-								maskSize: 'contain',
-								_groupHover: {
-									color: 'accent',
-									animation: 'icon-cycle-up',
-									animationDuration: 'longer',
-									animationTimingFunction: 'ease-in-out',
-								},
+						<span
+							class={square({
+								h: 'calc({sizes.full} - 0.25rem)',
+								overflow: 'hidden',
 							})}
-						/>
-					</span>
-					<span
-						class={css({
-							srOnly: true,
-							md: {
-								fontSize: 'lg',
-								fontWeight: 'medium',
-								srOnly: false,
-								_groupHover: {
-									color: 'accent',
-								},
-							},
-						})}
-					>
-						Back to top
-					</span>
+						>
+							<i
+								aria-hidden='true'
+								class={cx(
+									iconClasses,
+									css({
+										maskImage: '{assets.arrowUp}',
+										_groupHover: {
+											animation: 'icon-cycle-up',
+											animationDuration: 'longer',
+											animationTimingFunction: 'ease-in-out',
+										},
+										xs: { w: '1.7em', h: '1.7em' },
+									}),
+								)}
+							/>
+						</span>
+						<span
+							class={css({
+								srOnly: true,
+								md: { ml: '1.5', srOnly: false },
+							})}
+						>
+							Back to top
+						</span>
+					</div>
 				</button>
 			</div>
 		);
