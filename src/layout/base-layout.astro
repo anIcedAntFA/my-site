@@ -1,0 +1,34 @@
+---
+import '@style/panda.css';
+import { BackToTopButton } from '@ui/back-to-top-button';
+---
+
+<!doctype html>
+<html lang='en' class='light' data-theme='light'>
+	<head>
+		<meta charset='UTF-8' />
+		<meta name='viewport' content='width=device-width' />
+		<link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+		<meta name='generator' content={Astro.generator} />
+		<title>Astro Basics</title>
+	</head>
+	<body style={{ height: '2000px' }}>
+		<header>
+			<h1>My Site</h1>
+		</header>
+		<slot />
+		<BackToTopButton />
+		<footer>
+			<p>© 2024 My Site. All rights reserved.</p>
+		</footer>
+	</body>
+</html>
+
+<style>
+	html,
+	body {
+		margin: 0;
+		width: 100%;
+		height: 100%;
+	}
+</style>

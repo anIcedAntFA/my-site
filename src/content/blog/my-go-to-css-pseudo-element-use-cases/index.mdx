@@ -1,0 +1,83 @@
+---
+title: My Go-To CSS Pseudo-Element Use Cases
+description: Dive deep into practical CSS pseudo-element applications, from crafting elegant UI details and enhancing form usability to optimizing animations for a smoother user experience.
+featuredImage: ./image/vegetables-card-thumbnail.jpg
+publishedDate: '2025-05-01'
+modifiedDate: '2025-06-01'
+publish: true
+tags:
+  - css
+seo:
+  slug: mastering-css-pseudo-element-techniques # Slightly more keyword-rich slug
+  title: 'Mastering CSS Pseudo-Elements: Practical Use Cases & Expert Tips'
+  description: Explore a senior frontend engineer's go-to CSS pseudo-element techniques for enhancing UIs, optimizing performance, and writing cleaner, more maintainable code.
+  image: ./image/vegetables-card-thumbnail.jpg
+author: ngockhoi96
+---
+
+## 1. Crafting Interactive Text: The Layout-Shift-Free Hover
+
++> Highlighting interactive elements like links on hover is a fundamental UX pattern. However, a naive <mark>`font-weight`</mark> change can trigger ==layout shifts==, negatively impacting ==Core Web Vitals== (specifically Cumulative Layout Shift - CLS). Pseudo-elements offer a refined, CLS-friendly solution.
+
+[==test link==](https://developer.mozilla.org/en-US/blog/launching-new-front-end/)
+
+**The Core Concept:**
+
+Instead of altering the original text's properties, [dummy link](https://blog.ngockhoi96.dev) we introduce a `::before` pseudo-element containing the same text content. This pseudo-element, styled with the bolder font-weight, is absolutely positioned directly atop the original text. It's initially transparent (`opacity: 0`) and gracefully fades in on hover. The original element's dimensions remain unchanged, thus preventing any layout jank.
+
+**Implementation Insights:**
+
+The provided HTML snippet uses a `data-content` attribute on the anchor tag to hold the text for the pseudo-element. The CSS then uses `content: attr(data-content);` to pull this text into the `::before` element. Absolute positioning ensures precise overlay, while `pointer-events: none;` is crucial to allow clicks and other interactions to pass through to the underlying anchor tag.
+
+**HTML:**
+
+```html
+<p>
+	This is my personal blog,
+	<a
+		href="[https://blog.ngockhoi96.dev](https://blog.ngockhoi96.dev)"
+		data-content="blog.ngockhoi96.dev"
+	>
+		blog.ngockhoi96.dev
+	</a>
+	where I share my thoughts and experiences.
+</p>
+```
+
+**CSS:**
+
+```css
+a {
+	position: relative;
+	text-decoration: none;
+	color: green;
+}
+
+a::before {
+	content: attr(
+		data-content
+	); /* Pulls text from the 'data-content' attribute */
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: auto; /* Or match parent's width if necessary */
+	color: green; /* Or your desired hover color */
+	font-weight: 600; /* The heavier font weight for the hover state */
+	opacity: 0; /* Hidden by default */
+	transition: opacity 0.1s ease-in-out;
+	pointer-events: none; /* Allows clicks to pass through to the actual link below */
+}
+
+a:hover::before {
+	opacity: 1; /* Fade in on hover */
+}
+```
+
+- [x] This is now a clickable, checked checkbox.
+- [ ] This is a clickable, unchecked checkbox.
+
+**Key Technical Takeaways:**
+
+- **Performance:** This technique is excellent for performance as `opacity` transitions are highly optimized by browsers (often GPU-accelerated).
+- **Accessibility:** Ensure the `color` provides sufficient contrast in both normal and "hovered" (pseudo-element visible) states.
+- **Maintainability:** Using `data-content` keeps the duplicated text within the HTML, which can be good for SEO or if the text is dynamic. For static text, you could also hardcode it in the `content` property, but `attr()` is more flexible.

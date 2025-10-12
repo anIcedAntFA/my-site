@@ -1,6 +1,9 @@
 import { defineGlobalStyles } from '@pandacss/dev';
 
 export const globalCSS = defineGlobalStyles({
+	'*, *::before, *::after': {
+		transitionTimingFunction: 'ease-in-out',
+	},
 	body: {
 		bg: 'bg',
 		color: 'fg',

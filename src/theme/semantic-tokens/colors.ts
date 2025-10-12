@@ -177,4 +177,13 @@ export const colors = defineSemanticTokens.colors({
 			},
 		},
 	},
+
+	link: {
+		DEFAULT: {
+			value: { base: '{colors.blue.600}', _dark: '{colors.blue.500}' },
+		},
+		visited: {
+			value: { base: '{colors.violet.600}', _dark: '{colors.violet.500}' },
+		},
+	},
 });

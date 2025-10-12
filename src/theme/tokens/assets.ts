@@ -7,4 +7,10 @@ export const assets = defineTokens.assets({
 			value: '/arrow-up.svg',
 		},
 	},
+	externalLink: {
+		value: {
+			type: 'url',
+			value: '/external-link.svg',
+		},
+	},
 });

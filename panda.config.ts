@@ -115,7 +115,7 @@ export default defineConfig({
 	// The css utility definitions.
 	utilities: {
 		extend: {
-			borderColor: borderColor,
+			borderColor,
 		},
 	},
 

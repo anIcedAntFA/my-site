@@ -4,4 +4,5 @@ export const conditions = {
 	supportHover: '@media (hover: hover) and (pointer: fine)',
 	// Extend the default `dark` condition
 	dark: '.dark &, [data-theme="dark"] &',
+	blank: '&[target="_blank"]',
 };
