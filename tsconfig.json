@@ -17,7 +17,7 @@
 			"@ui/*": ["./src/ui/*"],
 			"@assets/*": ["./src/assets/*"],
 			"@content/*": ["./src/content/*"],
-			"@config": ["./src/config"],
+			"@config/*": ["./src/config/*"],
 			"@data/*": ["./src/data/*"],
 			"@lib/*": ["./src/lib/*"],
 			"@layout/*": ["./src/layout/*"],

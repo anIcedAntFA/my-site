@@ -23,6 +23,7 @@ export default [
 			'panda.config.ts',
 			'commitlint.config.mjs',
 			'lefthook.yml',
+			'src/content.config.ts',
 			'*.yml',
 			'*.yaml',
 			'*.toml',

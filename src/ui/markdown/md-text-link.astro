@@ -1,0 +1,29 @@
+---
+import { isAbsoluteURL } from '@lib/text';
+import { link } from '@styled-system/recipes';
+import type { HTMLAttributes } from 'astro/types';
+import { transform } from 'ultrahtml';
+import sanitize from 'ultrahtml/transformers/sanitize';
+
+interface Props extends HTMLAttributes<'a'> {}
+
+const { href, ...anchorAttrs } = Astro.props;
+
+const isAbsolute = typeof href === 'string' && isAbsoluteURL(href);
+
+const labelHTML = await Astro.slots.render('default');
+const labelString = await transform(labelHTML, [
+	sanitize({ unblockElements: [] }),
+]);
+
+const linkClasses = link({ visual: 'subtle', size: 'md' });
+---
+
+<a
+	aria-label={`Read more about ${labelString}`}
+	href={href}
+	target={isAbsolute ? '_blank' : undefined}
+	rel={isAbsolute ? 'noopener noreferrer' : undefined}
+	class={linkClasses}
+	{...anchorAttrs}><slot /></a
+>

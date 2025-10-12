@@ -42,3 +42,5 @@ styled-system-studio
 # Gitleaks
 .gitleaks-report.json
 gitleaks-report.json
+
+.eslintcache
