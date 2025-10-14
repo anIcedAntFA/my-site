@@ -1,5 +1,5 @@
 ---
-import { prose } from '@styled-system/recipes';
+import { proseBu } from '@styled-system/recipes';
 
 interface Props {
 	size?: 'sm' | 'base' | 'lg' | 'xl';
@@ -15,7 +15,7 @@ const {
 	class: className,
 } = Astro.props;
 
-const proseClasses = prose({ size, variant, lead });
+const proseClasses = proseBu({ size, variant, lead });
 const combinedClasses = className
 	? `${proseClasses} ${className}`
 	: proseClasses;

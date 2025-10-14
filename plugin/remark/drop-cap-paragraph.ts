@@ -43,8 +43,8 @@ export const remarkDropCapParagraph: Plugin<[IOptions?], MdastRoot> = (
 					node.data = node.data || {};
 					const hProperties = node.data.hProperties || {};
 
-					// Add the data attribute
-					hProperties['data-drop-cap'] = 'true';
+					// Add the data attribute without a value
+					hProperties['data-drop-cap'] = '';
 
 					node.data.hProperties = hProperties;
 				}
