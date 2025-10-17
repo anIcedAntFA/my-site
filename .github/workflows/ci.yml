@@ -49,7 +49,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: styled-system
-          key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/**/*.{ts,tsx,astro}') }}
+          key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/theme/**/*.ts', 'src/**/*.{ts,tsx,astro}') }}
 
       # Run checks in parallel using matrix strategy
       - name: Run Quality Checks
@@ -113,13 +113,13 @@ jobs:
         uses: actions/cache@v4
         with:
           path: styled-system
-          key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/**/*.{ts,tsx,astro}') }}
+          key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/theme/**/*.ts', 'src/**/*.{ts,tsx,astro}') }}
 
       - name: Generate Panda CSS (if cache miss)
         run: |
-          if [ ! -d "styled-system" ]; then
-            bun run panda:gen
-          fi
+          # Force regeneration for prose recipe PR
+          echo "� Force regenerating Panda CSS for prose recipe changes..."
+          bun run panda:gen
 
       - name: Type Check
         run: bun run check:types
@@ -156,13 +156,12 @@ jobs:
         uses: actions/cache@v4
         with:
           path: styled-system
-          key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/**/*.{ts,tsx,astro}') }}
+          key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/theme/**/*.ts', 'src/**/*.{ts,tsx,astro}') }}
 
       - name: Generate Panda CSS (if cache miss)
         run: |
-          if [ ! -d "styled-system" ]; then
-            bun run panda:gen
-          fi
+          echo "🔧 Force regenerating Panda CSS for theme changes..."
+          bun run panda:gen
 
       - name: Build
         run: bun run build
