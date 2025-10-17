@@ -3,7 +3,7 @@ import cloudflare from '@astrojs/cloudflare';
 import mdx from '@astrojs/mdx';
 import qwikdev from '@qwikdev/astro';
 import { defineConfig } from 'astro/config';
-import { remarkExternalLinks } from './plugin/remark';
+import { remarkDropCapParagraph, remarkExternalLinks } from './plugin/remark';
 
 // https://astro.build/config
 export default defineConfig({
@@ -17,6 +17,6 @@ export default defineConfig({
 	integrations: [qwikdev(), mdx()],
 	output: 'static',
 	markdown: {
-		remarkPlugins: [remarkExternalLinks],
+		remarkPlugins: [remarkExternalLinks, remarkDropCapParagraph],
 	},
 });

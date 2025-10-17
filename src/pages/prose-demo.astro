@@ -1,0 +1,165 @@
+---
+import Layout from '@layout/base-layout.astro';
+import Prose from '@ui/prose.astro';
+---
+
+<Layout title='Prose Recipe Demo'>
+	<main class='container max-w-4xl mx-auto py-8 px-4'>
+		<Prose size='lg' lead>
+			<h1>Prose Recipe Demonstration</h1>
+
+			<p>
+				This page demonstrates the comprehensive typography system built with
+				our prose recipe. The first paragraph is styled as a lead paragraph with
+				larger text and muted color to introduce the content effectively.
+			</p>
+
+			<h2>Typography Hierarchy</h2>
+
+			<p>
+				The prose recipe provides a complete typography scale that creates clear
+				visual hierarchy and excellent readability. All elements are properly
+				spaced and styled for optimal reading experience.
+			</p>
+
+			<h3>Lists and Structure</h3>
+
+			<p>Here's an ordered list showing key features:</p>
+
+			<ol>
+				<li>
+					<strong>Comprehensive element support</strong> - All HTML elements are
+					styled
+				</li>
+				<li>
+					<strong>Multiple size variants</strong> - From compact to extra large
+				</li>
+				<li>
+					<strong>Color variants</strong> - Default, muted, and inverted themes
+				</li>
+				<li>
+					<strong>Responsive design</strong> - Adapts to different screen sizes
+				</li>
+			</ol>
+
+			<p>And here's an unordered list of typography best practices:</p>
+
+			<ul>
+				<li>Maintain consistent spacing between elements</li>
+				<li>Use proper heading hierarchy (h1 → h2 → h3...)</li>
+				<li>Keep line lengths readable (45-75 characters)</li>
+				<li>Ensure sufficient color contrast</li>
+			</ul>
+
+			<h3>Code Examples</h3>
+
+			<p>
+				The recipe handles both inline code like <code
+					>const example = true;</code
+				> and code blocks with proper formatting:
+			</p>
+
+			<pre><code>import &#123; prose &#125; from '@styled-system/recipes';
+
+const proseClasses = prose(&#123;
+  size: 'lg',
+  variant: 'default',
+  lead: true
+&#125;);
+
+console.log('Prose recipe applied!');</code></pre>
+
+			<h3>Blockquotes</h3>
+
+			<blockquote>
+				<p>
+					"Typography is the craft of endowing human language with a durable
+					visual form." — Robert Bringhurst, The Elements of Typographic Style
+				</p>
+			</blockquote>
+
+			<p>
+				Blockquotes are styled with subtle borders and background colors to make
+				them stand out from regular content while maintaining readability.
+			</p>
+
+			<h2>Tables and Data</h2>
+
+			<p>The prose recipe also handles tabular data with proper styling:</p>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Size Variant</th>
+						<th>Base Font Size</th>
+						<th>Use Case</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>sm</td>
+						<td>0.875rem</td>
+						<td>Sidebars, captions, compact areas</td>
+					</tr>
+					<tr>
+						<td>base</td>
+						<td>1rem</td>
+						<td>Standard content, default option</td>
+					</tr>
+					<tr>
+						<td>lg</td>
+						<td>1.125rem</td>
+						<td>Featured articles, main content</td>
+					</tr>
+					<tr>
+						<td>xl</td>
+						<td>1.25rem</td>
+						<td>Hero sections, landing pages</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<h2>Images and Media</h2>
+
+			<p>
+				Images within prose content are automatically styled with proper spacing
+				and responsive behavior:
+			</p>
+
+			<figure>
+				<img
+					src='https://via.placeholder.com/600x300/4f46e5/ffffff?text=Typography+Example'
+					alt='Example of typography in action'
+					width='600'
+					height='300'
+				/>
+				<figcaption>
+					Example typography layout showing proper hierarchy and spacing
+				</figcaption>
+			</figure>
+
+			<hr />
+
+			<h2>Final Notes</h2>
+
+			<p>
+				This prose recipe is inspired by <strong>Tailwind Typography</strong> but
+				built specifically for our Panda CSS design system. It provides:
+			</p>
+
+			<ul>
+				<li>Type-safe variant selection</li>
+				<li>Design token integration</li>
+				<li>Optimal performance with atomic CSS</li>
+				<li>Seamless integration with our component library</li>
+			</ul>
+
+			<p>
+				<em>
+					The prose recipe makes it easy to create beautiful, readable content
+					without worrying about individual element styling.
+				</em>
+			</p>
+		</Prose>
+	</main>
+</Layout>

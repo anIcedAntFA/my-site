@@ -6,6 +6,7 @@ import { colors } from './colors';
 import { durations } from './durations';
 import { easings } from './easings';
 import { fonts } from './fonts';
+import { lineHeights } from './lineHeights';
 import { zIndex } from './z-index';
 
 export const tokens = defineTokens({
@@ -16,4 +17,5 @@ export const tokens = defineTokens({
 	easings,
 	zIndex,
 	assets,
+	lineHeights,
 });

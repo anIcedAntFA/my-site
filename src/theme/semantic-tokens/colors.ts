@@ -88,7 +88,7 @@ export const colors = defineSemanticTokens.colors({
 	fg: {
 		// primary readable text color
 		DEFAULT: {
-			value: { base: '{colors.black}', _dark: '{colors.slate.50}' },
+			value: { base: '{colors.slate.800}', _dark: '{colors.slate.200}' },
 		},
 		// muted / meta text
 		muted: {
@@ -101,6 +101,9 @@ export const colors = defineSemanticTokens.colors({
 		// inverted text (used on dark backgrounds)
 		inverted: {
 			value: { base: '{colors.slate.50}', _dark: '{colors.black}' },
+		},
+		headline: {
+			value: { base: '{colors.black}', _dark: '{colors.slate.50}' },
 		},
 		info: {
 			value: { base: '{colors.blue.600}', _dark: '{colors.blue.300}' },
@@ -165,6 +168,9 @@ export const colors = defineSemanticTokens.colors({
 		},
 		solid: {
 			value: { base: '{colors.indigo.600}', _dark: '{colors.indigo.600}' },
+		},
+		inverted: {
+			value: { base: '{colors.indigo.950}', _dark: '{colors.indigo.50}' },
 		},
 		focusRing: {
 			value: { base: '{colors.indigo.500}', _dark: '{colors.indigo.500}' },

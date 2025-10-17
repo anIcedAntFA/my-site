@@ -3,4 +3,5 @@ import { MdTextLink } from '@ui/markdown';
 
 export const MARKDOWN_COMPONENTS = {
 	a: MdTextLink,
+	// p: MdParagraph,
 };

@@ -1,0 +1,26 @@
+---
+import { proseBu } from '@styled-system/recipes';
+
+interface Props {
+	size?: 'sm' | 'base' | 'lg' | 'xl';
+	variant?: 'default' | 'muted' | 'inverted';
+	lead?: boolean;
+	class?: string;
+}
+
+const {
+	size = 'base',
+	variant = 'default',
+	lead = false,
+	class: className,
+} = Astro.props;
+
+const proseClasses = proseBu({ size, variant, lead });
+const combinedClasses = className
+	? `${proseClasses} ${className}`
+	: proseClasses;
+---
+
+<article class={combinedClasses}>
+	<slot />
+</article>
