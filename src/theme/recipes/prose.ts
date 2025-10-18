@@ -1,4 +1,4 @@
-import { em, round } from '@lib/style/calc.lib';
+import { em } from '@lib/style/calc.lib';
 import { defineRecipe } from '@pandacss/dev';
 
 export const prose = defineRecipe({
@@ -8,10 +8,54 @@ export const prose = defineRecipe({
 		maxWidth: '68ch',
 		color: 'fg',
 
+		// Headings
+		'& h1, & h2, & h3, & h4': {
+			display: 'inline',
+			color: 'fg.headline',
+			textWrap: 'balance',
+			scrollMarginTop: '4rem',
+		},
+		'& h1': {
+			fontWeight: 'extrabold',
+			lineHeight: 'tight',
+		},
+		'& h2, & h3, & h4': {
+			lineHeight: 'relaxed',
+		},
+		'& h1 strong': {
+			fontWeight: 'black',
+		},
+		'& [data-level="2"] button': {
+			fontSize: '1.125em',
+		},
+		'& h2': {
+			fontWeight: 'bold',
+		},
+		'& h2 strong': {
+			fontWeight: 'extrabold',
+		},
+		'& h3': {
+			fontWeight: 'semibold',
+		},
+		'& [data-level="3"] button': {
+			fontSize: '1em',
+		},
+		'& h3 strong': {
+			fontWeight: 'bold',
+		},
+		'& h4': {
+			fontWeight: 'semibold',
+		},
+		'& [data-level="4"] button': {
+			fontSize: '0.875em',
+		},
+		'& h4 strong': {
+			fontWeight: 'bold',
+		},
+
 		// Paragraphs
 		'& p': {
-			lineHeight: 'var(--line-height)',
-			'--line-height': round(32 / 18),
+			lineHeight: 'content',
 			'&[data-drop-cap]': {
 				_firstLetter: {
 					float: 'left',
@@ -23,7 +67,7 @@ export const prose = defineRecipe({
 					fontFamily: 'serif',
 					fontSize: '2.5em',
 					fontWeight: 'bold',
-					lineHeight: 'calc(var(--line-height)/2)',
+					lineHeight: 'calc({lineHeights.content}/2)',
 					bg: 'accent.inverted',
 					shadow: '0.25rem 0.25rem {colors.accent}',
 				},
@@ -33,41 +77,167 @@ export const prose = defineRecipe({
 	variants: {
 		size: {
 			sm: {
+				// Headings
 				fontSize: 'sm',
 
+				'& > h1': {
+					mt: '0',
+					mb: em(24, 30),
+					fontSize: em(30, 14),
+				},
+				'& [data-level="2"]': {
+					mt: em(32, 20),
+					mb: em(16, 20),
+					'& > h2': {
+						fontSize: em(20, 14),
+					},
+				},
+				'& [data-level="3"]': {
+					mt: em(28, 18),
+					mb: em(8, 18),
+					'& > h3': {
+						fontSize: em(18, 14),
+					},
+				},
+				'& [data-level="4"]': {
+					mt: em(20, 14),
+					mb: em(8, 14),
+				},
+
+				// Paragraphs
 				'& p': {
 					my: em(16, 14),
-					'--line-height': round(24 / 14),
 				},
 			},
 			md: {
 				fontSize: 'md',
 
+				// Headings
+				'& > h1': {
+					mt: '0',
+					mb: em(32, 36),
+					fontSize: em(36, 16),
+				},
+				'& [data-level="2"]': {
+					mt: em(48, 24),
+					mb: em(24, 24),
+					'& > h2': {
+						fontSize: em(24, 16),
+					},
+				},
+				'& [data-level="3"]': {
+					mt: em(32, 20),
+					mb: em(12, 20),
+					'& > h3': {
+						fontSize: em(20, 16),
+					},
+				},
+				'& [data-level="4"]': {
+					mt: em(24, 16),
+					mb: em(8, 16),
+				},
+
+				// Paragraphs
 				'& p': {
 					my: em(20, 16),
-					'--line-height': round(28 / 16),
 				},
 			},
 			lg: {
+				// Headings
 				fontSize: 'lg',
 
+				'& h1': {
+					mt: '0',
+					mb: em(40, 48),
+					fontSize: em(48, 18),
+				},
+				'& [data-level="2"]': {
+					mt: em(56, 30),
+					mb: em(32, 30),
+					'& > h2': {
+						fontSize: em(32, 18),
+					},
+				},
+				'& [data-level="3"]': {
+					mt: em(40, 24),
+					mb: em(16, 24),
+					'& > h3': {
+						fontSize: em(24, 18),
+					},
+				},
+				'& [data-level="4"]': {
+					mt: em(32, 18),
+					mb: em(8, 18),
+				},
+
+				// Paragraphs
 				'& p': {
 					my: em(24, 18),
 				},
 			},
 			xl: {
+				// Headings
 				fontSize: 'xl',
 
+				'& h1': {
+					mt: '0',
+					mb: em(48, 56),
+					fontSize: em(56, 20),
+				},
+				'& [data-level="2"]': {
+					mt: em(56, 36),
+					mb: em(32, 36),
+					'& > h2': {
+						fontSize: em(36, 20),
+					},
+				},
+				'& [data-level="3"]': {
+					mt: em(48, 30),
+					mb: em(20, 30),
+					'& > h3': {
+						fontSize: em(28, 20),
+					},
+				},
+				'& [data-level="4"]': {
+					mt: em(36, 20),
+					mb: em(12, 20),
+				},
+
+				// Paragraphs
 				'& p': {
 					my: em(28, 20),
-					'--line-height': round(36 / 20),
 				},
 			},
 			'2xl': {
 				fontSize: '2xl',
 
+				// Headings
+				'& h1': {
+					fontSize: em(64, 24),
+					mt: '0',
+					mb: em(56, 64),
+				},
+				'& [data-level="2"]': {
+					mt: em(72, 48),
+					mb: em(40, 48),
+					'& > h2': {
+						fontSize: em(48, 24),
+					},
+				},
+				'& [data-level="3"]': {
+					mt: em(56, 36),
+					mb: em(24, 36),
+					'& > h3': {
+						fontSize: em(36, 24),
+					},
+				},
+				'& [data-level="4"]': {
+					mt: em(40, 24),
+					mb: em(16, 24),
+				},
+
+				// Paragraphs
 				'& p': {
-					'--line-height': round(40 / 24),
 					my: em(32, 24),
 				},
 			},

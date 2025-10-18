@@ -23,22 +23,26 @@ export const iconRecipe = defineRecipe({
 		},
 		size: {
 			xs: {
+				w: '0.75em',
+				h: '0.75em',
+			},
+			sm: {
+				w: '0.875em',
+				h: '0.875em',
+			},
+			md: {
 				w: '1em',
 				h: '1em',
 			},
-			sm: {
+			lg: {
 				w: '1.2em',
 				h: '1.2em',
 			},
-			md: {
-				w: '1.4em',
-				h: '1.4em',
-			},
-			lg: {
-				w: '1.7em',
-				h: '1.7em',
-			},
 			xl: {
+				w: '1.5em',
+				h: '1.5em',
+			},
+			'2xl': {
 				w: '2em',
 				h: '2em',
 			},

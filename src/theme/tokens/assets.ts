@@ -1,16 +1,23 @@
 import { defineTokens } from '@pandacss/dev';
 
+// Helper function to generate SVG URL token values
+// from public directory
+const getSvgURL = (fileName: string) => ({
+	type: 'url',
+	value: `/svg/${fileName}.svg`,
+});
+
 export const assets = defineTokens.assets({
 	arrowUp: {
-		value: {
-			type: 'url',
-			value: '/arrow-up.svg',
-		},
+		value: getSvgURL('arrow-up'),
 	},
 	externalLink: {
-		value: {
-			type: 'url',
-			value: '/external-link.svg',
-		},
+		value: getSvgURL('external-link'),
+	},
+	hash: {
+		value: getSvgURL('hash'),
+	},
+	link: {
+		value: getSvgURL('link'),
 	},
 });
