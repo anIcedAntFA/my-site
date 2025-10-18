@@ -1,0 +1,11 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+import MdAnchorHeading from './md-anchor-heading.astro';
+
+interface Props extends HTMLAttributes<'h2'> {}
+
+const props = Astro.props;
+---
+
+<MdAnchorHeading {...props} level={2}><slot /></MdAnchorHeading>

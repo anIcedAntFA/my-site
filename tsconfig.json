@@ -19,6 +19,7 @@
 			"@content/*": ["./src/content/*"],
 			"@config/*": ["./src/config/*"],
 			"@data/*": ["./src/data/*"],
+			"@hook/*": ["./src/hook/*"],
 			"@lib/*": ["./src/lib/*"],
 			"@layout/*": ["./src/layout/*"],
 			"@style/*": ["./src/style/*"],
