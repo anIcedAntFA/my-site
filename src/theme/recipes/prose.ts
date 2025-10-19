@@ -73,6 +73,112 @@ export const prose = defineRecipe({
 				},
 			},
 		},
+
+		// Links
+		'& a[data-text-link]': {
+			display: 'inline',
+			color: 'accent',
+			textDecoration: 'underline',
+			fontWeight: 'medium',
+			textUnderlineOffset: '0.125em',
+			transitionDuration: 'fast',
+			transitionProperty: 'opacity',
+			_blank: {
+				_after: {
+					display: 'inline-block',
+					w: '0.875em',
+					h: '0.875em',
+					ml: '0.25em',
+					bg: 'currentColor',
+					transitionDuration: 'fast',
+					transitionProperty: 'opacity',
+					content: '""',
+					maskImage: '{assets.externalLink}',
+					maskSize: 'cover',
+				},
+			},
+			_hover: {
+				textDecoration: 'none',
+				opacity: 0.8,
+			},
+		},
+
+		// Strong and emphasis
+		'& strong': {
+			color: 'fg.headline',
+			fontWeight: 'semibold',
+		},
+		'& em': {
+			fontStyle: 'italic',
+		},
+
+		// Lists
+		'& ul': {
+			marginTop: '1.25em',
+			marginBottom: '1.25em',
+			paddingLeft: '1.625em',
+			listStyleType: 'disc',
+		},
+		'& ol': {
+			marginTop: '1.25em',
+			marginBottom: '1.25em',
+			paddingLeft: '1.625em',
+			listStyleType: 'decimal',
+		},
+		'& li': {
+			marginTop: '0.5em',
+			marginBottom: '0.5em',
+		},
+		'& li p': {
+			marginTop: '0.75em',
+			marginBottom: '0.75em',
+		},
+		'& li > *:first-child': {
+			marginTop: '1.25em',
+		},
+		'& li > *:last-child': {
+			marginBottom: '1.25em',
+		},
+
+		// Nested lists
+		'& ul > li': {
+			paddingLeft: '0.375em',
+		},
+		'& ol > li': {
+			paddingLeft: '0.375em',
+		},
+		'& ul ul, & ul ol, & ol ul, & ol ol': {
+			marginTop: '0.75em',
+			marginBottom: '0.75em',
+		},
+
+		// Inlined Code
+		'& code': {
+			display: 'inline',
+			borderRadius: '0.25em',
+			p: '0.125em 0.25em',
+			color: 'base.fg',
+			shadowColor: 'base.muted',
+			fontFamily: 'mono',
+			fontSize: '0.875em',
+			fontWeight: 'medium',
+			bg: 'base.muted/60',
+			shadow: 'inset 0 0 0px 1px var(--shadow-color)',
+		},
+
+		// Pre and code blocks
+		'& pre code': {
+			borderRadius: '0',
+			borderWidth: '0',
+			padding: '0',
+			color: 'inherit',
+			fontFamily: 'inherit',
+			fontSize: 'inherit',
+			fontWeight: 'inherit',
+			lineHeight: 'inherit',
+			backgroundColor: 'transparent',
+			boxShadow: 'none',
+		},
 	},
 	variants: {
 		size: {

@@ -3,8 +3,6 @@ import type { HTMLAttributes } from 'astro/types';
 import { transform } from 'ultrahtml';
 import sanitize from 'ultrahtml/transformers/sanitize';
 
-import { link } from '@styled-system/recipes';
-
 import { isAbsoluteURL } from '@lib/text';
 
 interface Props extends HTMLAttributes<'a'> {}
@@ -17,8 +15,6 @@ const labelHTML = await Astro.slots.render('default');
 const labelString = await transform(labelHTML, [
 	sanitize({ unblockElements: [] }),
 ]);
-
-const linkClasses = link({ visual: 'subtle', size: 'lg' });
 ---
 
 <a
@@ -26,6 +22,6 @@ const linkClasses = link({ visual: 'subtle', size: 'lg' });
 	href={href}
 	target={isAbsolute ? '_blank' : undefined}
 	rel={isAbsolute ? 'noopener noreferrer' : undefined}
-	class={linkClasses}
+	data-text-link
 	{...anchorAttrs}><slot /></a
 >
