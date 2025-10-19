@@ -21,6 +21,7 @@ export const CopyLinkButton = component$(
 			const url = getURLFromId(headingId);
 
 			copyText(url)
+				// TODO: Show a toast notification
 				.then(() => console.info('URL copied to clipboard:', url))
 				.catch((err) => console.error('Failed to copy URL:', err));
 		});
@@ -54,9 +55,9 @@ export const CopyLinkButton = component$(
 						transitionDuration: 'normal',
 						content: '""',
 					},
-					_groupHover: {
-						opacity: hasCopied.value ? 0.4 : 1,
-					},
+					// To improve accessibility, it become visible when tab-focused
+					_focusVisible: { opacity: 1 },
+					_groupHover: { opacity: hasCopied.value ? 0.4 : 1 },
 					_supportHover: {
 						'&:not(:disabled):hover::before': {
 							scale: 1,
