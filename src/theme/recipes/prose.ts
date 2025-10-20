@@ -152,10 +152,86 @@ export const prose = defineRecipe({
 			marginBottom: '0.75em',
 		},
 
+		// Blockquote
+		// Inlined quote
+		'& q': {
+			fontStyle: 'italic',
+			_before: {
+				y: '-0.25em',
+				maskImage: '{assets.quoteDoubleOpen}',
+			},
+			_after: {
+				y: '-0.125em',
+				maskImage: '{assets.quoteDoubleClose}',
+			},
+			'&::before, &::after': {
+				display: 'inline-block',
+				translate: 'auto',
+				w: '0.75em',
+				h: '0.75em',
+				bg: 'accent',
+				content: '""',
+				maskSize: 'cover',
+			},
+		},
+		// Block quotation
+		'& blockquote, & figure': {
+			pos: 'relative',
+			borderTopRightRadius: 'var(--border-radius)',
+			borderBottomRightRadius: 'var(--border-radius)',
+			mt: '1.6em',
+			mb: '1.6em',
+			py: '1.25em',
+			pe: 'calc(var(--spacing-right) + var(--border-width))',
+			ps: 'calc(var(--spacing-right) * 2 + var(--border-width) + var(--icon-size))',
+			bg: 'bg.emphasized/60',
+			fontStyle: 'italic',
+			_before: {
+				pos: 'absolute',
+				top: 'var(--spacing-right)',
+				left: 'calc(var(--spacing-right) + var(--border-width))',
+				w: 'var(--icon-size)',
+				h: 'var(--icon-size)',
+				bg: 'accent.gradient',
+				content: '""',
+				maskImage: '{assets.quoteDoubleOpen}',
+				maskSize: 'cover',
+			},
+			_after: {
+				zIndex: '1',
+				pos: 'absolute',
+				top: '0',
+				left: '0',
+				bottom: '0',
+				w: 'var(--border-width)',
+				bg: 'accent.gradient',
+				content: '""',
+			},
+			'--border-width': '0.5em',
+			'--border-radius': '0.75em',
+			'--spacing-right': '1em',
+			'--icon-size': '2em',
+		},
+		'& figure': {
+			'& blockquote': {
+				all: 'unset',
+				_before: { all: 'unset' },
+				_after: { all: 'unset' },
+			},
+			'& figcaption': {
+				mt: '0.5em',
+				color: 'fg.muted',
+				textAlign: 'right',
+				'& cite': {
+					fontStyle: 'italic',
+				},
+			},
+		},
+
 		// Inlined Code
 		'& code': {
 			display: 'inline',
-			borderRadius: '0.25em',
+			rounded: '0.25em',
 			p: '0.125em 0.25em',
 			color: 'base.fg',
 			shadowColor: 'base.muted',
@@ -168,7 +244,7 @@ export const prose = defineRecipe({
 
 		// Pre and code blocks
 		'& pre code': {
-			borderRadius: '0',
+			rounded: '0',
 			borderWidth: '0',
 			padding: '0',
 			color: 'inherit',
@@ -279,6 +355,10 @@ export const prose = defineRecipe({
 				// Paragraphs
 				'& p': {
 					my: em(24, 18),
+				},
+
+				'& blockquote p, & figcaption p': {
+					my: '0',
 				},
 			},
 			xl: {

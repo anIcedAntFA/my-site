@@ -20,4 +20,10 @@ export const assets = defineTokens.assets({
 	link: {
 		value: getSvgURL('link'),
 	},
+	quoteDoubleOpen: {
+		value: getSvgURL('quote-double-open'),
+	},
+	quoteDoubleClose: {
+		value: getSvgURL('quote-double-close'),
+	},
 });

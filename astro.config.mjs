@@ -5,7 +5,12 @@ import mdx from '@astrojs/mdx';
 import qwikdev from '@qwikdev/astro';
 import { defineConfig } from 'astro/config';
 import { rehypeSectionsForHeadings } from './plugin/rehype';
-import { remarkDropCapParagraph, remarkExternalLinks } from './plugin/remark';
+import {
+	remarkBlockQuotationCiteURL,
+	remarkDropCapParagraph,
+	remarkExternalLinks,
+	remarkInlinedQuotation,
+} from './plugin/remark';
 
 // https://astro.build/config
 export default defineConfig({
@@ -19,7 +24,12 @@ export default defineConfig({
 	integrations: [qwikdev(), mdx()],
 	output: 'static',
 	markdown: {
-		remarkPlugins: [remarkExternalLinks, remarkDropCapParagraph],
+		remarkPlugins: [
+			remarkExternalLinks,
+			remarkDropCapParagraph,
+			remarkInlinedQuotation,
+			remarkBlockQuotationCiteURL,
+		],
 		rehypePlugins: [
 			[rehypeHeadingIds, { headingIdCompat: true }],
 			rehypeSectionsForHeadings,
