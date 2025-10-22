@@ -9,6 +9,7 @@ export const globalCSS = defineGlobalStyles({
 		color: 'fg',
 		minHeight: '100vh',
 		lineHeight: 'normal',
+		scrollBehavior: 'smooth',
 	},
 	"a, summary, button, input, [tabindex]:not([tabindex='-1'])": {
 		outline: 'none',

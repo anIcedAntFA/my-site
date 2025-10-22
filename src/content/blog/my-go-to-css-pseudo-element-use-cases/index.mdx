@@ -15,11 +15,15 @@ seo:
 author: ngockhoi96
 ---
 
+import { MdCallout, MdFigureQuote } from '@ui/markdown';
+
 ## 1. Crafting Interactive Text: The Layout-Shift-Free Hover
 
-+> Highlighting interactive elements like links on hover is a fundamental UX pattern. However, a naive <mark>`font-weight`</mark> change can trigger ==layout shifts==, negatively impacting ==Core Web Vitals== (specifically Cumulative Layout Shift - CLS). Pseudo-elements offer a refined, CLS-friendly solution.
++> Highlighting interactive elements like links on hover is a fundamental UX pattern. However, a naive <mark>font-weight</mark> change can trigger ==layout shifts==, negatively impacting ==Core Web Vitals== (specifically Cumulative Layout Shift - CLS). Pseudo-elements offer a refined, CLS-friendly solution.
 
 [==test link==](https://developer.mozilla.org/en-US/blog/launching-new-front-end/)
+
+<kbd>Shift + Tab</kbd>
 
 **The Core Concept:**
 
@@ -99,6 +103,23 @@ He said, ""That's interesting."". HAL answers: ""I'm sorry, Dave. I'm afraid I c
 	</figcaption>
 </figure>
 
+<MdFigureQuote citeURL='https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes'>
+	<Fragment slot='quote'>
+		HTML is designed with extensibility in mind for data that should be
+		associated with a particular element but need not have any defined meaning.
+		[`data-*`
+		attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Global_attributes/data-*)
+		allow us to store extra information on standard, semantic HTML elements
+		without other hacks such as non-standard attributes, or extra properties on
+		DOM.
+	</Fragment>
+	<Fragment slot='caption'>
+		-- mdn, <cite>MDN</cite>
+	</Fragment>
+</MdFigureQuote>
+
+---
+
 - [x] This is now a clickable, checked checkbox.
 - [ ] This is a clickable, unchecked checkbox.
 
@@ -107,3 +128,138 @@ He said, ""That's interesting."". HAL answers: ""I'm sorry, Dave. I'm afraid I c
 Placeholders play a crucial role in guiding users on what input is expected in form fields. However, default placeholder styles can be bland and inconsistent across browsers. Leveraging CSS pseudo-elements allows for enhanced styling and better user experience.
 
 #### Optimizing Animations: Smooth Transitions with Pseudo-Elements
+
+**Example 1: Standard Left-Aligned Table**
+
+| Feature            | `rem`                                                   | `em`                                                |
+| :----------------- | :------------------------------------------------------ | :-------------------------------------------------- |
+| **Relative To**    | Font-size of the root (`<html>`) element                | Font-size of the direct parent element              |
+| **Use Case**       | Consistent spacing and sizing across the entire site    | Sizing elements relative to their immediate context |
+| **Advantage**      | Predictable and easy to manage for global style changes | Useful for modular components that scale internally |
+| **Common Pitfall** | (none)                                                  | Can lead to compounding issues if nested deeply     |
+
+**Example 2: Table with Different Alignments**
+
+| Item           | Availability | Price (USD) |
+| :------------- | :----------: | ----------: |
+| RGB Keyboard   |   In Stock   |       95.00 |
+| Wireless Mouse |   In Stock   |       49.50 |
+| 4K Monitor     | Out of Stock |      399.99 |
+| USB-C Hub      |   In Stock   |       72.25 |
+
+<table>
+  <caption>
+    Q1 2025 Sales Report (in thousands of USD)
+  </caption>
+
+<thead>
+	<tr>
+		<th scope='col'>Region</th>
+		<th scope='col'>Product</th>
+		<th scope='col'>Jan</th>
+		<th scope='col'>Feb</th>
+		<th scope='col'>Mar</th>
+	</tr>
+</thead>
+
+<tbody>
+	<tr>
+		<td scope='row' rowspan={2}>
+			North America
+		</td>
+		<td>Widgets</td>
+		<td>150</td>
+		<td>180</td>
+		<td>210</td>
+	</tr>
+	<tr>
+		<td>Gadgets</td>
+		<td>120</td>
+		<td>130</td>
+		<td>145</td>
+	</tr>
+	<tr>
+		<td scope='row'>Europe</td>
+		<td>Widgets</td>
+		<td>110</td>
+		<td>100</td>
+		<td>130</td>
+	</tr>
+</tbody>
+
+  <tfoot>
+    <tr>
+      <td scope="row" colspan={2}>Total Revenue:</td>
+      <td>380</td>
+      <td>410</td>
+      <td>485</td>
+    </tr>
+  </tfoot>
+</table>
+
+:::note Important Information
+Đây là một note quan trọng cần lưu ý.
+
+Có thể có nhiều đoạn văn bản.
+:::
+
+<aside aria-label='Default Behavior' class='nk-Rp6fbq-callout' data-type='note'>
+	<p class='nk-Rp6fbq-title'>
+		<svg
+			width='24'
+			height='24'
+			viewBox='0 0 24 24'
+			fill='none'
+			stroke='currentColor'
+			stroke-width='2'
+			stroke-linecap='round'
+			stroke-linejoin='round'
+			class='nk-Rp6fbq-icon'
+			aria-hidden='true'
+			aria-label='note'
+		>
+			<circle cx='12' cy='12' r='10'></circle>
+			<path d='M12 16v-4'></path>
+			<path d='M12 8h.01'></path>
+		</svg>
+		<strong>Default Behavior</strong>
+	</p>
+	<div class='nk-Rp6fbq-content'>
+		<p class='nk-fiTuNa-paragraph'>
+			This component will default to the “note” type if no
+			<code class='nk-E0z1UG-code'>type</code> prop is specified. It’s useful
+			for highlighting information that is good to know but not critical to the
+			main point.
+		</p>
+	</div>
+</aside>
+
+<MdCallout title='Default Behavior' type='note'>
+	This component will default to the "note" type if no `type` prop is specified.
+	It's useful for highlighting information that is good to know but not critical
+	to the main point.
+</MdCallout>
+
+<MdCallout title='Pro Tip: Use Keyboard Shortcuts' type='tip'>
+	You can improve your workflow efficiency by learning the application's
+	keyboard shortcuts. Press `Ctrl + K` to open the command palette and see all
+	available actions.
+</MdCallout>
+
+<MdCallout title='Deprecation Notice' type='caution'>
+	The `useLegacyAPI` flag is deprecated and will be removed in the next major
+	version. Please update your implementation to use the new V2 API to avoid
+	breaking changes.
+</MdCallout>
+
+<MdCallout title='Irreversible Action' type='danger'>
+	Deleting your account is permanent and cannot be undone. All of your data,
+	projects, and settings will be lost forever. Please be absolutely certain
+	before proceeding.
+</MdCallout>
+
+<MdCallout title='Core Concept' type='important'>
+	Understanding the data flow model is essential before building custom
+	integrations. Ensure you have read the architecture documentation thoroughly
+	to grasp the fundamentals.
+</MdCallout>
