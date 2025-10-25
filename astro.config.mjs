@@ -4,8 +4,14 @@ import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import qwikdev from '@qwikdev/astro';
 import { defineConfig } from 'astro/config';
-import { rehypeSectionsForHeadings } from './plugin/rehype';
-import { remarkDropCapParagraph, remarkExternalLinks } from './plugin/remark';
+import { rehypeCheckbox, rehypeSectionsForHeadings } from './plugin/rehype';
+import {
+	remarkBlockQuotationCiteURL,
+	remarkDropCapParagraph,
+	remarkExternalLinks,
+	remarkInlinedQuotation,
+	remarkTextHighlight,
+} from './plugin/remark';
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,13 +22,22 @@ export default defineConfig({
 		},
 		imageService: 'compile',
 	}),
-	integrations: [qwikdev(), mdx()],
+	integrations: [
+		qwikdev(),
+		mdx({
+			remarkPlugins: [
+				remarkExternalLinks,
+				remarkDropCapParagraph,
+				remarkTextHighlight,
+				remarkInlinedQuotation,
+				remarkBlockQuotationCiteURL,
+			],
+			rehypePlugins: [
+				[rehypeHeadingIds, { headingIdCompat: true }],
+				rehypeSectionsForHeadings,
+				rehypeCheckbox,
+			],
+		}),
+	],
 	output: 'static',
-	markdown: {
-		remarkPlugins: [remarkExternalLinks, remarkDropCapParagraph],
-		rehypePlugins: [
-			[rehypeHeadingIds, { headingIdCompat: true }],
-			rehypeSectionsForHeadings,
-		],
-	},
 });
