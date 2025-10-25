@@ -1,10 +1,10 @@
 import { defineTokens } from '@pandacss/dev';
 
 // Helper function to generate SVG URL token values
-// from public directory
+// from asset directory
 const getSvgURL = (fileName: string) => ({
 	type: 'url',
-	value: `/svg/${fileName}.svg`,
+	value: `/src/asset/svg/${fileName}.svg`,
 });
 
 export const assets = defineTokens.assets({
@@ -25,5 +25,20 @@ export const assets = defineTokens.assets({
 	},
 	quoteDoubleClose: {
 		value: getSvgURL('quote-double-close'),
+	},
+	info: {
+		value: getSvgURL('info'),
+	},
+	lightbulb: {
+		value: getSvgURL('lightbulb'),
+	},
+	siren: {
+		value: getSvgURL('siren'),
+	},
+	bomb: {
+		value: getSvgURL('bomb'),
+	},
+	rocket: {
+		value: getSvgURL('rocket'),
 	},
 });

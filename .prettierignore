@@ -13,3 +13,5 @@
 # Files
 bun.lock
 worker-configuration.d.ts
+
+*.mdx

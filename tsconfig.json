@@ -14,8 +14,8 @@
 			}
 		],
 		"paths": {
+			"@asset/*": ["./src/asset/*"],
 			"@ui/*": ["./src/ui/*"],
-			"@assets/*": ["./src/assets/*"],
 			"@content/*": ["./src/content/*"],
 			"@config/*": ["./src/config/*"],
 			"@data/*": ["./src/data/*"],
@@ -23,7 +23,10 @@
 			"@lib/*": ["./src/lib/*"],
 			"@layout/*": ["./src/layout/*"],
 			"@style/*": ["./src/style/*"],
-			"@styled-system/*": ["./styled-system/*"]
+			"@styled-system/*": ["./styled-system/*"],
+			// Optional
+			"@theme/*": ["./src/theme/*"],
+			"@plugin/*": ["./plugin/*"]
 		}
 	}
 }

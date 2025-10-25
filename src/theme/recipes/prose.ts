@@ -55,6 +55,7 @@ export const prose = defineRecipe({
 
 		// Paragraphs
 		'& p': {
+			display: 'block',
 			lineHeight: 'content',
 			'&[data-drop-cap]': {
 				_firstLetter: {
@@ -237,10 +238,10 @@ export const prose = defineRecipe({
 
 		// Keyboard input
 		'& kbd': {
+			display: 'inline-block',
 			bdc: 'border.emphasized',
 			rounded: '0.25em',
 			borderWidth: '0.1em 0.1em 0.2em',
-			py: '0.125em',
 			px: '0.25em',
 			color: 'fg',
 			fontSize: '0.875em',
@@ -278,8 +279,6 @@ export const prose = defineRecipe({
 			pos: 'relative',
 			borderTopRightRadius: 'var(--border-radius)',
 			borderBottomRightRadius: 'var(--border-radius)',
-			my: '1.6em',
-			py: '1.25em',
 			pe: 'calc(var(--spacing-right) + var(--border-width))',
 			ps: 'calc(var(--spacing-right) * 2 + var(--border-width) + var(--icon-size))',
 			bg: 'bg.emphasized/60',
@@ -322,6 +321,101 @@ export const prose = defineRecipe({
 				textAlign: 'right',
 				'& cite': {
 					fontStyle: 'italic',
+				},
+			},
+		},
+
+		// Callouts
+		'& aside': {
+			pos: 'relative',
+			borderInlineStart: 'var(--border-width) solid transparent',
+			borderTopRightRadius: 'var(--border-radius)',
+			borderBottomRightRadius: 'var(--border-radius)',
+			'--border-width': '0.5em',
+			'--border-radius': '0.75em',
+
+			'& > :first-child': {
+				display: 'inline-flex',
+				gap: '0.5em',
+				alignItems: 'center',
+				fontSize: '1.125em',
+			},
+
+			'& > :last-child': {
+				marginBlockStart: '0.5em',
+			},
+
+			'& i': {
+				display: 'inline-block',
+				w: '1.5em',
+				h: '1.5em',
+				bg: 'currentColor',
+				content: '""',
+				maskSize: 'cover',
+			},
+
+			'&[data-type="note"]': {
+				borderInlineStartColor: 'blue.600',
+				bg: { base: 'blue.100', _dark: 'blue.950/80' },
+
+				'& i, & strong': {
+					color: { base: 'blue.800', _dark: 'blue.300' },
+				},
+
+				'& i': {
+					maskImage: '{assets.info}',
+				},
+			},
+
+			'&[data-type="tip"]': {
+				borderInlineStartColor: 'emerald.600',
+				bg: { base: 'emerald.100', _dark: 'emerald.950/80' },
+
+				'& i, & strong': {
+					color: { base: 'emerald.800', _dark: 'emerald.300' },
+				},
+
+				'& i': {
+					maskImage: '{assets.lightbulb}',
+				},
+			},
+
+			'&[data-type="caution"]': {
+				borderInlineStartColor: 'amber.600',
+				bg: { base: 'amber.100', _dark: 'amber.950/80' },
+
+				'& i, & strong': {
+					color: { base: 'amber.800', _dark: 'amber.300' },
+				},
+
+				'& i': {
+					maskImage: '{assets.siren}',
+				},
+			},
+
+			'&[data-type="danger"]': {
+				borderInlineStartColor: 'rose.600',
+				bg: { base: 'rose.100', _dark: 'rose.950/80' },
+
+				'& i, & strong': {
+					color: { base: 'rose.800', _dark: 'rose.300' },
+				},
+
+				'& i': {
+					maskImage: '{assets.bomb}',
+				},
+			},
+
+			'&[data-type="important"]': {
+				borderInlineStartColor: 'purple.600',
+				bg: { base: 'purple.100', _dark: 'purple.950/80' },
+
+				'& i, & strong': {
+					color: { base: 'purple.800', _dark: 'purple.300' },
+				},
+
+				'& i': {
+					maskImage: '{assets.rocket}',
 				},
 			},
 		},
@@ -465,6 +559,21 @@ export const prose = defineRecipe({
 					my: em(16, 14),
 				},
 
+				// Blockquotes
+				'& blockquote, & figure': {
+					my: em(20, 14),
+					py: em(16, 14),
+					'--spacing-right': em(12, 14),
+					'--icon-size': em(24, 14),
+				},
+
+				// Callouts
+				'& aside': {
+					my: em(20, 14),
+					py: em(12, 14),
+					px: em(16, 14),
+				},
+
 				// Tables
 				'& table': {
 					fontSize: em(12, 14),
@@ -484,7 +593,8 @@ export const prose = defineRecipe({
 				'& caption': {
 					marginBlockStart: em(6, 12),
 				},
-				'& caption p': {
+
+				'& blockquote p, & figcaption p, & aside p, & caption p': {
 					my: '0',
 				},
 			},
@@ -521,6 +631,21 @@ export const prose = defineRecipe({
 					my: em(20, 16),
 				},
 
+				// Blockquotes
+				'& blockquote, & figure': {
+					my: em(24, 16),
+					py: em(20, 16),
+					'--spacing-right': em(16, 16),
+					'--icon-size': em(32, 16),
+				},
+
+				// Callouts
+				'& aside': {
+					my: em(24, 16),
+					py: em(16, 16),
+					px: em(20, 16),
+				},
+
 				// Tables
 				'& table': {
 					fontSize: em(14, 16),
@@ -540,7 +665,8 @@ export const prose = defineRecipe({
 				'& caption': {
 					marginBlockStart: em(8, 14),
 				},
-				'& caption p': {
+
+				'& blockquote p, & figcaption p, & aside p, & caption p': {
 					my: '0',
 				},
 			},
@@ -577,8 +703,19 @@ export const prose = defineRecipe({
 					my: em(24, 18),
 				},
 
-				'& blockquote p, & figcaption p': {
-					my: '0',
+				// Blockquotes
+				'& blockquote, & figure': {
+					my: em(32, 18),
+					py: em(24, 18),
+					'--spacing-right': em(18, 18),
+					'--icon-size': em(36, 18),
+				},
+
+				// Callouts
+				'& aside': {
+					my: em(32, 18),
+					py: em(20, 18),
+					px: em(24, 18),
 				},
 
 				// Tables
@@ -600,7 +737,8 @@ export const prose = defineRecipe({
 				'& caption': {
 					marginBlockStart: em(10, 16),
 				},
-				'& caption p': {
+
+				'& blockquote p, & figcaption p, & aside p, & caption p': {
 					my: '0',
 				},
 			},
@@ -637,6 +775,21 @@ export const prose = defineRecipe({
 					my: em(28, 20),
 				},
 
+				// Blockquotes
+				'& blockquote, & figure': {
+					my: em(40, 20),
+					py: em(28, 20),
+					'--spacing-right': em(20, 20),
+					'--icon-size': em(40, 20),
+				},
+
+				// Callouts
+				'& aside': {
+					my: em(40, 20),
+					py: em(24, 20),
+					px: em(28, 20),
+				},
+
 				// Tables
 				'& table': {
 					fontSize: em(18, 20),
@@ -656,7 +809,8 @@ export const prose = defineRecipe({
 				'& caption': {
 					marginBlockStart: em(12, 18),
 				},
-				'& caption p': {
+
+				'& blockquote p, & figcaption p, & aside p, & caption p': {
 					my: '0',
 				},
 			},
@@ -712,7 +866,21 @@ export const prose = defineRecipe({
 				'& caption': {
 					marginBlockStart: em(14, 20),
 				},
-				'& caption p': {
+
+				// Blockquotes & Callouts
+				'& blockquote, & figure': {
+					my: em(48, 24),
+					py: em(32, 24),
+					'--spacing-right': em(24, 24),
+					'--icon-size': em(48, 24),
+				},
+				'& aside': {
+					my: em(48, 24),
+					py: em(28, 24),
+					px: em(32, 24),
+				},
+
+				'& blockquote p, & figcaption p, & aside p, & caption p': {
 					my: '0',
 				},
 			},

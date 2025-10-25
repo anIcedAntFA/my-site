@@ -12,7 +12,9 @@ const { post } = Astro.props;
 
 const { title, description, author, publishedDate, modifiedDate } = post.data;
 
-const contentClasses = prose({ size: 'lg' });
+const contentClasses = prose({
+	size: { base: 'md', xs: 'lg', lg: 'xl', '3xl': '2xl' },
+});
 ---
 
 <BaseLayout>
