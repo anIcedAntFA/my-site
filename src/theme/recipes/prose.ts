@@ -25,6 +25,7 @@ export const prose = defineRecipe({
 		'& h1 strong': {
 			fontWeight: 'black',
 		},
+		// Copy link button size adjustments
 		'& [data-level="2"] button': {
 			fontSize: '1.125em',
 		},
