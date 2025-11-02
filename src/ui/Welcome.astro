@@ -6,6 +6,7 @@ import { vstack, hstack } from '@styled-system/patterns';
 import { InlineCode } from './inline-code';
 import { Button } from './button';
 import { css } from '@styled-system/css';
+import IconButton from './icon-button.astro';
 ---
 
 <div id='container'>
@@ -59,6 +60,13 @@ import { css } from '@styled-system/css';
 				<Button size='lg' variant='contained'>javascript</Button>
 			</div>
 			<SonHayHoi />
+
+			<div class={hstack({ gap: 4 })}>
+				<IconButton size='sm' label='alert' maskImage='{assets.info}' />
+				<IconButton size='md' label='alert' maskImage='{assets.rocket}' />
+				<IconButton size='lg' label='alert' maskImage='{assets.siren}' />
+				<IconButton rounded label='alert' maskImage='{assets.hash}' />
+			</div>
 
 			<section id='links'>
 				<a class='button' href='https://docs.astro.build'>Read our docs</a>

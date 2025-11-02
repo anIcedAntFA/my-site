@@ -13,7 +13,7 @@ export const iconRecipe = defineRecipe({
 				bg: 'currentColor',
 				maskPosition: 'center',
 				maskRepeat: 'no-repeat',
-				maskSize: 'contain',
+				maskSize: 'cover',
 			},
 			background: {
 				bgPosition: 'center',
