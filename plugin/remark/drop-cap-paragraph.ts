@@ -1,12 +1,12 @@
-import type { Paragraph as MdastParagraph, Root as MdastRoot } from 'mdast';
-import type { Plugin } from 'unified';
-import { visit } from 'unist-util-visit';
+import type { Paragraph as MdastParagraph, Root as MdastRoot } from "mdast";
+import type { Plugin } from "unified";
+import { visit } from "unist-util-visit";
 
 interface IOptions {
 	marker?: string; // Allow customizing the marker
 }
 
-const DEFAULT_MARKER = '+> '; // Default marker for drop cap paragraphs
+const DEFAULT_MARKER = "+> "; // Default marker for drop cap paragraphs
 
 export const remarkDropCapParagraph: Plugin<[IOptions?], MdastRoot> = (
 	options,
@@ -15,12 +15,12 @@ export const remarkDropCapParagraph: Plugin<[IOptions?], MdastRoot> = (
 	const markerLength = marker.length;
 
 	return (tree: MdastRoot) => {
-		visit(tree, 'paragraph', (node: MdastParagraph) => {
+		visit(tree, "paragraph", (node: MdastParagraph) => {
 			if (node.children && node.children.length > 0) {
 				const firstChild = node.children[0];
 
 				// Check if the first child is a text node and starts with our marker
-				if (firstChild.type === 'text' && firstChild.value.startsWith(marker)) {
+				if (firstChild.type === "text" && firstChild.value.startsWith(marker)) {
 					// Remove the marker from the text node's value
 					firstChild.value = firstChild.value
 						.substring(markerLength)
@@ -28,7 +28,7 @@ export const remarkDropCapParagraph: Plugin<[IOptions?], MdastRoot> = (
 
 					// If the text node becomes empty after removing the marker and trimming, remove the node.
 					// This handles cases like "+> " followed by an image or other non-text element.
-					if (firstChild.value === '') {
+					if (firstChild.value === "") {
 						node.children.shift();
 					}
 
@@ -44,7 +44,7 @@ export const remarkDropCapParagraph: Plugin<[IOptions?], MdastRoot> = (
 					const hProperties = node.data.hProperties || {};
 
 					// Add the data attribute without a value
-					hProperties['data-drop-cap'] = '';
+					hProperties["data-drop-cap"] = "";
 
 					node.data.hProperties = hProperties;
 				}

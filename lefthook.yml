@@ -1,12 +1,12 @@
 pre-commit:
   parallel: true
   commands:
-    format:
-      glob: '**/*.{ts,tsx,js,jsx,json,md,astro,yml,yaml}'
-      run: npx prettier --check {staged_files}
-    linter:
-      glob: '**/*.{ts,tsx,js,jsx,astro}'
-      run: npx eslint {staged_files}
+    # format:
+    #   glob: '**/*.{ts,tsx,js,jsx,json,md,astro,yml,yaml}'
+    #   run: npx prettier --check {staged_files}
+    # linter:
+    #   glob: '**/*.{ts,tsx,js,jsx,astro}'
+    #   run: npx eslint {staged_files}
     check-types:
       run: bun run check:types
 

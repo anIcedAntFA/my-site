@@ -1,31 +1,32 @@
 ---
-import { AstroError } from 'astro/errors';
-import type { HTMLAttributes } from 'astro/types';
+	import { AstroError } from "astro/errors";
+	import type { HTMLAttributes } from "astro/types";
 
-const VARIANTS = ['note', 'tip', 'caution', 'danger', 'important'] as const;
+	const VARIANTS = ["note", "tip", "caution", "danger", "important"] as const;
 
-interface Props extends HTMLAttributes<'aside'> {
-	type?: (typeof VARIANTS)[number];
-	title?: string;
-}
+	interface Props extends HTMLAttributes<"aside"> {
+		type?: (typeof VARIANTS)[number];
+		title?: string;
+	}
 
-const { type = 'note', title, ...asideProps } = Astro.props;
+	const { type = "note", title, ...asideProps } = Astro.props;
 
-if (!VARIANTS.includes(type)) {
-	throw new AstroError(
-		'Invalid `type` prop passed to the `<Aside>` component.\n',
-		`Received: ${JSON.stringify(type)}\n` +
-			`Expected one of ${VARIANTS.map((i) => JSON.stringify(i)).join(', ')}`,
-	);
-}
+	if (!VARIANTS.includes(type)) {
+		throw new AstroError(
+			"Invalid `type` prop passed to the `<Aside>` component.\n",
+			`Received: ${JSON.stringify(type)}\n` +
+				`Expected one of ${VARIANTS.map((i) => JSON.stringify(i)).join(", ")}`,
+		);
+	}
 
-const myTitle = title ? title : type;
+	const myTitle = title ? title : type;
 ---
-
 <aside aria-label={myTitle} data-type={type || 'note'} {...asideProps}>
 	<p>
-		<i aria-hidden='true' aria-label={type}></i>
+		<i aria-hidden="true" aria-label={type}></i>
 		<strong>{myTitle}</strong>
 	</p>
-	<div><slot /></div>
+	<div>
+		<slot />
+	</div>
 </aside>

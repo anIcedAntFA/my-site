@@ -1,30 +1,30 @@
-import { defineGlobalStyles } from '@pandacss/dev';
+import { defineGlobalStyles } from "@pandacss/dev";
 
 export const globalCSS = defineGlobalStyles({
-	'*, *::before, *::after': {
-		transitionTimingFunction: 'ease-in-out',
+	"*, *::before, *::after": {
+		transitionTimingFunction: "ease-in-out",
 	},
 	body: {
-		bg: 'bg',
-		color: 'fg',
-		minHeight: '100vh',
-		lineHeight: 'normal',
-		scrollBehavior: 'smooth',
+		bg: "bg",
+		color: "fg",
+		minHeight: "100vh",
+		lineHeight: "normal",
+		scrollBehavior: "smooth",
 	},
 	"a, summary, button, input, [tabindex]:not([tabindex='-1'])": {
-		outline: 'none',
+		outline: "none",
 		_focusVisible: {
-			outline: '2px',
-			outlineColor: 'accent',
-			outlineOffset: '2px',
-			outlineStyle: 'solid',
-			rounded: 'sm',
+			outline: "2px",
+			outlineColor: "accent",
+			outlineOffset: "2px",
+			outlineStyle: "solid",
+			rounded: "sm",
 		},
 	},
 	"input[type='search']": {
-		'&::-webkit-search-decoration, &::-webkit-search-cancel-button, &::-webkit-search-results-button, &::-webkit-search-results-decoration':
+		"&::-webkit-search-decoration, &::-webkit-search-cancel-button, &::-webkit-search-results-button, &::-webkit-search-results-decoration":
 			{
-				WebkitAppearance: 'none',
+				WebkitAppearance: "none",
 			},
 	},
 	// '*::selection': {

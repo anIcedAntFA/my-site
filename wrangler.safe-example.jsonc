@@ -11,11 +11,11 @@
 
 	"assets": {
 		"binding": "ASSETS",
-		"directory": "./dist",
+		"directory": "./dist"
 	},
 
 	"observability": {
-		"enabled": true,
+		"enabled": true
 	},
 
 	/**
@@ -24,8 +24,8 @@
 	"routes": [
 		{
 			"pattern": "blog.ngockhoi96.dev",
-			"custom_domain": true,
-		},
+			"custom_domain": true
+		}
 	],
 
 	/**
@@ -35,8 +35,8 @@
 	"kv_namespaces": [
 		{
 			"binding": "MY_TEST_KV",
-			"id": "dbc60903f1124f808ff7426fc18dc2fc",
-		},
+			"id": "dbc60903f1124f808ff7426fc18dc2fc"
+		}
 	],
 
 	/**
@@ -45,15 +45,15 @@
 	"r2_buckets": [
 		{
 			"binding": "BLOG_IMAGES",
-			"bucket_name": "blog-images",
-		},
+			"bucket_name": "blog-images"
+		}
 	],
 
 	/**
 	 * Images binding - Safe to commit
 	 */
 	"images": {
-		"binding": "IMAGES",
+		"binding": "IMAGES"
 	},
 
 	/**
@@ -71,8 +71,8 @@
 		"R2_BUCKET_NAME": "blog-images",
 		"API_VERSION": "v1",
 		"ENABLE_ANALYTICS": "true",
-		"MAX_UPLOAD_SIZE_MB": "50",
-	},
+		"MAX_UPLOAD_SIZE_MB": "50"
+	}
 
 	/**
 	 * ⚠️ SECRETS MANAGEMENT:

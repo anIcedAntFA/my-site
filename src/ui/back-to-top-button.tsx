@@ -1,8 +1,8 @@
-import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
+import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 
-import { css, cx } from '@styled-system/css';
-import { flex, square } from '@styled-system/patterns';
-import { button, icon } from '@styled-system/recipes';
+import { css, cx } from "@styled-system/css";
+import { flex, square } from "@styled-system/patterns";
+import { button, icon } from "@styled-system/recipes";
 
 interface BackToTopButtonProps {
 	top?: number;
@@ -15,9 +15,10 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 		const btnRef = useSignal<HTMLButtonElement>();
 
 		const scrollToTop = $(() => {
-			window.scrollTo({ top: 0, behavior: isSmooth ? 'smooth' : 'auto' });
+			window.scrollTo({ top: 0, behavior: isSmooth ? "smooth" : "auto" });
 		});
 
+		// biome-ignore lint/correctness/noQwikUseVisibleTask: <wrong>
 		useVisibleTask$(({ cleanup, track }) => {
 			track(() => top);
 
@@ -31,64 +32,64 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 					const scrollPercent = (scrollTop / scrollTotal) * 100;
 
 					btnRef.value?.style.setProperty(
-						'--btt-scroll-percent',
+						"--btt-scroll-percent",
 						`${scrollPercent}%`,
 					);
 				};
 
 				handleScroll();
-				window.addEventListener('scroll', handleScroll);
+				window.addEventListener("scroll", handleScroll);
 
 				cleanup(() => {
-					window.removeEventListener('scroll', handleScroll);
+					window.removeEventListener("scroll", handleScroll);
 				});
 			}
 		});
 
-		const btnClasses = button({ size: 'sm', variant: 'outlined' });
-		const iconClasses = icon({ mode: 'mask', size: 'md' });
+		const btnClasses = button({ size: "sm", variant: "outlined" });
+		const iconClasses = icon({ mode: "mask", size: "md" });
 
 		return (
 			<div
 				class={flex({
-					zIndex: 'tooltip',
-					pos: 'sticky',
-					left: '100%',
-					bottom: 'var(--btt-btn-size)',
-					translate: 'auto',
-					y: 'var(--btt-btn-size)',
-					justify: 'center',
-					align: 'center',
-					w: 'var(--btt-btn-size)',
-					h: 'var(--btt-btn-size)',
-					mr: 'var(--btt-btn-size)',
-					mb: 'var(--btt-btn-size)',
+					zIndex: "tooltip",
+					pos: "sticky",
+					left: "100%",
+					bottom: "var(--btt-btn-size)",
+					translate: "auto",
+					y: "var(--btt-btn-size)",
+					justify: "center",
+					align: "center",
+					w: "var(--btt-btn-size)",
+					h: "var(--btt-btn-size)",
+					mr: "var(--btt-btn-size)",
+					mb: "var(--btt-btn-size)",
 					opacity: 0,
-					transitionDuration: 'normal',
-					transitionProperty: 'opacity, translate',
-					pointerEvents: 'none',
+					transitionDuration: "normal",
+					transitionProperty: "opacity, translate",
+					pointerEvents: "none",
 					_visible: {
-						y: '0',
+						y: "0",
 						opacity: 1,
-						pointerEvents: 'auto',
+						pointerEvents: "auto",
 					},
-					xs: { '--btt-btn-size': 'sizes.12' },
-					md: { w: 'fit-content' },
-					'--btt-btn-size': 'sizes.10',
+					xs: { "--btt-btn-size": "sizes.12" },
+					md: { w: "fit-content" },
+					"--btt-btn-size": "sizes.10",
 				})}
 				data-visible={isVisible.value}
 			>
 				<button
 					ref={btnRef}
-					aria-label='Back to top'
-					type='button'
+					aria-label="Back to top"
+					type="button"
 					class={cx(
 						btnClasses.root,
-						'group',
+						"group",
 						flex({
-							pos: 'relative',
-							align: 'center',
-							boxSize: '{sizes.full}',
+							pos: "relative",
+							align: "center",
+							boxSize: "{sizes.full}",
 						}),
 					)}
 					onClick$={scrollToTop}
@@ -97,30 +98,30 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 						class={cx(
 							btnClasses.content,
 							css({
-								justifyContent: 'center',
-								h: '{sizes.full}',
-								overflow: 'hidden',
+								justifyContent: "center",
+								h: "{sizes.full}",
+								overflow: "hidden",
 							}),
 						)}
 					>
 						<span
 							class={square({
-								h: 'calc({sizes.full} - 0.25rem)',
-								overflow: 'hidden',
+								h: "calc({sizes.full} - 0.25rem)",
+								overflow: "hidden",
 							})}
 						>
 							<i
-								aria-hidden='true'
+								aria-hidden="true"
 								class={cx(
 									iconClasses,
 									css({
-										maskImage: '{assets.arrowUp}',
+										maskImage: "{assets.arrowUp}",
 										_groupHover: {
-											animation: 'icon-cycle-up',
-											animationDuration: 'longer',
-											animationTimingFunction: 'ease-in-out',
+											animation: "icon-cycle-up",
+											animationDuration: "longer",
+											animationTimingFunction: "ease-in-out",
 										},
-										xs: { w: '1.7em', h: '1.7em' },
+										xs: { w: "1.7em", h: "1.7em" },
 									}),
 								)}
 							/>
@@ -128,7 +129,7 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 						<span
 							class={css({
 								srOnly: true,
-								md: { ml: '1.5', srOnly: false },
+								md: { ml: "1.5", srOnly: false },
 							})}
 						>
 							Back to top

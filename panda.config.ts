@@ -1,30 +1,31 @@
-import { defineConfig } from '@pandacss/dev';
-import { breakpoints } from './src/theme/breakpoints';
-import { conditions } from './src/theme/conditions';
-import { globalCSS } from './src/theme/global-css';
-import { globalVariables } from './src/theme/global-variables';
-import { keyframes } from './src/theme/keyframes';
-import { recipes } from './src/theme/recipes';
-import { semanticTokens } from './src/theme/semantic-tokens';
-import { slotRecipes } from './src/theme/slot-recipes';
-import { textStyles } from './src/theme/text-styles';
-import { tokens } from './src/theme/tokens';
-import { borderColor } from './src/theme/utilities';
+import { defineConfig } from "@pandacss/dev";
+
+import { breakpoints } from "./src/theme/breakpoints";
+import { conditions } from "./src/theme/conditions";
+import { globalCSS } from "./src/theme/global-css";
+import { globalVariables } from "./src/theme/global-variables";
+import { keyframes } from "./src/theme/keyframes";
+import { recipes } from "./src/theme/recipes";
+import { semanticTokens } from "./src/theme/semantic-tokens";
+import { slotRecipes } from "./src/theme/slot-recipes";
+import { textStyles } from "./src/theme/text-styles";
+import { tokens } from "./src/theme/tokens";
+import { borderColor } from "./src/theme/utilities";
 
 export default defineConfig({
 	//==== Output css options ====
 
 	// The set of reusable and shareable configuration presets.
-	presets: ['@pandacss/preset-panda'],
+	presets: ["@pandacss/preset-panda"],
 
 	// Whether to enable css reset styles.
 	preflight: true,
 
 	// The namespace prefix for the generated css classes and css variables.
-	prefix: 'mk',
+	prefix: "mk",
 
 	// The separator for the generated css classes.
-	separator: '_',
+	separator: "_",
 
 	// Whether to minify the generated css. This can be set
 	// to `true` to reduce the size of the generated css.
@@ -45,7 +46,7 @@ export default defineConfig({
 	clean: true,
 
 	// The output directory for the generated css.
-	outdir: 'styled-system',
+	outdir: "styled-system",
 
 	// Allows you to customize the import paths for the generated outdir.
 	// importMap: {
@@ -57,8 +58,8 @@ export default defineConfig({
 
 	// List of files glob to watch for changes.
 	include: [
-		'./src/**/*.{js,jsx,ts,tsx,mdx,astro}',
-		'./pages/**/*.{js,jsx,ts,tsx,mdx,astro}',
+		"./src/**/*.{js,jsx,ts,tsx,mdx,astro}",
+		"./pages/**/*.{js,jsx,ts,tsx,mdx,astro}",
 	],
 
 	// List of files glob to ignore.
@@ -68,10 +69,10 @@ export default defineConfig({
 	watch: true,
 
 	// File extension for generated javascript files.
-	outExtension: 'mjs',
+	outExtension: "mjs",
 
 	// Decides which syntax to use when writing CSS.
-	syntax: 'object-literal',
+	syntax: "object-literal",
 
 	// // Whether to use lightningcss instead of postcss for css optimization.
 	// lightningcss: true,
@@ -86,7 +87,7 @@ export default defineConfig({
 	shorthands: true,
 
 	// The root selector for the css variables.
-	cssVarRoot: ':where(:host, :root)',
+	cssVarRoot: ":where(:host, :root)",
 
 	// The css selectors or media queries shortcuts.
 	conditions: {
@@ -121,11 +122,11 @@ export default defineConfig({
 
 	// ==== JSX options ====
 	// JS Framework for generated JSX elements.
-	jsxFramework: 'qwik',
+	jsxFramework: "qwik",
 
 	// The factory name of the element
-	jsxFactory: 'styled',
+	jsxFactory: "styled",
 
 	// The style props allowed on generated JSX components
-	jsxStyleProps: 'all',
+	jsxStyleProps: "all",
 });

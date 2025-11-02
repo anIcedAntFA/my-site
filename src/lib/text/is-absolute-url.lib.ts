@@ -3,7 +3,7 @@ export const isAbsoluteURL = (url: string) => {
 		new URL(url);
 		return true;
 	} catch (err: unknown) {
-		console.error('Error parsing URL:', err);
+		console.error("Error parsing URL:", err);
 		return false;
 	}
 };

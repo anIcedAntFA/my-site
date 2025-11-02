@@ -1,44 +1,44 @@
-import { defineTokens } from '@pandacss/dev';
+import { defineTokens } from "@pandacss/dev";
 
 // Helper function to generate SVG URL token values
 // from asset directory
 const getSvgURL = (fileName: string) => ({
-	type: 'url',
+	type: "url",
 	value: `/src/asset/svg/${fileName}.svg`,
 });
 
 export const assets = defineTokens.assets({
 	arrowUp: {
-		value: getSvgURL('arrow-up'),
+		value: getSvgURL("arrow-up"),
 	},
 	externalLink: {
-		value: getSvgURL('external-link'),
+		value: getSvgURL("external-link"),
 	},
 	hash: {
-		value: getSvgURL('hash'),
+		value: getSvgURL("hash"),
 	},
 	link: {
-		value: getSvgURL('link'),
+		value: getSvgURL("link"),
 	},
 	quoteDoubleOpen: {
-		value: getSvgURL('quote-double-open'),
+		value: getSvgURL("quote-double-open"),
 	},
 	quoteDoubleClose: {
-		value: getSvgURL('quote-double-close'),
+		value: getSvgURL("quote-double-close"),
 	},
 	info: {
-		value: getSvgURL('info'),
+		value: getSvgURL("info"),
 	},
 	lightbulb: {
-		value: getSvgURL('lightbulb'),
+		value: getSvgURL("lightbulb"),
 	},
 	siren: {
-		value: getSvgURL('siren'),
+		value: getSvgURL("siren"),
 	},
 	bomb: {
-		value: getSvgURL('bomb'),
+		value: getSvgURL("bomb"),
 	},
 	rocket: {
-		value: getSvgURL('rocket'),
+		value: getSvgURL("rocket"),
 	},
 });

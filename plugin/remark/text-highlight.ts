@@ -1,10 +1,10 @@
 import type {
 	Parent as MdastParent,
-	PhrasingContent,
 	Root as MdastRoot,
 	Text as MdastText,
-} from 'mdast';
-import { SKIP, visit } from 'unist-util-visit';
+	PhrasingContent,
+} from "mdast";
+import { SKIP, visit } from "unist-util-visit";
 
 // Define the plugin in the attacher function style, similar to your working examples.
 // It returns a transformer function.
@@ -13,7 +13,7 @@ export const remarkTextHighlight = () => {
 	return (tree: MdastRoot) => {
 		visit(
 			tree,
-			'text',
+			"text",
 			(
 				node: MdastText,
 				index: number | undefined,
@@ -26,8 +26,8 @@ export const remarkTextHighlight = () => {
 				if (
 					!parent ||
 					index === undefined ||
-					parent.type === 'inlineCode' ||
-					parent.type === 'code'
+					parent.type === "inlineCode" ||
+					parent.type === "code"
 				) {
 					return; // Skip this node
 				}
@@ -51,7 +51,7 @@ export const remarkTextHighlight = () => {
 					// 1. Add the text segment before the current match (if any)
 					if (matchStartIndex > lastIndex) {
 						newChildren.push({
-							type: 'text',
+							type: "text",
 							value: value.slice(lastIndex, matchStartIndex),
 						});
 					}
@@ -59,7 +59,7 @@ export const remarkTextHighlight = () => {
 					// 2. Add the highlighted part as an MDAST 'html' node
 					// This node will be rendered as raw HTML by remark-rehype later.
 					newChildren.push({
-						type: 'html',
+						type: "html",
 						value: `<mark>${textContent}</mark>`,
 					});
 
@@ -71,7 +71,7 @@ export const remarkTextHighlight = () => {
 				if (hasMatches) {
 					// 3. Add any remaining text after the last match
 					if (lastIndex < value.length) {
-						newChildren.push({ type: 'text', value: value.slice(lastIndex) });
+						newChildren.push({ type: "text", value: value.slice(lastIndex) });
 					}
 
 					// 4. Replace the original text node in the parent's children array

@@ -1,27 +1,27 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-import { transform } from 'ultrahtml';
-import sanitize from 'ultrahtml/transformers/sanitize';
+	import type { HTMLAttributes } from "astro/types";
 
-import { isAbsoluteURL } from '@lib/text';
+	import { isAbsoluteURL } from "@lib/text";
+	import { transform } from "ultrahtml";
+	import sanitize from "ultrahtml/transformers/sanitize";
 
-interface Props extends HTMLAttributes<'a'> {}
+	interface Props extends HTMLAttributes<"a"> {}
 
-const { href, ...anchorAttrs } = Astro.props;
+	const { href, ...anchorAttrs } = Astro.props;
 
-const isAbsolute = typeof href === 'string' && isAbsoluteURL(href);
+	const isAbsolute = typeof href === "string" && isAbsoluteURL(href);
 
-const labelHTML = await Astro.slots.render('default');
-const labelString = await transform(labelHTML, [
-	sanitize({ unblockElements: [] }),
-]);
+	const labelHTML = await Astro.slots.render("default");
+	const labelString = await transform(labelHTML, [
+		sanitize({ unblockElements: [] }),
+	]);
 ---
-
 <a
 	aria-label={`Read more about ${labelString}`}
 	href={href}
 	target={isAbsolute ? '_blank' : undefined}
 	rel={isAbsolute ? 'noopener noreferrer' : undefined}
 	data-text-link
-	{...anchorAttrs}><slot /></a
+	{...anchorAttrs}
+	><slot /></a
 >

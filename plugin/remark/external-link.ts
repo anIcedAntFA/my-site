@@ -1,6 +1,6 @@
-import type { Link } from 'mdast'; // Specific type for a Markdown link node in mdast
-import type { Node } from 'unist'; // Type for a generic Unist node
-import { visit } from 'unist-util-visit';
+import type { Link } from "mdast"; // Specific type for a Markdown link node in mdast
+import type { Node } from "unist"; // Type for a generic Unist node
+import { visit } from "unist-util-visit";
 
 // This is a Remark plugin. Remark plugins operate on the Markdown Abstract Syntax Tree (mdast).
 // This specific plugin adds 'target="_blank"' and 'rel="noopener noreferrer"' attributes
@@ -13,7 +13,7 @@ export const remarkExternalLinks = () => {
 		// The 'unist-util-visit' library allows us to easily traverse the tree
 		// and find specific types of nodes. We are looking for nodes of type 'link'.
 		// The visitor function receives the node found, its index, and its parent.
-		visit(tree, 'link', (node: Link) => {
+		visit(tree, "link", (node: Link) => {
 			// Check if the found node is indeed a link (which 'visit' ensures by type 'link')
 			// and importantly, check if its URL property indicates an external link.
 			// A common heuristic is to check if the URL starts with 'http://' or 'https://'.
@@ -21,7 +21,7 @@ export const remarkExternalLinks = () => {
 			// (e.g., handling mailto links, protocol-relative URLs, specific internal links).
 			if (
 				node.url &&
-				(node.url.startsWith('http://') || node.url.startsWith('https://'))
+				(node.url.startsWith("http://") || node.url.startsWith("https://"))
 			) {
 				// If the link is external, we add/modify properties that will be used
 				// when this node is converted into an HTML element later in the pipeline (by rehype).
@@ -34,7 +34,7 @@ export const remarkExternalLinks = () => {
 				node.data.hProperties = node.data.hProperties || {};
 
 				// Add/set the 'target' attribute to '_blank' to open the link in a new tab.
-				node.data.hProperties.target = '_blank';
+				node.data.hProperties.target = "_blank";
 
 				// Add/set the 'rel' attribute for security and best practices when using target="_blank".
 				// 'noopener' prevents the new page from accessing the window.opener property.
@@ -42,7 +42,7 @@ export const remarkExternalLinks = () => {
 				// You could use an array like ['noopener', 'noreferrer'] as well,
 				// depending on how your renderer handles the 'rel' property type.
 				// Sticking to string 'noopener noreferrer' is common and directly matches HTML.
-				node.data.hProperties.rel = 'noopener noreferrer';
+				node.data.hProperties.rel = "noopener noreferrer";
 			}
 		});
 	};

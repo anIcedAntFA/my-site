@@ -1,0 +1,118 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.3.2/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"includes": [
+			"**",
+			"!!**/dist",
+			"!!styled-system",
+			"!!plugin",
+			"!worker-configuration.d.ts"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true
+		},
+		"domains": {
+			"qwik": "all",
+			"project": "recommended"
+		}
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true,
+		"formatter": {
+			"enabled": true,
+			"indentScriptAndStyle": true,
+			"selfCloseVoidElements": "always",
+			"indentWidth": 2,
+			"lineWidth": 80,
+			"indentStyle": "tab",
+			"lineEnding": "lf"
+		}
+	},
+	"css": {
+		"formatter": {
+			"quoteStyle": "single"
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"identifierOrder": "natural",
+						"groups": [
+							// Group 1: Core Framework imports (Astro & Qwik) - HIGHEST PRIORITY
+							[
+								"@astrojs/**",
+								"astro/**",
+								"astro:*",
+								"@builder.io/**",
+								"@qwikdev/**",
+								"@pandacss/**"
+							],
+							":BLANK_LINE:",
+							// Group 2: Other external packages
+							":PACKAGE:",
+							":BLANK_LINE:",
+							// Group 3: Node.js built-in modules
+							[":BUN:", ":NODE:", "URL"],
+							":BLANK_LINE:",
+							// Group 4: Alias imports (e.g., @config, @layout, etc.) - EXCLUDE CSS
+							[
+								"@/**"
+								// "@/asset/**",
+								// "@/ui/**",
+								// "@/content/**",
+								// "@/config/**",
+								// "@/data/**",
+								// "@/hook/**",
+								// "@/lib/**",
+								// "@/layout/**",
+								// "@/styled-system/**",
+								// "@/theme/**",
+								// "@/plugin/**"
+							],
+							":BLANK_LINE:",
+							// Group 5: Relative imports
+							["./**", "../**"],
+							":BLANK_LINE:",
+							// Group 6: CSS/Style imports - LOWEST PRIORITY
+							["@style/**", "**/*.css"]
+						]
+					}
+				}
+			}
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
+					}
+				}
+			}
+		}
+	]
+}

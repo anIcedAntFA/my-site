@@ -1,2 +1,2 @@
-export { rehypeCheckbox } from './checkbox';
-export { rehypeSectionsForHeadings } from './sections-for-headings';
+export { rehypeCheckbox } from "./checkbox";
+export { rehypeSectionsForHeadings } from "./sections-for-headings";

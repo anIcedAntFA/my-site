@@ -1,7 +1,7 @@
-import type { SemanticTokens } from '@pandacss/dev';
+import type { SemanticTokens } from "@pandacss/dev";
 
-import { colors } from './colors';
-import { shadows } from './shadows';
+import { colors } from "./colors";
+import { shadows } from "./shadows";
 
 export const semanticTokens: SemanticTokens = {
 	colors: colors,

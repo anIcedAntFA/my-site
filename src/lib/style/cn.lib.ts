@@ -27,20 +27,20 @@ function cn(...args: Argument[]) {
 	const presentClassNames: string[] = Array.prototype.slice
 		.call(args)
 		.filter(Boolean)
-		.filter((arg) => typeof arg === 'string');
+		.filter((arg) => typeof arg === "string");
 
 	const atomicClasses: { [k: string]: string } = {};
 	const nonAtomicClasses: string[] = [];
 
 	presentClassNames.forEach((arg) => {
 		// Break args down into individual class names, stripping any empty strings
-		const individualClassNames = arg ? arg.split(' ').filter(Boolean) : [];
+		const individualClassNames = arg ? arg.split(" ").filter(Boolean) : [];
 
 		individualClassNames.forEach((className) => {
 			// Check for atomic class format match
 			const matches = className.match(regex);
 			if (
-				!className.includes('__') /* Slot recipes contain `__` */ &&
+				!className.includes("__") /* Slot recipes contain `__` */ &&
 				matches
 			) {
 				// Grab the first part of the class name (before the first '_', but after any `[...]:`)
@@ -58,14 +58,14 @@ function cn(...args: Argument[]) {
 
 	// Push atomic classes first
 	for (const key in atomicClasses) {
-		if (Object.prototype.hasOwnProperty.call(atomicClasses, key)) {
+		if (Object.hasOwn(atomicClasses, key)) {
 			result.push(atomicClasses[key]);
 		}
 	}
 	// Push non atomic classes last
 	result.push(...nonAtomicClasses);
 	// Return a string of all the classes joined by a space
-	return result.join(' ');
+	return result.join(" ");
 }
 
 export { cn };

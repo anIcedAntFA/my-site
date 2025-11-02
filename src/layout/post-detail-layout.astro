@@ -1,22 +1,23 @@
 ---
-import type { CollectionEntry } from 'astro:content';
-import BaseLayout from './base-layout.astro';
-import { prose } from '@styled-system/recipes';
-import { cx, css } from '@styled-system/css';
+	import type { CollectionEntry } from "astro:content";
 
-interface Props {
-	post: CollectionEntry<'blog'>;
-}
+	import { css, cx } from "@styled-system/css";
+	import { prose } from "@styled-system/recipes";
 
-const { post } = Astro.props;
+	import BaseLayout from "./base-layout.astro";
 
-const { title, description, author, publishedDate, modifiedDate } = post.data;
+	interface Props {
+		post: CollectionEntry<"blog">;
+	}
 
-const contentClasses = prose({
-	size: { base: 'md', xs: 'lg', lg: 'xl', '3xl': '2xl' },
-});
+	const { post } = Astro.props;
+
+	const { title, description, author, publishedDate, modifiedDate } = post.data;
+
+	const contentClasses = prose({
+		size: { base: "md", xs: "lg", lg: "xl", "3xl": "2xl" },
+	});
 ---
-
 <BaseLayout>
 	<main>
 		<div class={cx(contentClasses, css({ mx: 'auto' }))}>
@@ -24,7 +25,7 @@ const contentClasses = prose({
 				<header></header>
 				<h1>{title}</h1>
 				<p>{description}</p>
-				<p>By {author} on {publishedDate}</p>
+				<p>By {author}on {publishedDate}</p>
 				<p>Last modified on {modifiedDate}</p>
 				<div>
 					<slot />

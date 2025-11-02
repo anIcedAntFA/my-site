@@ -1,27 +1,26 @@
 ---
-import { css, cx } from '@styled-system/css';
-import { iconButton } from '@styled-system/recipes';
+	import { css, cx } from "@styled-system/css";
+	import { iconButton } from "@styled-system/recipes";
 
-interface Props {
-	label: string;
-	maskImage: string;
-	size?: 'sm' | 'md' | 'lg';
-	variant?: 'ghost' | 'outlined';
-	rounded?: boolean;
-}
+	interface Props {
+		label: string;
+		maskImage: string;
+		size?: "sm" | "md" | "lg";
+		variant?: "ghost" | "outlined";
+		rounded?: boolean;
+	}
 
-const {
-	label,
-	maskImage,
-	size = 'md',
-	variant = 'ghost',
-	rounded = false,
-	...buttonProps
-} = Astro.props;
+	const {
+		label,
+		maskImage,
+		size = "md",
+		variant = "ghost",
+		rounded = false,
+		...buttonProps
+	} = Astro.props;
 
-const { icon, root } = iconButton({ size, variant, rounded });
+	const { icon, root } = iconButton({ size, variant, rounded });
 ---
-
-<button type='button' aria-label={label} class={root} {...buttonProps}>
+<button type="button" aria-label={label} class={root} {...buttonProps}>
 	<i class={cx(icon, css({ maskImage: maskImage }))}></i>
 </button>

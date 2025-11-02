@@ -1,28 +1,26 @@
 ---
-import { render } from 'astro:content';
+	import type { CollectionEntry } from "astro:content";
+	import { getCollection, render } from "astro:content";
 
-import { MARKDOWN_COMPONENTS } from '@config/component.config';
-import PostDetailLayout from '@layout/post-detail-layout.astro';
-import type { CollectionEntry } from 'astro:content';
-import { getCollection } from 'astro:content';
+	import { MARKDOWN_COMPONENTS } from "@/config/component.config";
+	import PostDetailLayout from "@/layout/post-detail-layout.astro";
 
-export async function getStaticPaths() {
-	const posts = await getCollection('blog');
+	export async function getStaticPaths() {
+		const posts = await getCollection("blog");
 
-	return posts.map((post) => ({
-		params: { slug: post.id },
-		props: post,
-	}));
-}
+		return posts.map((post) => ({
+			params: { slug: post.id },
+			props: post,
+		}));
+	}
 
-type Props = CollectionEntry<'blog'>;
+	type Props = CollectionEntry<"blog">;
 
-const post = Astro.props;
+	const post = Astro.props;
 
-// 4. Render the content of the fetched entry to HTML.
-const { Content } = await render(post);
+	// 4. Render the content of the fetched entry to HTML.
+	const { Content } = await render(post);
 ---
-
 <PostDetailLayout post={post}>
 	<Content components={MARKDOWN_COMPONENTS} />
 </PostDetailLayout>
