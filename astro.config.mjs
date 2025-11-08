@@ -1,9 +1,11 @@
 // @ts-check
+
 import cloudflare from '@astrojs/cloudflare';
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import qwikdev from '@qwikdev/astro';
 import { defineConfig } from 'astro/config';
+
 import { rehypeCheckbox, rehypeSectionsForHeadings } from './plugin/rehype';
 import {
 	remarkBlockQuotationCiteURL,

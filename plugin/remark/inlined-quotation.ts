@@ -1,8 +1,8 @@
 import type {
 	Html as MdastHtml,
 	Paragraph as MdastParagraph,
-	PhrasingContent,
 	Root as MdastRoot,
+	PhrasingContent,
 } from 'mdast';
 import type { Plugin } from 'unified';
 import { visit } from 'unist-util-visit';
@@ -72,7 +72,7 @@ export const remarkInlinedQuotation: Plugin<[], MdastRoot> = () => {
 
 			// Stage 1: Process all text nodes for simple ""quote"" patterns first.
 			// This might create more nodes in a new temporary array.
-			let stage1Children: PhrasingContent[] = [];
+			const stage1Children: PhrasingContent[] = [];
 			for (const child of paragraphNode.children) {
 				if (child.type === 'text') {
 					stage1Children.push(...processTextForSimpleQuotes(child.value));

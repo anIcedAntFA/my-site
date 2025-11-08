@@ -1,7 +1,7 @@
 import { component$, type PropsOf, Slot } from '@builder.io/qwik';
 
-import { cn } from '@lib/style/cn.lib';
-import { inlineCode } from '@styled-system/recipes';
+import { cn } from '@/lib/style';
+import { inlineCode } from '@/styled-system/recipes';
 
 interface InlineCodeProps extends PropsOf<'span'> {
 	size?: 'sm' | 'md' | 'lg';

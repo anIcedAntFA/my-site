@@ -14,19 +14,19 @@
 			}
 		],
 		"paths": {
-			"@asset/*": ["./src/asset/*"],
-			"@ui/*": ["./src/ui/*"],
-			"@content/*": ["./src/content/*"],
-			"@config/*": ["./src/config/*"],
-			"@data/*": ["./src/data/*"],
-			"@hook/*": ["./src/hook/*"],
-			"@lib/*": ["./src/lib/*"],
-			"@layout/*": ["./src/layout/*"],
-			"@style/*": ["./src/style/*"],
-			"@styled-system/*": ["./styled-system/*"],
+			"@/asset/*": ["./src/asset/*"],
+			"@/ui/*": ["./src/ui/*"],
+			"@/content/*": ["./src/content/*"],
+			"@/config/*": ["./src/config/*"],
+			"@/data/*": ["./src/data/*"],
+			"@/hook/*": ["./src/hook/*"],
+			"@/lib/*": ["./src/lib/*"],
+			"@/layout/*": ["./src/layout/*"],
+			"@/style/*": ["./src/style/*"],
+			"@/styled-system/*": ["./styled-system/*"],
 			// Optional
-			"@theme/*": ["./src/theme/*"],
-			"@plugin/*": ["./plugin/*"]
+			"@/theme/*": ["./src/theme/*"],
+			"@/plugin/*": ["./plugin/*"]
 		}
 	}
 }

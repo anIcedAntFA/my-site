@@ -58,7 +58,7 @@ function cn(...args: Argument[]) {
 
 	// Push atomic classes first
 	for (const key in atomicClasses) {
-		if (Object.prototype.hasOwnProperty.call(atomicClasses, key)) {
+		if (Object.hasOwn(atomicClasses, key)) {
 			result.push(atomicClasses[key]);
 		}
 	}

@@ -1,5 +1,6 @@
-import { em } from '@lib/style/calc.lib';
 import { defineRecipe } from '@pandacss/dev';
+
+import { em } from '@/lib/style';
 
 export const prose = defineRecipe({
 	className: 'prose',

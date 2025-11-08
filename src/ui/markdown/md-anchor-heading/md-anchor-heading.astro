@@ -1,47 +1,60 @@
 ---
-import { AstroError } from 'astro/errors';
-import type { HTMLAttributes } from 'astro/types';
-import { transform } from 'ultrahtml';
-import sanitize from 'ultrahtml/transformers/sanitize';
+	import { AstroError } from 'astro/errors';
+	import type { HTMLAttributes } from 'astro/types';
 
-import { cx, css } from '@styled-system/css';
-import { icon } from '@styled-system/recipes';
+	import { transform } from 'ultrahtml';
+	import sanitize from 'ultrahtml/transformers/sanitize';
 
-import { CopyLinkButton } from './copy-link-button';
+	import { css, cx } from '@/styled-system/css';
+	import { icon } from '@/styled-system/recipes';
 
-const headingLevels = [1, 2, 3, 4, 5, 6, '1', '2', '3', '4', '5', '6'] as const;
+	import { CopyLinkButton } from './copy-link-button';
 
-interface Props extends HTMLAttributes<'h1'> {
-	level: 1 | 2 | 3 | 4 | 5 | 6 | `${1 | 2 | 3 | 4 | 5 | 6}`;
-}
+	const headingLevels = [
+		1,
+		2,
+		3,
+		4,
+		5,
+		6,
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+		'6',
+	] as const;
 
-const { level, id, ...headingAttrs } = Astro.props;
+	interface Props extends HTMLAttributes<'h1'> {
+		level: 1 | 2 | 3 | 4 | 5 | 6 | `${1 | 2 | 3 | 4 | 5 | 6}`;
+	}
 
-if (!id) {
-	throw new AstroError(
-		'Missing `id` attribute passed to `<AnchorHeading>` component',
-		`The \`<AnchorHeading>\` component requires an \`id\` attribute, but received \`${typeof id === 'string' ? '""' : id}\`.`,
-	);
-}
+	const { level, id, ...headingAttrs } = Astro.props;
 
-if (!headingLevels.includes(level)) {
-	throw new AstroError(
-		'Invalid `level` attribute passed to `<AnchorHeading>` component',
-		`The \`<AnchorHeading>\` component expects a \`level\` attribute of \`1 | 2 | 3 | 4 | 5 | 6\`, but received \`${level}\`.`,
-	);
-}
+	if (!id) {
+		throw new AstroError(
+			'Missing `id` attribute passed to `<AnchorHeading>` component',
+			`The \`<AnchorHeading>\` component requires an \`id\` attribute, but received \`${typeof id === 'string' ? '""' : id}\`.`,
+		);
+	}
 
-const HeadingElement = `h${level}` as const;
-const headingHTML = await Astro.slots.render('default');
-const headingString = await transform(headingHTML, [
-	sanitize({ unblockElements: [] }),
-]);
+	if (!headingLevels.includes(level)) {
+		throw new AstroError(
+			'Invalid `level` attribute passed to `<AnchorHeading>` component',
+			`The \`<AnchorHeading>\` component expects a \`level\` attribute of \`1 | 2 | 3 | 4 | 5 | 6\`, but received \`${level}\`.`,
+		);
+	}
 
-const accessibleLabel = headingString;
+	const HeadingElement = `h${level}` as const;
+	const headingHTML = await Astro.slots.render('default');
+	const headingString = await transform(headingHTML, [
+		sanitize({ unblockElements: [] }),
+	]);
 
-const iconClass = icon({ mode: 'mask', size: 'sm' });
+	const accessibleLabel = headingString;
+
+	const iconClass = icon({ mode: 'mask', size: 'sm' });
 ---
-
 <div
 	data-heading-id={id}
 	data-level={level}
@@ -61,7 +74,7 @@ const iconClass = icon({ mode: 'mask', size: 'sm' });
 			})}
 		>
 			<i
-				aria-hidden='true'
+				aria-hidden="true"
 				class={cx(
 					iconClass,
 					css({
@@ -70,10 +83,11 @@ const iconClass = icon({ mode: 'mask', size: 'sm' });
 						top: '0.1em',
 						color: 'accent',
 					}),
-				)}></i>
+				)}
+			></i>
 			{headingHTML}
 			<span
-				role='alert'
+				role="alert"
 				set:text={accessibleLabel}
 				class={css({ srOnly: true })}
 			/>
@@ -99,9 +113,7 @@ const iconClass = icon({ mode: 'mask', size: 'sm' });
 			sectionElement.setAttribute('aria-labelledby', headingId);
 			delete sectionElement.dataset.sectionNeedsLabelledby; // Clean up marker
 		} else if (
-			sectionElement &&
-			sectionElement.parentElement &&
-			sectionElement.parentElement.tagName === 'SECTION' &&
+			sectionElement?.parentElement?.tagName === 'SECTION' &&
 			sectionElement.parentElement.dataset.sectionNeedsLabelledby === 'true'
 		) {
 			// Fallback: Astro might add an implicit wrapper around slots sometimes, check one level higher for the section.

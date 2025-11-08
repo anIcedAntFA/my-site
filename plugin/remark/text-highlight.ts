@@ -1,8 +1,8 @@
 import type {
 	Parent as MdastParent,
-	PhrasingContent,
 	Root as MdastRoot,
 	Text as MdastText,
+	PhrasingContent,
 } from 'mdast';
 import { SKIP, visit } from 'unist-util-visit';
 

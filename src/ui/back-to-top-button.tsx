@@ -1,8 +1,8 @@
 import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 
-import { css, cx } from '@styled-system/css';
-import { flex, square } from '@styled-system/patterns';
-import { button, icon } from '@styled-system/recipes';
+import { css, cx } from '@/styled-system/css';
+import { flex, square } from '@/styled-system/patterns';
+import { button, icon } from '@/styled-system/recipes';
 
 interface BackToTopButtonProps {
 	top?: number;
@@ -18,6 +18,7 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 			window.scrollTo({ top: 0, behavior: isSmooth ? 'smooth' : 'auto' });
 		});
 
+		// biome-ignore lint/correctness/noQwikUseVisibleTask: <wrong>
 		useVisibleTask$(({ cleanup, track }) => {
 			track(() => top);
 
@@ -79,9 +80,7 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 				data-visible={isVisible.value}
 			>
 				<button
-					ref={btnRef}
 					aria-label='Back to top'
-					type='button'
 					class={cx(
 						btnClasses.root,
 						'group',
@@ -92,6 +91,8 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 						}),
 					)}
 					onClick$={scrollToTop}
+					ref={btnRef}
+					type='button'
 				>
 					<div
 						class={cx(

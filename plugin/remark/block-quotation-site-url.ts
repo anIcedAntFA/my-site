@@ -1,7 +1,7 @@
 import type {
 	BlockContent,
-	Blockquote as MdastBlockquote,
 	DefinitionContent,
+	Blockquote as MdastBlockquote,
 	Root as MdastRoot,
 } from 'mdast';
 import { toString as mdastToString } from 'mdast-util-to-string';
@@ -29,7 +29,7 @@ export const remarkBlockQuotationCiteURL: Plugin<
 				return;
 			}
 
-			let citeUrl: string | undefined = undefined;
+			let citeUrl: string | undefined;
 			// Children of a blockquote are FlowContent (BlockContent | DefinitionContent)
 			const newChildren: Array<BlockContent | DefinitionContent> = [];
 
@@ -46,7 +46,7 @@ export const remarkBlockQuotationCiteURL: Plugin<
 
 					const citeMatch = paragraphText.trim().match(citeUrlRegex);
 
-					if (citeMatch && citeMatch[1]) {
+					if (citeMatch?.[1]) {
 						citeUrl = citeMatch[1];
 						isCiteUrlParagraph = true;
 						// console.log(`  -> Matched CITE:: URL: ${citeUrl}`); // DEBUG

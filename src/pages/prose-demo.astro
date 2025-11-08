@@ -1,11 +1,10 @@
 ---
-import Layout from '@layout/base-layout.astro';
-import Prose from '@ui/prose.astro';
+	import Layout from '@/layout/base-layout.astro';
+	import Prose from '@/ui/prose.astro';
 ---
-
-<Layout title='Prose Recipe Demo'>
-	<main class='container max-w-4xl mx-auto py-8 px-4'>
-		<Prose size='lg' lead>
+<Layout title="Prose Recipe Demo">
+	<main class="container max-w-4xl mx-auto py-8 px-4">
+		<Prose size="lg" lead>
 			<h1>Prose Recipe Demonstration</h1>
 
 			<p>
@@ -28,17 +27,17 @@ import Prose from '@ui/prose.astro';
 
 			<ol>
 				<li>
-					<strong>Comprehensive element support</strong> - All HTML elements are
+					<strong>Comprehensive element support</strong>- All HTML elements are
 					styled
 				</li>
 				<li>
-					<strong>Multiple size variants</strong> - From compact to extra large
+					<strong>Multiple size variants</strong>- From compact to extra large
 				</li>
 				<li>
-					<strong>Color variants</strong> - Default, muted, and inverted themes
+					<strong>Color variants</strong>- Default, muted, and inverted themes
 				</li>
 				<li>
-					<strong>Responsive design</strong> - Adapts to different screen sizes
+					<strong>Responsive design</strong>- Adapts to different screen sizes
 				</li>
 			</ol>
 
@@ -54,9 +53,9 @@ import Prose from '@ui/prose.astro';
 			<h3>Code Examples</h3>
 
 			<p>
-				The recipe handles both inline code like <code
-					>const example = true;</code
-				> and code blocks with proper formatting:
+				The recipe handles both inline code like
+				<code>const example = true;</code>and code blocks with proper
+				formatting:
 			</p>
 
 			<pre><code>import &#123; prose &#125; from '@styled-system/recipes';
@@ -128,10 +127,10 @@ console.log('Prose recipe applied!');</code></pre>
 
 			<figure>
 				<img
-					src='https://via.placeholder.com/600x300/4f46e5/ffffff?text=Typography+Example'
-					alt='Example of typography in action'
-					width='600'
-					height='300'
+					src="https://via.placeholder.com/600x300/4f46e5/ffffff?text=Typography+Example"
+					alt="Example of typography in action"
+					width="600"
+					height="300"
 				/>
 				<figcaption>
 					Example typography layout showing proper hierarchy and spacing
@@ -143,7 +142,7 @@ console.log('Prose recipe applied!');</code></pre>
 			<h2>Final Notes</h2>
 
 			<p>
-				This prose recipe is inspired by <strong>Tailwind Typography</strong> but
+				This prose recipe is inspired by <strong>Tailwind Typography</strong>but
 				built specifically for our Panda CSS design system. It provides:
 			</p>
 

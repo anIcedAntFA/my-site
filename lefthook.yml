@@ -1,25 +1,30 @@
 pre-commit:
   parallel: true
   commands:
-    format:
-      glob: '**/*.{ts,tsx,js,jsx,json,md,astro,yml,yaml}'
-      run: npx prettier --check {staged_files}
-    linter:
-      glob: '**/*.{ts,tsx,js,jsx,astro}'
-      run: npx eslint {staged_files}
+    # Check formatting and lint before committing
+    biome-check:
+      glob: '*.{astro,js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}'
+      run: bunx @biomejs/biome check --no-errors-on-unmatched --files-ignore-unknown=true --colors=off {staged_files}
+    # Type checking
     check-types:
       run: bun run check:types
 
 pre-push:
   parallel: true
   commands:
+    # Security scanning
     gitLeaks:
-      run: bun run gitleaks
+      run: bunx gitleaks detect --config .gitleaks.toml --verbose
+    # Circular dependency check
     check-circular-deps:
       glob: '**/*.{ts,tsx,js,jsx,astro}'
       run: bun run check:circular-deps
+    # Branch naming validation
     check-branch-name:
-      run: npx validate-branch-name
+      run: bunx validate-branch-name
+    # Full quality check before push
+    quality-gate:
+      run: bun run ci:quality
 
 commit-msg:
   commands:

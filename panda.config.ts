@@ -1,4 +1,5 @@
 import { defineConfig } from '@pandacss/dev';
+
 import { breakpoints } from './src/theme/breakpoints';
 import { conditions } from './src/theme/conditions';
 import { globalCSS } from './src/theme/global-css';

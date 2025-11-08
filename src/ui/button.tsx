@@ -1,7 +1,7 @@
 import { component$, type PropsOf, Slot } from '@builder.io/qwik';
 
-import { cn } from '@lib/style/cn.lib';
-import { button } from '@styled-system/recipes';
+import { cn } from '@/lib/style';
+import { button } from '@/styled-system/recipes';
 
 interface ButtonProps extends PropsOf<'button'> {
 	variant?: 'contained' | 'outlined';
@@ -19,7 +19,7 @@ export const Button = component$(
 		const { root, content } = button({ size, variant });
 
 		return (
-			<button type='button' class={cn(root, classes)} {...buttonProps}>
+			<button class={cn(root, classes)} type='button' {...buttonProps}>
 				<span class={content}>
 					<Slot />
 				</span>

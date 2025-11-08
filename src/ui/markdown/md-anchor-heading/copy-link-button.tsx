@@ -1,10 +1,10 @@
 import { $, component$ } from '@builder.io/qwik';
 
-import { useCopyToClipboard } from '@hook/use-copy-to-clipboard';
-import { cn } from '@lib/style/cn.lib';
-import { getURLFromId } from '@lib/text';
-import { css, cx } from '@styled-system/css';
-import { iconButton } from '@styled-system/recipes';
+import { useCopyToClipboard } from '@/hook/use-copy-to-clipboard';
+import { cn } from '@/lib/style';
+import { getURLFromId } from '@/lib/text';
+import { css, cx } from '@/styled-system/css';
+import { iconButton } from '@/styled-system/recipes';
 
 interface CopyLinkButtonProps {
 	headingId: string;
@@ -32,12 +32,8 @@ export const CopyLinkButton = component$(
 
 		return (
 			<button
-				type='button'
-				aria-label='Copy URL'
-				title='Copy to clipboard'
-				onClick$={handleCopyURL}
-				disabled={hasCopied.value}
 				aria-disabled={hasCopied.value}
+				aria-label='Copy URL'
 				class={cn(
 					iconBtnClasses.root,
 					css({
@@ -52,6 +48,10 @@ export const CopyLinkButton = component$(
 						_groupHover: { opacity: hasCopied.value ? 0.4 : 1 },
 					}),
 				)}
+				disabled={hasCopied.value}
+				onClick$={handleCopyURL}
+				title='Copy to clipboard'
+				type='button'
 			>
 				<i
 					class={cx(
@@ -61,7 +61,7 @@ export const CopyLinkButton = component$(
 							maskImage: '{assets.link}',
 						}),
 					)}
-				></i>
+				/>
 			</button>
 		);
 	},

@@ -1,0 +1,167 @@
+{
+	"$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
+	"vcs": {
+		"enabled": true,
+		"clientKind": "git",
+		"useIgnoreFile": true
+	},
+	"files": {
+		"includes": [
+			"**",
+			"!!**/dist",
+			"!!styled-system",
+			"!!plugin",
+			"!worker-configuration.d.ts",
+			"!wrangler.*.jsonc"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": true,
+			"correctness": {
+				"noUnknownMediaFeatureName": "off"
+			},
+			"performance": {
+				"noReExportAll": "error",
+				"useTopLevelRegex": "error"
+			},
+			"suspicious": {
+				"noConsole": {
+					"level": "error",
+					"options": {
+						"allow": ["info", "warn", "error", "debug"]
+					}
+				}
+			},
+			"style": {
+				"noParameterAssign": "error",
+				"useAsConstAssertion": "error",
+				"useDefaultParameterLast": "error",
+				"useEnumInitializers": "error",
+				"useSelfClosingElements": "error",
+				"useSingleVarDeclarator": "error",
+				"noUnusedTemplateLiteral": "error",
+				"useNumberNamespace": "error",
+				"noInferrableTypes": "error",
+				"noUselessElse": "error"
+			}
+		},
+		"domains": {
+			"qwik": "all",
+			"project": "recommended"
+		}
+	},
+	"html": {
+		"experimentalFullSupportEnabled": true,
+		"formatter": {
+			"enabled": true,
+			"indentScriptAndStyle": true,
+			"selfCloseVoidElements": "always",
+			"indentWidth": 2,
+			"lineWidth": 80,
+			"indentStyle": "tab",
+			"lineEnding": "lf",
+			"whitespaceSensitivity": "strict"
+		}
+	},
+	"css": {
+		"formatter": {
+			"quoteStyle": "single"
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "single",
+			"indentStyle": "tab",
+			"lineWidth": 80,
+			"lineEnding": "lf",
+			"semicolons": "always",
+			"jsxQuoteStyle": "single"
+		}
+	},
+	"json": {
+		"parser": {
+			"allowComments": true,
+			"allowTrailingCommas": true
+		},
+		"formatter": {
+			"indentStyle": "tab",
+			"trailingCommas": "none"
+		}
+	},
+	"assist": {
+		"enabled": true,
+		"actions": {
+			"source": {
+				"organizeImports": {
+					"level": "on",
+					"options": {
+						"identifierOrder": "natural",
+						"groups": [
+							// Group 1: Core Framework imports (Astro & Qwik) - HIGHEST PRIORITY
+							[
+								"@astrojs/**",
+								"astro/**",
+								"astro:*",
+								"@builder.io/**",
+								"@qwikdev/**",
+								"@pandacss/**"
+							],
+							":BLANK_LINE:",
+							// Group 2: Other external packages
+							":PACKAGE:",
+							":BLANK_LINE:",
+							// Group 3: Node.js built-in modules
+							[":BUN:", ":NODE:", "URL"],
+							":BLANK_LINE:",
+							// Group 4: Alias imports (e.g., @config, @layout, etc.) - EXCLUDE CSS
+							[
+								"@/asset/**",
+								"@/ui/**",
+								"@/content/**",
+								"@/config/**",
+								"@/data/**",
+								"@/hook/**",
+								"@/lib/**",
+								"@/layout/**",
+								"@/styled-system/**",
+								"@/theme/**",
+								"@/plugin/**",
+								"@/**"
+							],
+							":BLANK_LINE:",
+							// Group 5: Relative imports
+							["./**", "../**"],
+							":BLANK_LINE:",
+							// Group 6: CSS/Style imports - LOWEST PRIORITY
+							["@style/**", "**/*.css"]
+						]
+					}
+				},
+				"useSortedAttributes": "on",
+				"useSortedProperties": "on"
+			}
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedVariables": "off",
+						"noUnusedImports": "off"
+					}
+				}
+			},
+			"assist": {
+				"enabled": false
+			}
+		}
+	]
+}
