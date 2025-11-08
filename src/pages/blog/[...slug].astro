@@ -1,12 +1,12 @@
 ---
-	import type { CollectionEntry } from "astro:content";
-	import { getCollection, render } from "astro:content";
+	import type { CollectionEntry } from 'astro:content';
+	import { getCollection, render } from 'astro:content';
 
-	import { MARKDOWN_COMPONENTS } from "@/config/component.config";
-	import PostDetailLayout from "@/layout/post-detail-layout.astro";
+	import { MARKDOWN_COMPONENTS } from '@/config/component.config';
+	import PostDetailLayout from '@/layout/post-detail-layout.astro';
 
 	export async function getStaticPaths() {
-		const posts = await getCollection("blog");
+		const posts = await getCollection('blog');
 
 		return posts.map((post) => ({
 			params: { slug: post.id },
@@ -14,7 +14,7 @@
 		}));
 	}
 
-	type Props = CollectionEntry<"blog">;
+	type Props = CollectionEntry<'blog'>;
 
 	const post = Astro.props;
 

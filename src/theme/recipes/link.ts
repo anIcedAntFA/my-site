@@ -1,31 +1,31 @@
-import { defineRecipe } from "@pandacss/dev";
+import { defineRecipe } from '@pandacss/dev';
 
 export const linkRecipe = defineRecipe({
-	className: "text-link",
+	className: 'text-link',
 	description:
-		"Text link styles with semantic variants for different use cases",
+		'Text link styles with semantic variants for different use cases',
 	base: {
-		display: "inline-flex",
-		pos: "relative",
-		alignItems: "center",
-		color: "var(--clr-link, {colors.link})",
-		textDecoration: "none",
+		display: 'inline-flex',
+		pos: 'relative',
+		alignItems: 'center',
+		color: 'var(--clr-link, {colors.link})',
+		textDecoration: 'none',
 		_blank: {
 			_after: {
-				display: "inline-block",
-				w: "var(--size-icon)",
-				h: "var(--size-icon)",
-				ml: "1",
-				bg: "currentColor",
-				transitionDuration: "fast",
-				transitionProperty: "opacity",
+				display: 'inline-block',
+				w: 'var(--size-icon)',
+				h: 'var(--size-icon)',
+				ml: '1',
+				bg: 'currentColor',
+				transitionDuration: 'fast',
+				transitionProperty: 'opacity',
 				content: '""',
-				maskImage: "{assets.externalLink}",
-				maskSize: "cover",
+				maskImage: '{assets.externalLink}',
+				maskSize: 'cover',
 			},
 		},
 		_visited: {
-			color: "var(--clr-link-visited, {colors.link.visited})",
+			color: 'var(--clr-link-visited, {colors.link.visited})',
 		},
 	},
 	variants: {
@@ -33,23 +33,23 @@ export const linkRecipe = defineRecipe({
 		visual: {
 			// subtle = light emphasis, originally "opacity"
 			subtle: {
-				transitionTimingFunction: "ease",
-				transitionDuration: "fast",
-				transitionProperty: "opacity",
+				transitionTimingFunction: 'ease',
+				transitionDuration: 'fast',
+				transitionProperty: 'opacity',
 				_before: {
-					position: "absolute",
-					left: "0",
-					bottom: "0",
-					rounded: "sm",
-					w: "{sizes.full}",
-					h: "0.5",
-					bg: "currentcolor/80",
+					position: 'absolute',
+					left: '0',
+					bottom: '0',
+					rounded: 'sm',
+					w: '{sizes.full}',
+					h: '0.5',
+					bg: 'currentcolor/80',
 					opacity: 1,
-					transitionDuration: "inherit",
+					transitionDuration: 'inherit',
 					content: '""',
 				},
 				_supportHover: {
-					"&:hover": {
+					'&:hover': {
 						opacity: 0.8,
 						_before: {
 							opacity: 0,
@@ -61,25 +61,25 @@ export const linkRecipe = defineRecipe({
 			// underline = animated underline (same as original underline behaviour)
 			underline: {
 				_before: {
-					position: "absolute",
-					left: "0",
-					bottom: "0",
-					transformOrigin: "100% 50%",
-					scale: "auto",
-					scaleX: "0",
-					rounded: "sm",
-					w: "{sizes.full}",
-					h: "0.5",
-					bg: "currentcolor/80",
-					transitionDuration: "slow",
-					transitionProperty: "scale",
+					position: 'absolute',
+					left: '0',
+					bottom: '0',
+					transformOrigin: '100% 50%',
+					scale: 'auto',
+					scaleX: '0',
+					rounded: 'sm',
+					w: '{sizes.full}',
+					h: '0.5',
+					bg: 'currentcolor/80',
+					transitionDuration: 'slow',
+					transitionProperty: 'scale',
 					content: '""',
 				},
 				_supportHover: {
-					"&:hover": {
+					'&:hover': {
 						_before: {
-							transformOrigin: "0% 50%",
-							scaleX: "1",
+							transformOrigin: '0% 50%',
+							scaleX: '1',
 						},
 					},
 				},
@@ -87,22 +87,22 @@ export const linkRecipe = defineRecipe({
 
 			// highlight = soft background highlight behind text (was background)
 			highlight: {
-				px: "1",
+				px: '1',
 				_before: {
-					position: "absolute",
-					left: "0",
-					bottom: "0",
-					rounded: "sm",
-					boxSize: "{sizes.full}",
-					bg: "currentColor/10",
+					position: 'absolute',
+					left: '0',
+					bottom: '0',
+					rounded: 'sm',
+					boxSize: '{sizes.full}',
+					bg: 'currentColor/10',
 					opacity: 0,
 					// transitionTimingFunction: 'ease-in-out',
-					transitionDuration: "normal",
-					transitionProperty: "opacity",
+					transitionDuration: 'normal',
+					transitionProperty: 'opacity',
 					content: '""',
 				},
 				_supportHover: {
-					"&:hover": {
+					'&:hover': {
 						_before: {
 							opacity: 1,
 						},
@@ -114,16 +114,16 @@ export const linkRecipe = defineRecipe({
 		// size semantic names remain
 		size: {
 			sm: {
-				textStyle: "sm",
-				"--size-icon": "0.75em",
+				textStyle: 'sm',
+				'--size-icon': '0.75em',
 			},
 			md: {
-				textStyle: "md",
-				"--size-icon": "0.875em",
+				textStyle: 'md',
+				'--size-icon': '0.875em',
 			},
 			lg: {
-				textStyle: "lg",
-				"--size-icon": "1em",
+				textStyle: 'lg',
+				'--size-icon': '1em',
 			},
 		},
 
@@ -132,13 +132,13 @@ export const linkRecipe = defineRecipe({
 			enabled: {},
 			disabled: {
 				opacity: 0.4,
-				userSelect: "none",
-				pointerEvents: "none",
+				userSelect: 'none',
+				pointerEvents: 'none',
 			},
 		},
 	},
 	defaultVariants: {
-		visual: "subtle",
-		size: "md",
+		visual: 'subtle',
+		size: 'md',
 	},
 });

@@ -1,20 +1,20 @@
 ---
-	import { css, cx } from "@styled-system/css";
-	import { iconButton } from "@styled-system/recipes";
+	import { css, cx } from '@/styled-system/css';
+	import { iconButton } from '@/styled-system/recipes';
 
 	interface Props {
 		label: string;
 		maskImage: string;
-		size?: "sm" | "md" | "lg";
-		variant?: "ghost" | "outlined";
+		size?: 'sm' | 'md' | 'lg';
+		variant?: 'ghost' | 'outlined';
 		rounded?: boolean;
 	}
 
 	const {
 		label,
 		maskImage,
-		size = "md",
-		variant = "ghost",
+		size = 'md',
+		variant = 'ghost',
 		rounded = false,
 		...buttonProps
 	} = Astro.props;

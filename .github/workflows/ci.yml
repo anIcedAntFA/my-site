@@ -51,27 +51,20 @@ jobs:
           path: styled-system
           key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/theme/**/*.ts', 'src/**/*.{ts,tsx,astro}') }}
 
-      # Run checks in parallel using matrix strategy
-      - name: Run Quality Checks
+      # Run quality checks with Biome (replaces format + lint)
+      - name: Run Biome Quality Checks
         run: |
-          # Run checks in parallel using background processes
-          bun run format & FORMAT_PID=$!
-          bun run lint & LINT_PID=$!
+          # Run Biome checks in parallel using background processes
+          bunx biome ci --formatter-enabled=true --linter-enabled=true & BIOME_PID=$!
           bun run check:circular-deps & CIRCULAR_PID=$!
 
           # Wait for all processes and collect exit codes
-          wait $FORMAT_PID; FORMAT_EXIT=$?
-          wait $LINT_PID; LINT_EXIT=$?
+          wait $BIOME_PID; BIOME_EXIT=$?
           wait $CIRCULAR_PID; CIRCULAR_EXIT=$?
 
           # Check if any failed
-          if [ $FORMAT_EXIT -ne 0 ]; then
-            echo "❌ Format check failed"
-            exit 1
-          fi
-
-          if [ $LINT_EXIT -ne 0 ]; then
-            echo "❌ Lint check failed"
+          if [ $BIOME_EXIT -ne 0 ]; then
+            echo "❌ Biome quality checks failed (format/lint)"
             exit 1
           fi
 

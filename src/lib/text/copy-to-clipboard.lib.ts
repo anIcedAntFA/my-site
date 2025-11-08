@@ -6,7 +6,7 @@
 export const copyToClipboard = async (text: string): Promise<boolean> => {
 	// Check if the Clipboard API is available
 	if (!navigator.clipboard) {
-		console.warn("Clipboard API not available");
+		console.warn('Clipboard API not available');
 		return false;
 	}
 
@@ -16,7 +16,7 @@ export const copyToClipboard = async (text: string): Promise<boolean> => {
 		return true; // Success
 	} catch (error) {
 		// Log any errors that occur during copying
-		console.warn("Failed to copy:", error);
+		console.warn('Failed to copy:', error);
 		return false; // Failure
 	}
 };

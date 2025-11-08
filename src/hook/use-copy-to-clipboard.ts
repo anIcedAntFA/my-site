@@ -1,6 +1,6 @@
-import { $, type Signal, useSignal, useTask$ } from "@builder.io/qwik";
+import { $, type Signal, useSignal, useTask$ } from '@builder.io/qwik';
 
-import { copyToClipboard } from "@lib/text";
+import { copyToClipboard } from '@/lib/text';
 
 export type CopiedValue = string | null;
 

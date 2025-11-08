@@ -1,17 +1,18 @@
 ---
-	import type { HTMLAttributes } from "astro/types";
+	import type { HTMLAttributes } from 'astro/types';
 
-	import { isAbsoluteURL } from "@lib/text";
-	import { transform } from "ultrahtml";
-	import sanitize from "ultrahtml/transformers/sanitize";
+	import { transform } from 'ultrahtml';
+	import sanitize from 'ultrahtml/transformers/sanitize';
 
-	interface Props extends HTMLAttributes<"a"> {}
+	import { isAbsoluteURL } from '@/lib/text';
+
+	interface Props extends HTMLAttributes<'a'> {}
 
 	const { href, ...anchorAttrs } = Astro.props;
 
-	const isAbsolute = typeof href === "string" && isAbsoluteURL(href);
+	const isAbsolute = typeof href === 'string' && isAbsoluteURL(href);
 
-	const labelHTML = await Astro.slots.render("default");
+	const labelHTML = await Astro.slots.render('default');
 	const labelString = await transform(labelHTML, [
 		sanitize({ unblockElements: [] }),
 	]);

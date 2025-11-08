@@ -1,5 +1,5 @@
 {
-	"$schema": "https://biomejs.dev/schemas/2.3.2/schema.json",
+	"$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
 	"vcs": {
 		"enabled": true,
 		"clientKind": "git",
@@ -11,7 +11,8 @@
 			"!!**/dist",
 			"!!styled-system",
 			"!!plugin",
-			"!worker-configuration.d.ts"
+			"!worker-configuration.d.ts",
+			"!wrangler.*.jsonc"
 		]
 	},
 	"formatter": {
@@ -21,7 +22,34 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"correctness": {
+				"noUnknownMediaFeatureName": "off"
+			},
+			"performance": {
+				"noReExportAll": "error",
+				"useTopLevelRegex": "error"
+			},
+			"suspicious": {
+				"noConsole": {
+					"level": "error",
+					"options": {
+						"allow": ["info", "warn", "error", "debug"]
+					}
+				}
+			},
+			"style": {
+				"noParameterAssign": "error",
+				"useAsConstAssertion": "error",
+				"useDefaultParameterLast": "error",
+				"useEnumInitializers": "error",
+				"useSelfClosingElements": "error",
+				"useSingleVarDeclarator": "error",
+				"noUnusedTemplateLiteral": "error",
+				"useNumberNamespace": "error",
+				"noInferrableTypes": "error",
+				"noUselessElse": "error"
+			}
 		},
 		"domains": {
 			"qwik": "all",
@@ -37,7 +65,8 @@
 			"indentWidth": 2,
 			"lineWidth": 80,
 			"indentStyle": "tab",
-			"lineEnding": "lf"
+			"lineEnding": "lf",
+			"whitespaceSensitivity": "strict"
 		}
 	},
 	"css": {
@@ -47,7 +76,22 @@
 	},
 	"javascript": {
 		"formatter": {
-			"quoteStyle": "double"
+			"quoteStyle": "single",
+			"indentStyle": "tab",
+			"lineWidth": 80,
+			"lineEnding": "lf",
+			"semicolons": "always",
+			"jsxQuoteStyle": "single"
+		}
+	},
+	"json": {
+		"parser": {
+			"allowComments": true,
+			"allowTrailingCommas": true
+		},
+		"formatter": {
+			"indentStyle": "tab",
+			"trailingCommas": "none"
 		}
 	},
 	"assist": {
@@ -77,18 +121,18 @@
 							":BLANK_LINE:",
 							// Group 4: Alias imports (e.g., @config, @layout, etc.) - EXCLUDE CSS
 							[
+								"@/asset/**",
+								"@/ui/**",
+								"@/content/**",
+								"@/config/**",
+								"@/data/**",
+								"@/hook/**",
+								"@/lib/**",
+								"@/layout/**",
+								"@/styled-system/**",
+								"@/theme/**",
+								"@/plugin/**",
 								"@/**"
-								// "@/asset/**",
-								// "@/ui/**",
-								// "@/content/**",
-								// "@/config/**",
-								// "@/data/**",
-								// "@/hook/**",
-								// "@/lib/**",
-								// "@/layout/**",
-								// "@/styled-system/**",
-								// "@/theme/**",
-								// "@/plugin/**"
 							],
 							":BLANK_LINE:",
 							// Group 5: Relative imports
@@ -98,7 +142,9 @@
 							["@style/**", "**/*.css"]
 						]
 					}
-				}
+				},
+				"useSortedAttributes": "on",
+				"useSortedProperties": "on"
 			}
 		}
 	},
@@ -112,6 +158,9 @@
 						"noUnusedImports": "off"
 					}
 				}
+			},
+			"assist": {
+				"enabled": false
 			}
 		}
 	]

@@ -3,21 +3,21 @@ import type {
 	Paragraph as MdastParagraph,
 	Root as MdastRoot,
 	PhrasingContent,
-} from "mdast";
-import type { Plugin } from "unified";
-import { visit } from "unist-util-visit";
+} from 'mdast';
+import type { Plugin } from 'unified';
+import { visit } from 'unist-util-visit';
 
 function escapeHtmlAttr(unsafe: string): string {
-	if (typeof unsafe !== "string") return "";
-	return unsafe.replace(/"/g, "&quot;");
+	if (typeof unsafe !== 'string') return '';
+	return unsafe.replace(/"/g, '&quot;');
 }
 
 function escapeHtmlContent(text: string): string {
-	if (typeof text !== "string") return "";
+	if (typeof text !== 'string') return '';
 	return text
-		.replace(/&/g, "&amp;")
-		.replace(/</g, "&lt;")
-		.replace(/>/g, "&gt;");
+		.replace(/&/g, '&amp;')
+		.replace(/</g, '&lt;')
+		.replace(/>/g, '&gt;');
 }
 
 /**
@@ -38,24 +38,24 @@ function processTextForSimpleQuotes(textValue: string): PhrasingContent[] {
 
 		if (simpleMatchStartIndex > lastSubIndex) {
 			resultingNodes.push({
-				type: "text",
+				type: 'text',
 				value: textValue.slice(lastSubIndex, simpleMatchStartIndex),
 			});
 		}
 		resultingNodes.push({
-			type: "html",
+			type: 'html',
 			value: `<q>${escapeHtmlContent(simpleTextContent)}</q>`,
 		} as MdastHtml);
 		lastSubIndex = simpleMatchStartIndex + fullSimpleMatch.length;
 	}
 
 	if (lastSubIndex < textValue.length) {
-		resultingNodes.push({ type: "text", value: textValue.slice(lastSubIndex) });
+		resultingNodes.push({ type: 'text', value: textValue.slice(lastSubIndex) });
 	}
 
 	return resultingNodes.length > 0
 		? resultingNodes
-		: [{ type: "text", value: textValue }];
+		: [{ type: 'text', value: textValue }];
 }
 
 export const remarkInlinedQuotation: Plugin<[], MdastRoot> = () => {
@@ -65,7 +65,7 @@ export const remarkInlinedQuotation: Plugin<[], MdastRoot> = () => {
 	const complexQuoteStartTextRegex = /^(.*)""(.*?)\s*CITE::\s*$/i; // Non-greedy for leading text
 
 	return (tree: MdastRoot) => {
-		visit(tree, "paragraph", (paragraphNode: MdastParagraph) => {
+		visit(tree, 'paragraph', (paragraphNode: MdastParagraph) => {
 			if (!paragraphNode.children || paragraphNode.children.length === 0) {
 				return;
 			}
@@ -74,7 +74,7 @@ export const remarkInlinedQuotation: Plugin<[], MdastRoot> = () => {
 			// This might create more nodes in a new temporary array.
 			const stage1Children: PhrasingContent[] = [];
 			for (const child of paragraphNode.children) {
-				if (child.type === "text") {
+				if (child.type === 'text') {
 					stage1Children.push(...processTextForSimpleQuotes(child.value));
 				} else {
 					stage1Children.push(child);
@@ -92,9 +92,9 @@ export const remarkInlinedQuotation: Plugin<[], MdastRoot> = () => {
 				let processedComplex = false;
 
 				if (
-					node1?.type === "text" &&
-					node2?.type === "link" &&
-					node3?.type === "text"
+					node1?.type === 'text' &&
+					node2?.type === 'link' &&
+					node3?.type === 'text'
 				) {
 					const textNode1 = node1;
 					const linkNode = node2;
@@ -120,12 +120,12 @@ export const remarkInlinedQuotation: Plugin<[], MdastRoot> = () => {
 							);
 						}
 
-						let qTagHtml = "<q";
+						let qTagHtml = '<q';
 						if (citeUrl) {
 							qTagHtml += ` cite="${escapeHtmlAttr(citeUrl.trim())}"`;
 						}
 						qTagHtml += `>${escapeHtmlContent(quoteContentFromNode1)}</q>`;
-						finalChildren.push({ type: "html", value: qTagHtml } as MdastHtml);
+						finalChildren.push({ type: 'html', value: qTagHtml } as MdastHtml);
 
 						const trailingTextInNode3 = textNode3.value.substring(2); // Text after "" in node3
 						if (trailingTextInNode3) {

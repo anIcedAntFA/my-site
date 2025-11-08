@@ -3,10 +3,10 @@ import type {
 	DefinitionContent,
 	Blockquote as MdastBlockquote,
 	Root as MdastRoot,
-} from "mdast";
-import { toString as mdastToString } from "mdast-util-to-string";
-import type { Plugin } from "unified";
-import { visit } from "unist-util-visit";
+} from 'mdast';
+import { toString as mdastToString } from 'mdast-util-to-string';
+import type { Plugin } from 'unified';
+import { visit } from 'unist-util-visit';
 
 export interface BlockquoteCiteUrlOptions {
 	citeUrlLineRegex?: RegExp;
@@ -24,7 +24,7 @@ export const remarkBlockQuotationCiteURL: Plugin<
 	const citeUrlRegex = options?.citeUrlLineRegex || DEFAULT_CITE_URL_REGEX;
 
 	return (tree: MdastRoot) => {
-		visit(tree, "blockquote", (blockquoteNode: MdastBlockquote) => {
+		visit(tree, 'blockquote', (blockquoteNode: MdastBlockquote) => {
 			if (!blockquoteNode.children || blockquoteNode.children.length === 0) {
 				return;
 			}
@@ -35,7 +35,7 @@ export const remarkBlockQuotationCiteURL: Plugin<
 
 			for (const child of blockquoteNode.children) {
 				let isCiteUrlParagraph = false;
-				if (child.type === "paragraph") {
+				if (child.type === 'paragraph') {
 					// Get the full text content of the paragraph to check against the regex
 					const paragraphText = mdastToString(child); // Get raw text, trim later or adjust regex
 
