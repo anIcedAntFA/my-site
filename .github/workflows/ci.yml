@@ -1,10 +1,11 @@
 name: CI
 
 on:
-  push:
-    branches: [main, develop]
   pull_request:
     branches: [main, develop]
+  push:
+    branches: [main, develop]
+    # Also run on pushes to main/develop to verify merged code
 
 # Cancel in-progress runs for same workflow and ref
 concurrency:
@@ -41,9 +42,7 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
-
-      - name: Generate Panda CSS
-        run: bun run panda:gen
+        # Note: Panda CSS generation now runs automatically via prepare script
 
       - name: Cache styled-system
         uses: actions/cache@v4
@@ -101,18 +100,13 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
+        # Note: Panda CSS generation now runs automatically via prepare script
 
       - name: Restore Panda cache
         uses: actions/cache@v4
         with:
           path: styled-system
           key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/theme/**/*.ts', 'src/**/*.{ts,tsx,astro}') }}
-
-      - name: Generate Panda CSS (if cache miss)
-        run: |
-          # Force regeneration for prose recipe PR
-          echo "� Force regenerating Panda CSS for prose recipe changes..."
-          bun run panda:gen
 
       - name: Type Check
         run: bun run check:types
@@ -144,17 +138,13 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
+        # Note: Panda CSS generation now runs automatically via prepare script
 
       - name: Restore Panda cache
         uses: actions/cache@v4
         with:
           path: styled-system
           key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/theme/**/*.ts', 'src/**/*.{ts,tsx,astro}') }}
-
-      - name: Generate Panda CSS (if cache miss)
-        run: |
-          echo "🔧 Force regenerating Panda CSS for theme changes..."
-          bun run panda:gen
 
       - name: Build
         run: bun run build
