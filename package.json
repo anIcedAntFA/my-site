@@ -4,7 +4,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "astro dev",
-		"build": "bun run panda:gen && astro build",
+		"build": "astro build",
 		"preview": "astro build && wrangler pages dev",
 		"astro": "astro",
 		"deploy": "astro build && wrangler pages deploy",
@@ -16,7 +16,7 @@
 		"format:imports": "biome check --formatter-enabled=false --write",
 		"lint": "biome lint .",
 		"lint:fix": "biome lint --write --unsafe .",
-		"panda:gen": "panda codegen",
+		"prepare": "panda codegen",
 		"panda:jsx": "panda codegen --clean",
 		"check:all": "bun run format && bun run lint && bun run check:types && bun run check:circular-deps",
 		"ci:quality": "bun run format && bun run lint && bun run check:circular-deps",
