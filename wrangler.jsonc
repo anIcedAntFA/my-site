@@ -8,9 +8,6 @@
 	"compatibility_date": "2025-10-01",
 	"compatibility_flags": ["nodejs_compat"],
 	"pages_build_output_dir": "./dist",
-  "build": {
-    "command": "bun install && bun run build"
-  },
 	"observability": {
 		"enabled": true
 	}
