@@ -1,5 +1,5 @@
 export const globalVariables = {
-	'--font-mono': 'Jetbrains Mono, monospace',
-	'--font-sans': 'Inter, sans-serif',
-	'--font-serif': 'Merriweather, serif',
+	'--font-mono': 'var(--font-jetbrains-mono)',
+	'--font-sans': 'var(--font-noto-sans)',
+	'--font-serif': 'var(--font-merriweather-serif)',
 };
