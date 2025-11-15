@@ -1,16 +1,18 @@
 ---
 	import { BackToTopButton } from '@/ui/back-to-top-button';
 	import '@/style/panda.css';
+	import BaseHead from '@/ui/base-head.astro';
+
+	interface Props {
+		title: string;
+		description?: string;
+	}
+
+	const { title, description = '' } = Astro.props;
 ---
 <!doctype html>
 <html lang="en" class="light" data-theme="light">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
+	<BaseHead title={title} description={description} />
 	<body style={{ height: '2000px' }}>
 		<header>
 			<h1>My Site</h1>

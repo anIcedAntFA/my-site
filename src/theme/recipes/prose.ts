@@ -19,6 +19,7 @@ export const prose = defineRecipe({
 		'& h1': {
 			fontWeight: 'extrabold',
 			lineHeight: 'tight',
+			fontFamily: 'heading',
 		},
 		'& h2, & h3, & h4': {
 			lineHeight: 'relaxed',
