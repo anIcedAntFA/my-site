@@ -1,22 +1,23 @@
 ---
-	import type { ImageMetadata } from 'astro';
-	import { Font } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { Font } from 'astro:assets';
 
-	import FallbackImage from '@/asset/image/thumbnail-placeholder.jpg';
+import FallbackImage from '@/asset/image/thumbnail-placeholder.jpg';
 
-	interface Props {
-		title: string;
-		description: string;
-		image?: ImageMetadata;
-	}
+interface Props {
+	title: string;
+	description: string;
+	image?: ImageMetadata;
+}
 
-	const SITE_TITLE = 'Astro Blog';
+const SITE_TITLE = 'Astro Blog';
 
-	const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-	const rssURL = new URL('rss.xml', Astro.site);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const rssURL = new URL('rss.xml', Astro.site);
 
-	const { title, description, image = FallbackImage } = Astro.props;
+const { title, description, image = FallbackImage } = Astro.props;
 ---
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />

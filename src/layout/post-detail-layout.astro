@@ -1,24 +1,27 @@
 ---
-	import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 
-	import { css, cx } from '@/styled-system/css';
-	import { prose } from '@/styled-system/recipes';
+import { css, cx } from '@/styled-system/css';
+import { prose } from '@/styled-system/recipes';
+import { ScrollProgressBar } from '@/ui/scroll-progress-bar';
 
-	import BaseLayout from './base-layout.astro';
+import BaseLayout from './base-layout.astro';
 
-	interface Props {
-		post: CollectionEntry<'blog'>;
-	}
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
 
-	const { post } = Astro.props;
+const { post } = Astro.props;
 
-	const { title, description, author, publishedDate, modifiedDate } = post.data;
+const { title, description, author, publishedDate, modifiedDate } = post.data;
 
-	const contentClasses = prose({
-		size: { base: 'md', xs: 'lg', lg: 'xl', '3xl': '2xl' },
-	});
+const contentClasses = prose({
+	size: { base: 'md', xs: 'lg', lg: 'xl', '3xl': '2xl' },
+});
 ---
+
 <BaseLayout title={title} description={description}>
+	<ScrollProgressBar />
 	<main>
 		<div class={cx(contentClasses, css({ mx: 'auto' }))}>
 			<article>
