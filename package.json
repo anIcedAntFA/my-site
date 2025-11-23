@@ -44,6 +44,7 @@
 		"@builder.io/qwik": "^1.17.1",
 		"@qwikdev/astro": "^0.8.2",
 		"astro": "^5.15.3",
+		"es-toolkit": "^1.42.0",
 		"hast-util-to-string": "^3.0.1",
 		"typescript": "^5.9.3",
 		"ultrahtml": "^1.6.0",

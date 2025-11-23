@@ -1,14 +1,15 @@
 ---
-	import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from 'uuid';
 
-	interface Props {
-		checked: boolean;
-		text: string;
-	}
+interface Props {
+	checked: boolean;
+	text: string;
+}
 
-	const { checked, text } = Astro.props;
-	const uniqueId = uuid();
+const { checked, text } = Astro.props;
+const uniqueId = uuid();
 ---
+
 <div data-task-list-item>
 	<input type="checkbox" id={uniqueId} checked={checked} disabled hidden />
 	<label for={uniqueId} set:html={text} />
