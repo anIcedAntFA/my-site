@@ -46,7 +46,7 @@ export const useScrollProgressBar = (
 		state.windowHeight = window.innerHeight;
 	});
 
-	const calculateProgress$ = $(async () => {
+	const calculateProgress$ = $(() => {
 		// Throttle the execution to improve performance
 		const now = performance.now();
 		if (now - state.lastRun < throttleTime) return;
