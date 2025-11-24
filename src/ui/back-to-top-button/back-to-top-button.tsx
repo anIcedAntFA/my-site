@@ -1,8 +1,10 @@
-import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
+import { component$ } from '@builder.io/qwik';
 
 import { css, cx } from '@/styled-system/css';
 import { flex, square } from '@/styled-system/patterns';
 import { button, icon } from '@/styled-system/recipes';
+
+import { useBackToTopButton } from './use-back-to-top-button';
 
 interface BackToTopButtonProps {
 	top?: number;
@@ -11,40 +13,10 @@ interface BackToTopButtonProps {
 
 export const BackToTopButton = component$<BackToTopButtonProps>(
 	({ top = 200, isSmooth = true }) => {
-		const isVisible = useSignal(false);
-		const btnRef = useSignal<HTMLButtonElement>();
-
-		const scrollToTop = $(() => {
-			window.scrollTo({ top: 0, behavior: isSmooth ? 'smooth' : 'auto' });
-		});
-
-		// biome-ignore lint/correctness/noQwikUseVisibleTask: <wrong>
-		useVisibleTask$(({ cleanup, track }) => {
-			track(() => top);
-
-			if (btnRef.value) {
-				const handleScroll = () => {
-					isVisible.value = window.scrollY > top;
-
-					const rootEle = document.documentElement;
-					const scrollTop = rootEle.scrollTop;
-					const scrollTotal = rootEle.scrollHeight - rootEle.clientHeight;
-					const scrollPercent = (scrollTop / scrollTotal) * 100;
-
-					btnRef.value?.style.setProperty(
-						'--btt-scroll-percent',
-						`${scrollPercent}%`,
-					);
-				};
-
-				handleScroll();
-				window.addEventListener('scroll', handleScroll);
-
-				cleanup(() => {
-					window.removeEventListener('scroll', handleScroll);
-				});
-			}
-		});
+		const { isVisible, btnRef, scrollToTop$ } = useBackToTopButton(
+			top,
+			isSmooth,
+		);
 
 		const btnClasses = button({ size: 'sm', variant: 'outlined' });
 		const iconClasses = icon({ mode: 'mask', size: 'md' });
@@ -90,7 +62,7 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 							boxSize: '{sizes.full}',
 						}),
 					)}
-					onClick$={scrollToTop}
+					onClick$={scrollToTop$}
 					ref={btnRef}
 					type='button'
 				>
@@ -119,7 +91,6 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 										_groupHover: {
 											animation: 'icon-cycle-up',
 											animationDuration: 'longer',
-											animationTimingFunction: 'ease-in-out',
 										},
 										xs: { w: '1.7em', h: '1.7em' },
 									}),
