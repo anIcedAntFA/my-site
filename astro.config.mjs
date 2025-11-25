@@ -11,6 +11,8 @@ import {
 	remarkDropCapParagraph,
 	remarkExternalLinks,
 	remarkInlinedQuotation,
+	remarkModifiedTime,
+	remarkReadingTime,
 	remarkTextHighlight,
 } from './plugin/remark';
 
@@ -37,6 +39,8 @@ export default defineConfig({
 				[rehypeHeadingIds, { headingIdCompat: true }],
 				rehypeSectionsForHeadings,
 				rehypeCheckbox,
+				remarkReadingTime,
+				remarkModifiedTime,
 			],
 		}),
 	],

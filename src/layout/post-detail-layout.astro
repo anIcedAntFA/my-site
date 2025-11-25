@@ -9,9 +9,10 @@ import BaseLayout from './base-layout.astro';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
+	minutesRead: number;
 }
 
-const { post } = Astro.props;
+const { post, minutesRead } = Astro.props;
 
 const { title, description, author, publishedDate, modifiedDate } = post.data;
 
@@ -30,6 +31,7 @@ const contentClasses = prose({
 				<p>{description}</p>
 				<p>By {author}on {publishedDate}</p>
 				<p>Last modified on {modifiedDate}</p>
+				<p>Estimated reading time: {minutesRead}</p>
 				<div>
 					<slot />
 				</div>
