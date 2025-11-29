@@ -49,7 +49,8 @@ export const remarkReadingTime = () => {
 		// We store this string in the frontmatter of the content entry.
 		// Astro content entries expose their frontmatter through 'data.astro.frontmatter'.
 		// We ensure the frontmatter object exists and then assign the reading time text to 'minutesRead'.
-		astroData.astro.frontmatter.minutesRead = readingTime.text;
+		// astroData.astro.frontmatter.minutesRead = readingTime.text;
+    astroData.astro.frontmatter.readingTime = readingTime;
 
 		// No return needed as we modified file.data in place.
 	};

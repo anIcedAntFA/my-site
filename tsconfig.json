@@ -24,6 +24,7 @@
 			"@/layout/*": ["./src/layout/*"],
 			"@/style/*": ["./src/style/*"],
 			"@/styled-system/*": ["./styled-system/*"],
+			"@/types/*": ["./src/types/*"],
 			// Optional
 			"@/theme/*": ["./src/theme/*"],
 			"@/plugin/*": ["./plugin/*"]

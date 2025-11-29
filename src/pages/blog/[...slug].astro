@@ -1,13 +1,9 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-
-dayjs.extend(utc);
 
 import { MARKDOWN_COMPONENTS } from '@/config/component.config';
 import PostDetailLayout from '@/layout/post-detail-layout.astro';
+import type { RemarkPluginFrontmatter } from '@/types/remark';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -18,18 +14,13 @@ export async function getStaticPaths() {
 	}));
 }
 
-type Props = CollectionEntry<'blog'>;
-
 const post = Astro.props;
 
 const { Content, remarkPluginFrontmatter } = await render(post);
 
-const lastModified = dayjs(remarkPluginFrontmatter.lastModified)
-	.utc()
-	.format('HH:mm:ss DD MMMM YYYY UTC');
-console.info('Last modified:', lastModified);
+const frontmatter = remarkPluginFrontmatter as RemarkPluginFrontmatter;
 ---
 
-<PostDetailLayout post={post} minutesRead={remarkPluginFrontmatter.minutesRead}>
+<PostDetailLayout post={post} frontmatter={frontmatter}>
 	<Content components={MARKDOWN_COMPONENTS} />
 </PostDetailLayout>

@@ -29,6 +29,8 @@ export default defineConfig({
 		qwikdev(),
 		mdx({
 			remarkPlugins: [
+				remarkReadingTime,
+				remarkModifiedTime,
 				remarkExternalLinks,
 				remarkDropCapParagraph,
 				remarkTextHighlight,
@@ -39,8 +41,6 @@ export default defineConfig({
 				[rehypeHeadingIds, { headingIdCompat: true }],
 				rehypeSectionsForHeadings,
 				rehypeCheckbox,
-				remarkReadingTime,
-				remarkModifiedTime,
 			],
 		}),
 	],
