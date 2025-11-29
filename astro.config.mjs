@@ -11,6 +11,8 @@ import {
 	remarkDropCapParagraph,
 	remarkExternalLinks,
 	remarkInlinedQuotation,
+	remarkModifiedTime,
+	remarkReadingTime,
 	remarkTextHighlight,
 } from './plugin/remark';
 
@@ -27,6 +29,8 @@ export default defineConfig({
 		qwikdev(),
 		mdx({
 			remarkPlugins: [
+				remarkReadingTime,
+				remarkModifiedTime,
 				remarkExternalLinks,
 				remarkDropCapParagraph,
 				remarkTextHighlight,

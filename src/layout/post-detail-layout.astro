@@ -4,20 +4,30 @@ import type { CollectionEntry } from 'astro:content';
 import { css, cx } from '@/styled-system/css';
 import { prose } from '@/styled-system/recipes';
 import { ScrollProgressBar } from '@/ui/scroll-progress-bar';
+import { formatLastModified } from '@/lib/datetime';
+import type { RemarkPluginFrontmatter } from '@/types/remark';
 
 import BaseLayout from './base-layout.astro';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
+	frontmatter: RemarkPluginFrontmatter;
 }
 
-const { post } = Astro.props;
+const { post, frontmatter } = Astro.props;
 
-const { title, description, author, publishedDate, modifiedDate } = post.data;
+const { title, description, author, publishedDate } = post.data;
 
 const contentClasses = prose({
 	size: { base: 'md', xs: 'lg', lg: 'xl', '3xl': '2xl' },
 });
+
+const { readingTime, lastModified } = frontmatter;
+
+const modifiedTime = formatLastModified(lastModified);
+const roundedMinutesRead = Math.ceil(readingTime.minutes);
+const displayMinutesRead = `${roundedMinutesRead} min read`;
+const wordCount = readingTime.words;
 ---
 
 <BaseLayout title={title} description={description}>
@@ -28,8 +38,11 @@ const contentClasses = prose({
 				<header></header>
 				<h1>{title}</h1>
 				<p>{description}</p>
-				<p>By {author}on {publishedDate}</p>
-				<p>Last modified on {modifiedDate}</p>
+				<p>By {author}</p>
+				<p>Published on {publishedDate}</p>
+				<p>Last modified on {modifiedTime}</p>
+				<p>Estimated reading time: {displayMinutesRead}</p>
+				{wordCount && <p>Word count: {wordCount}</p>}
 				<div>
 					<slot />
 				</div>

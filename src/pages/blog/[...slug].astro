@@ -1,9 +1,9 @@
 ---
-import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 
 import { MARKDOWN_COMPONENTS } from '@/config/component.config';
 import PostDetailLayout from '@/layout/post-detail-layout.astro';
+import type { RemarkPluginFrontmatter } from '@/types/remark';
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');
@@ -14,14 +14,13 @@ export async function getStaticPaths() {
 	}));
 }
 
-type Props = CollectionEntry<'blog'>;
-
 const post = Astro.props;
 
-// 4. Render the content of the fetched entry to HTML.
-const { Content } = await render(post);
+const { Content, remarkPluginFrontmatter } = await render(post);
+
+const frontmatter = remarkPluginFrontmatter as RemarkPluginFrontmatter;
 ---
 
-<PostDetailLayout post={post}>
+<PostDetailLayout post={post} frontmatter={frontmatter}>
 	<Content components={MARKDOWN_COMPONENTS} />
 </PostDetailLayout>
