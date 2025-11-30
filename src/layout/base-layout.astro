@@ -1,7 +1,8 @@
 ---
-import BaseHead from '@/ui/base-head.astro';
-import { BackToTopButton } from '@/ui/back-to-top-button';
 import '@/style/panda.css';
+import { BackToTopButton } from '@/ui/back-to-top-button';
+import BaseHead from '@/ui/base-head.astro';
+import { ThemeSelector } from '@/ui/theme-selector';
 
 interface Props {
 	title: string;
@@ -12,11 +13,12 @@ const { title, description = '' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="light" data-theme="light">
+<html lang="en">
 	<BaseHead title={title} description={description} />
 	<body style={{ height: '2000px' }}>
-		<header>
+		<header class="header">
 			<h1>My Site</h1>
+			<ThemeSelector />
 		</header>
 		<slot />
 		<BackToTopButton />
@@ -32,5 +34,13 @@ const { title, description = '' } = Astro.props;
 		margin: 0;
 		width: 100%;
 		height: 100%;
+	}
+
+	.header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 16px;
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	}
 </style>
