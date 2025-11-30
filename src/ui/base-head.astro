@@ -4,6 +4,8 @@ import { Font } from 'astro:assets';
 
 import FallbackImage from '@/asset/image/thumbnail-placeholder.jpg';
 
+import { themeScript } from './theme-selector';
+
 interface Props {
 	title: string;
 	description: string;
@@ -72,3 +74,6 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image.src, Astro.url)} />
+
+<!-- Theme script must run before any rendering to prevent FOUC -->
+<script set:html={themeScript} is:inline />
