@@ -10,7 +10,13 @@ import { semanticTokens } from './src/theme/semantic-tokens';
 import { slotRecipes } from './src/theme/slot-recipes';
 import { textStyles } from './src/theme/text-styles';
 import { tokens } from './src/theme/tokens';
-import { borderColor } from './src/theme/utilities';
+import {
+	borderBottom,
+	borderColor,
+	borderLeft,
+	borderRight,
+	borderTop,
+} from './src/theme/utilities';
 
 export default defineConfig({
 	//==== Output css options ====
@@ -117,6 +123,10 @@ export default defineConfig({
 	utilities: {
 		extend: {
 			borderColor,
+			borderTop,
+			borderLeft,
+			borderRight,
+			borderBottom,
 		},
 	},
 
