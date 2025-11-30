@@ -53,7 +53,7 @@ export default defineConfig({
 				name: 'Noto Sans',
 				cssVariable: '--font-noto-sans',
 				display: 'swap',
-				weights: ['400', '700'],
+				weights: ['400', '500', '700'],
 				styles: ['normal', 'italic'],
 				subsets: ['latin', 'vietnamese'],
 				fallbacks: ['sans-serif'],
