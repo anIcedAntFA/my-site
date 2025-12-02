@@ -41,4 +41,16 @@ export const assets = defineTokens.assets({
 	rocket: {
 		value: getSvgURL('rocket'),
 	},
+	monitorCog: {
+		value: getSvgURL('monitor-cog'),
+	},
+	sun: {
+		value: getSvgURL('sun'),
+	},
+	moon: {
+		value: getSvgURL('moon'),
+	},
+	check: {
+		value: getSvgURL('check'),
+	},
 });
