@@ -30,4 +30,16 @@ export const keyframes = defineKeyframes({
 		'0%': { opacity: 1, transform: 'translateY(0)' },
 		'100%': { opacity: 0, transform: 'translateY(-8px)' },
 	},
+	// Theme icon wrapper animations (Option B)
+	wrapperPop: {
+		'0%': { transform: 'scale(1) rotate(0deg)' },
+		'30%': { transform: 'scale(0.7) rotate(45deg)' },
+		'60%': { transform: 'scale(1.15) rotate(-10deg)' },
+		'100%': { transform: 'scale(1) rotate(0deg)' },
+	},
+	wrapperFlip: {
+		'0%': { transform: 'rotateY(0deg)' },
+		'50%': { transform: 'rotateY(90deg)' },
+		'100%': { transform: 'rotateY(0deg)' },
+	},
 });

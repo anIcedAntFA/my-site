@@ -15,7 +15,7 @@ import {
 	selectRootStyles,
 } from './style';
 import type { ThemePreference } from './theme-script';
-import { useTheme } from './use-theme';
+import { isThemePreference, useTheme } from './use-theme';
 
 export const ThemeSelector = component$(() => {
 	const iconBtnClasses = iconButton({
@@ -30,9 +30,7 @@ export const ThemeSelector = component$(() => {
 
 	const onSelectTheme$ = $((value: string | string[]) => {
 		const theme = Array.isArray(value) ? value[0] : value;
-		if (theme === 'light' || theme === 'dark' || theme === 'system') {
-			setTheme(theme as ThemePreference);
-		}
+		if (isThemePreference(theme)) setTheme(theme);
 	});
 
 	// Get current theme icon class for trigger

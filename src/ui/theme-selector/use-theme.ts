@@ -184,3 +184,7 @@ export const useTheme = (
 		initTheme,
 	};
 };
+
+export const isThemePreference = (value: unknown): value is ThemePreference => {
+	return value === 'light' || value === 'dark' || value === 'system';
+};
