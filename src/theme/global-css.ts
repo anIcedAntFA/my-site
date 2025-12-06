@@ -11,6 +11,8 @@ export const globalCSS = defineGlobalStyles({
 		lineHeight: 'normal',
 		scrollBehavior: 'smooth',
 		fontFamily: 'body',
+		transitionProperty: 'background-color, color',
+		transitionDuration: 'slow',
 	},
 	"a, summary, button, input, [tabindex]:not([tabindex='-1'])": {
 		outline: 'none',

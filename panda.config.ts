@@ -1,5 +1,7 @@
 import { defineConfig } from '@pandacss/dev';
 
+import { animationStyles } from '@/theme/animations';
+
 import { breakpoints } from './src/theme/breakpoints';
 import { conditions } from './src/theme/conditions';
 import { globalCSS } from './src/theme/global-css';
@@ -113,6 +115,7 @@ export default defineConfig({
 			semanticTokens,
 			textStyles,
 			keyframes,
+			animationStyles,
 			recipes,
 			slotRecipes,
 			breakpoints,

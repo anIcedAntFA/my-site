@@ -1,4 +1,4 @@
-import { $, component$, useSignal } from '@builder.io/qwik';
+import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 
 import { Select } from '@qwik-ui/headless';
 
@@ -12,33 +12,41 @@ import {
 	itemLabelStyles,
 	itemStyles,
 	popoverStyles,
+	scaleBounceActiveStyles,
+	scaleBounceInactiveStyles,
 	selectRootStyles,
+	skeletonStyles,
+	stackedIconStyles,
 } from './style';
 import type { ThemePreference } from './theme-script';
-import { useTheme } from './use-theme';
+import { getInitialTheme, isThemePreference, useTheme } from './use-theme';
 
 export const ThemeSelector = component$(() => {
-	const iconBtnClasses = iconButton({
-		size: 'md',
-		variant: 'ghost',
-	});
+	const iconBtnClasses = iconButton({ size: 'md', variant: 'ghost' });
 	const iconClasses = icon({ mode: 'mask', size: 'lg' });
 
+	// Start with 'system' on server, will be synced on client
 	const selectedTheme = useSignal<ThemePreference>('system');
+	// Track if client has synced the theme
+	const isReady = useSignal(false);
 
 	const { setTheme } = useTheme(selectedTheme);
 
+	// Sync theme from localStorage/DOM on client hydration
+	// biome-ignore lint/correctness/noQwikUseVisibleTask: Need client-side DOM/localStorage access
+	useVisibleTask$(
+		() => {
+			const storedTheme = getInitialTheme();
+			selectedTheme.value = storedTheme;
+			isReady.value = true;
+		},
+		{ strategy: 'document-ready' },
+	);
+
 	const onSelectTheme$ = $((value: string | string[]) => {
 		const theme = Array.isArray(value) ? value[0] : value;
-		if (theme === 'light' || theme === 'dark' || theme === 'system') {
-			setTheme(theme as ThemePreference);
-		}
+		if (isThemePreference(theme)) setTheme(theme);
 	});
-
-	// Get current theme icon class for trigger
-	const currentIconClass =
-		THEME_OPTION.find((opt) => opt.value === selectedTheme.value)?.iconClass ||
-		THEME_OPTION[0].iconClass;
 
 	return (
 		<Select.Root
@@ -47,11 +55,32 @@ export const ThemeSelector = component$(() => {
 			onChange$={onSelectTheme$}
 			bind:value={selectedTheme}
 		>
-			<Select.Trigger aria-label='Select theme' class={iconBtnClasses.root}>
-				<i
-					aria-hidden='true'
-					class={cx(iconBtnClasses.icon, currentIconClass)}
-				/>
+			<Select.Trigger
+				aria-label='Select theme'
+				class={iconBtnClasses.root}
+				disabled={!isReady.value}
+			>
+				{/* Theme icons - only show when ready */}
+				{isReady.value ? (
+					THEME_OPTION.map(({ value, maskImageClass }) => (
+						<i
+							aria-hidden='true'
+							class={cx(
+								iconBtnClasses.icon,
+								iconClasses,
+								maskImageClass,
+								stackedIconStyles,
+								selectedTheme.value === value
+									? scaleBounceActiveStyles
+									: scaleBounceInactiveStyles,
+							)}
+							key={value}
+						/>
+					))
+				) : (
+					// Skeleton while loading
+					<div class={skeletonStyles} />
+				)}
 			</Select.Trigger>
 
 			<Select.Popover class={popoverStyles} floating='bottom-end' gutter={4}>

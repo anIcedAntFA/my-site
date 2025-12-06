@@ -8,6 +8,7 @@ import {
 
 import {
 	type EffectiveTheme,
+	THEME_PREFERENCE_ATTR,
 	THEME_STORAGE_KEY,
 	type ThemePreference,
 } from './theme-script';
@@ -15,20 +16,60 @@ import {
 export interface UseThemeReturn {
 	/** Apply a new theme preference */
 	setTheme: (theme: ThemePreference) => void;
-	/** Initialize theme and set up system preference listener */
-	initTheme: () => void;
 }
+
+/**
+ * Type guard function that checks if a given value is a valid ThemePreference.
+ * @param value - The value to check.
+ * @returns `true` if the value is 'light', 'dark', or 'system', otherwise `false`.
+ */
+export const isThemePreference = (value: unknown): value is ThemePreference => {
+	return value === 'light' || value === 'dark' || value === 'system';
+};
+
+/**
+ * Get the initial theme preference from DOM attribute or localStorage
+ * This runs synchronously to avoid flash of wrong icon
+ *
+ * Priority:
+ * 1. data-theme-preference attribute (set by inline script)
+ * 2. localStorage
+ * 3. Default to 'system'
+ */
+export const getInitialTheme = (): ThemePreference => {
+	if (isServer) return 'system';
+
+	try {
+		// First, try to read from DOM attribute (fastest, already set by inline script)
+		const attrValue = document.documentElement.getAttribute(
+			THEME_PREFERENCE_ATTR,
+		);
+		if (isThemePreference(attrValue)) {
+			return attrValue;
+		}
+
+		// Fallback to localStorage
+		const stored = localStorage.getItem(THEME_STORAGE_KEY);
+		if (isThemePreference(stored)) {
+			return stored;
+		}
+	} catch {
+		// localStorage may not be available
+	}
+
+	return 'system';
+};
 
 /**
  * Custom hook for theme management in Qwik components
  *
  * @param selectedTheme - Signal to track the current theme preference
- * @returns Object with setTheme and initTheme functions
+ * @returns Object with setTheme function
  *
  * Features:
- * - Reads from localStorage on mount
+ * - Signal is initialized with correct value from getInitialTheme()
  * - Listens to system preference changes for 'system' mode
- * - Updates DOM (data-theme attribute + class) immediately
+ * - Updates DOM (data-theme + data-theme-preference attributes, classes)
  * - Persists preference to localStorage
  */
 export const useTheme = (
@@ -46,127 +87,78 @@ export const useTheme = (
 
 	/**
 	 * Apply theme to DOM
-	 * Updates both data-theme attribute and class on <html>
+	 * Updates data-theme attribute, classes, and data-theme-preference
 	 */
-	const applyTheme = $((effectiveTheme: EffectiveTheme) => {
-		// Guard: only run in browser environment
-		if (isServer) return;
-		const html = document.documentElement;
-		html.setAttribute('data-theme', effectiveTheme);
-		html.classList.remove('light', 'dark');
-		html.classList.add(effectiveTheme);
-	});
+	const applyTheme = $(
+		(effectiveTheme: EffectiveTheme, preference: ThemePreference) => {
+			if (isServer) return;
+
+			const html = document.documentElement;
+			// Update effective theme for CSS
+			html.setAttribute('data-theme', effectiveTheme);
+			html.classList.remove('light', 'dark');
+			html.classList.add(effectiveTheme);
+			// Update preference for JS
+			html.setAttribute(THEME_PREFERENCE_ATTR, preference);
+		},
+	);
 
 	/**
 	 * Set and persist theme preference
 	 * If 'system', resolves to actual light/dark based on system preference
 	 */
 	const setTheme = $(async (preference: ThemePreference) => {
-		// Guard: only run in browser environment
 		if (isServer) {
 			selectedTheme.value = preference;
 			return;
 		}
 
+		// Persist to localStorage
 		try {
 			localStorage.setItem(THEME_STORAGE_KEY, preference);
 		} catch {
 			// localStorage may not be available in some environments
 		}
 
+		// Update signal
 		selectedTheme.value = preference;
 
-		if (preference === 'system') {
-			const systemTheme = await getSystemTheme();
-			await applyTheme(systemTheme);
-		} else {
-			await applyTheme(preference);
-		}
+		// Apply to DOM
+		const effectiveTheme =
+			preference === 'system' ? await getSystemTheme() : preference;
+		await applyTheme(effectiveTheme, preference);
 	});
 
 	/**
-	 * Read stored preference and initialize signal
-	 */
-	const initTheme = $(async () => {
-		// Guard: only run in browser environment
-		if (isServer) return;
-
-		try {
-			const stored = localStorage.getItem(
-				THEME_STORAGE_KEY,
-			) as ThemePreference | null;
-
-			if (stored === 'light' || stored === 'dark' || stored === 'system') {
-				selectedTheme.value = stored;
-
-				if (stored === 'system') {
-					const systemTheme = await getSystemTheme();
-					await applyTheme(systemTheme);
-				} else {
-					await applyTheme(stored);
-				}
-			} else {
-				// No preference stored, default to system
-				selectedTheme.value = 'system';
-				const systemTheme = await getSystemTheme();
-				await applyTheme(systemTheme);
-			}
-		} catch {
-			// Fallback
-			selectedTheme.value = 'system';
-		}
-	});
-
-	/**
-	 * Initialize theme on component mount
-	 * eagerness: 'load' ensures this runs as soon as possible
-	 *
-	 * Note: useVisibleTask$ is intentionally used here because theme initialization
-	 * requires client-side DOM access for localStorage and matchMedia APIs.
-	 */
-	// biome-ignore lint/correctness/noQwikUseVisibleTask: Theme init requires client-side localStorage/matchMedia
-	useVisibleTask$(
-		async () => {
-			await initTheme();
-		},
-		{ strategy: 'document-ready' },
-	);
-
-	/**
-	 * Listen for system preference changes
-	 * Only applies when user has selected 'system' theme
+	 * Listen for system preference changes when tab becomes visible
+	 * Re-applies theme in case system preference changed while tab was hidden
 	 */
 	useOnDocument(
 		'visibilitychange',
 		$(async () => {
-			// Guard: only run in browser environment
 			if (isServer) return;
 
-			// Re-check system preference when tab becomes visible
 			if (
 				document.visibilityState === 'visible' &&
 				selectedTheme.value === 'system'
 			) {
 				const systemTheme = await getSystemTheme();
-				await applyTheme(systemTheme);
+				await applyTheme(systemTheme, 'system');
 			}
 		}),
 	);
 
 	/**
 	 * Set up matchMedia listener for real-time system theme changes
-	 *
-	 * Note: useVisibleTask$ is intentionally used here because matchMedia listener
-	 * requires client-side Window API access and needs cleanup on unmount.
 	 */
 	// biome-ignore lint/correctness/noQwikUseVisibleTask: matchMedia requires client-side Window API
 	useVisibleTask$(
-		async ({ cleanup }) => {
+		({ cleanup }) => {
 			const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
 			const handleChange = async (event: MediaQueryListEvent) => {
 				if (selectedTheme.value === 'system') {
-					await applyTheme(event.matches ? 'dark' : 'light');
+					await applyTheme(event.matches ? 'dark' : 'light', 'system');
 				}
 			};
 
@@ -179,8 +171,5 @@ export const useTheme = (
 		{ strategy: 'document-ready' },
 	);
 
-	return {
-		setTheme,
-		initTheme,
-	};
+	return { setTheme };
 };
