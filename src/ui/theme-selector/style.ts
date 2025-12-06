@@ -1,4 +1,5 @@
 import { css } from '@/styled-system/css';
+import { square } from '@/styled-system/patterns';
 
 const selectRootStyles = css({
 	pos: 'relative',
@@ -14,11 +15,9 @@ const popoverStyles = css({
 	boxShadow: 'lg',
 	p: '1.5 !important',
 	zIndex: 'popover',
-	// Animation
-	animation: 'fadeIn 0.25s ease-out',
-	transformOrigin: 'top',
-	'&[data-closed]': {
-		animation: 'fadeOut 0.15s ease-in',
+	animationStyle: 'slide-fade-scale-in',
+	_closed: {
+		animationStyle: 'slide-fade-scale-out',
 	},
 });
 
@@ -46,7 +45,7 @@ const itemStyles = css({
 		bg: 'bg.emphasized',
 		outline: 'none',
 	},
-	'&[data-selected]': {
+	_selected: {
 		color: 'accent',
 		cursor: 'auto',
 		fontWeight: 'bold',
@@ -68,11 +67,45 @@ const checkIconStyles = css({
 	maskImage: '{assets.check}',
 });
 
+// Skeleton loader while theme is being determined
+const skeletonStyles = square({
+	size: '8',
+	rounded: 'sm',
+	bg: 'bg.emphasized',
+	animation: 'pulse',
+});
+
+// Base styles for stacked icons (position absolute, hidden by default)
+const stackedIconStyles = css({
+	pos: 'absolute',
+	pointerEvents: 'none',
+});
+
+// ============================================================================
+// Animation Styles (Scale Bounce)
+// ============================================================================
+
+const scaleBounceActiveStyles = css({
+	opacity: 1,
+	transform: 'scale(1)',
+	transition: 'opacity {durations.slow}, transform {durations.slower}',
+});
+
+const scaleBounceInactiveStyles = css({
+	opacity: 0,
+	transform: 'scale(0)',
+	transition: 'opacity {durations.slow}, transform {durations.slower}',
+});
+
 export {
 	checkIconStyles,
 	itemIndicatorStyles,
 	itemLabelStyles,
 	itemStyles,
 	popoverStyles,
+	scaleBounceActiveStyles,
+	scaleBounceInactiveStyles,
 	selectRootStyles,
+	skeletonStyles,
+	stackedIconStyles,
 };

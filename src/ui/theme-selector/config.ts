@@ -5,19 +5,23 @@ import type { ThemePreference } from './theme-script';
 interface ThemeOptionItem {
 	value: ThemePreference;
 	label: string;
-	iconClass: string;
+	maskImageClass: string;
 }
 
-const iconClasses = {
+const iconMaskImage = {
 	sun: css({ maskImage: '{assets.sun}' }),
 	moon: css({ maskImage: '{assets.moon}' }),
 	monitorCog: css({ maskImage: '{assets.monitorCog}' }),
 } as const;
 
 const THEME_OPTION: ThemeOptionItem[] = [
-	{ value: 'light', label: 'Light', iconClass: iconClasses.sun },
-	{ value: 'dark', label: 'Dark', iconClass: iconClasses.moon },
-	{ value: 'system', label: 'System', iconClass: iconClasses.monitorCog },
+	{ value: 'light', label: 'Light', maskImageClass: iconMaskImage.sun },
+	{ value: 'dark', label: 'Dark', maskImageClass: iconMaskImage.moon },
+	{
+		value: 'system',
+		label: 'System',
+		maskImageClass: iconMaskImage.monitorCog,
+	},
 ];
 
 export { THEME_OPTION };

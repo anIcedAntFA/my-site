@@ -1,5 +1,6 @@
 import { defineTokens } from '@pandacss/dev';
 
+import { animations } from './animations';
 import { assets } from './assets';
 import { borders } from './borders';
 import { colors } from './colors';
@@ -18,4 +19,5 @@ export const tokens = defineTokens({
 	zIndex,
 	assets,
 	lineHeights,
+	animations,
 });

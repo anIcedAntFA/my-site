@@ -14,19 +14,19 @@ export const keyframes = defineKeyframes({
 		'80%': { opacity: 0.5, transform: 'translateY(-50%)' },
 		'100%': { opacity: 1, transform: 'translateY(0)' },
 	},
-	fadeIn: {
-		'0%': { opacity: 0, transform: 'scale(0.95) translateY(-4px)' },
+	'slide-fade-scale-in': {
+		'0%': { opacity: 0, transform: 'scale(0.8) translateY(-4px)' },
 		'100%': { opacity: 1, transform: 'scale(1) translateY(0)' },
 	},
-	fadeOut: {
+	'slide-fade-scale-out': {
 		'0%': { opacity: 1, transform: 'scale(1) translateY(0)' },
-		'100%': { opacity: 0, transform: 'scale(0.95) translateY(-4px)' },
+		'100%': { opacity: 0, transform: 'scale(0.8) translateY(-4px)' },
 	},
-	slideIn: {
+	'slide-fade-in': {
 		'0%': { opacity: 0, transform: 'translateY(-8px)' },
 		'100%': { opacity: 1, transform: 'translateY(0)' },
 	},
-	slideOut: {
+	'slide-fade-out': {
 		'0%': { opacity: 1, transform: 'translateY(0)' },
 		'100%': { opacity: 0, transform: 'translateY(-8px)' },
 	},

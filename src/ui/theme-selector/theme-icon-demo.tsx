@@ -310,7 +310,7 @@ const svgStrokeActiveStyles = css({
 	'& path, & circle, & rect, & line': {
 		strokeDasharray: '100',
 		strokeDashoffset: '0',
-		transition: 'stroke-dashoffset 0.5s ease-out, opacity 0.3s ease',
+		transition: 'stroke-dashoffset 2s ease-out, opacity 1.2s ease',
 	},
 });
 
@@ -319,7 +319,7 @@ const svgStrokeInactiveStyles = css({
 	'& path, & circle, & rect, & line': {
 		strokeDasharray: '100',
 		strokeDashoffset: '100',
-		transition: 'stroke-dashoffset 0.5s ease-out, opacity 0.3s ease',
+		transition: 'stroke-dashoffset 2s ease-out, opacity 1.2s ease',
 	},
 });
 
@@ -353,13 +353,13 @@ const AnimatedThemeIcon = component$<AnimatedThemeIconProps>(
 				type='button'
 			>
 				<span class={iconStackContainerStyles}>
-					{THEME_OPTION.map(({ value, iconClass }) => (
+					{THEME_OPTION.map(({ value, maskImageClass }) => (
 						<i
 							aria-hidden='true'
 							class={cx(
 								iconBtnClasses.icon,
 								iconClasses,
-								iconClass,
+								maskImageClass,
 								stackedIconBaseStyles,
 								currentTheme.value === value ? activeStyles : inactiveStyles,
 							)}
@@ -428,7 +428,11 @@ const WrapperAnimatedThemeIcon = component$<{
 			<span class='icon-wrapper'>
 				<i
 					aria-hidden='true'
-					class={cx(iconBtnClasses.icon, iconClasses, currentIcon?.iconClass)}
+					class={cx(
+						iconBtnClasses.icon,
+						iconClasses,
+						currentIcon?.maskImageClass,
+					)}
 				/>
 			</span>
 		</button>
