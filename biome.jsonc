@@ -160,7 +160,14 @@
 				}
 			},
 			"assist": {
-				"enabled": false
+				"enabled": true,
+				"actions": {
+					"source": {
+						"organizeImports": "off",
+						"useSortedAttributes": "on",
+						"useSortedProperties": "on"
+					}
+				}
 			}
 		}
 	]

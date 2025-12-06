@@ -90,6 +90,9 @@ export const colors = defineSemanticTokens.colors({
 		DEFAULT: {
 			value: { base: '{colors.slate.800}', _dark: '{colors.slate.200}' },
 		},
+		strong: {
+			value: { base: '{colors.slate.700}', _dark: '{colors.slate.300}' },
+		},
 		// muted / meta text
 		muted: {
 			value: { base: '{colors.slate.600}', _dark: '{colors.slate.400}' },
