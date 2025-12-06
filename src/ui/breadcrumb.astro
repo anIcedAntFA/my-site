@@ -1,0 +1,55 @@
+---
+import { cx } from '@/styled-system/css';
+import { breadcrumb } from '@/styled-system/recipes';
+
+interface BreadcrumbItem {
+	label: string;
+	href?: string;
+}
+
+interface Props {
+	crumbs: BreadcrumbItem[];
+	variant?: 'plain' | 'underline';
+	size?: 'sm' | 'md' | 'lg';
+	class?: string;
+}
+
+const {
+	crumbs,
+	variant = 'plain',
+	size = 'md',
+	class: className,
+} = Astro.props;
+
+const breadcrumbClasses = breadcrumb({ variant, size });
+---
+
+<nav aria-label="Breadcrumb" class={cx(breadcrumbClasses.root, className)}>
+	<ol class={breadcrumbClasses.list}>
+		{
+			crumbs.map((crumb, index) => {
+				const isLast = index === crumbs.length - 1;
+				return (
+					<li class={breadcrumbClasses.item}>
+						{isLast ? (
+						  // Render a link if it's not the last item
+							<span aria-current="page" class={breadcrumbClasses.currentLink}>
+								{crumb.label}
+							</span>
+						) : (
+              // Render text for the current page (the last item)
+							<a href={crumb.href} class={breadcrumbClasses.link}>
+								{crumb.label}
+							</a>
+						)}
+
+						{!isLast && (
+						  // Render a separator, but not after the last item
+							<span aria-hidden="true" class={breadcrumbClasses.separator}>/</span>
+						)}
+					</li>
+				);
+			})
+		}
+	</ol>
+</nav>

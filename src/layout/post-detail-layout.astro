@@ -8,6 +8,7 @@ import { formatLastModified } from '@/lib/datetime';
 import type { RemarkPluginFrontmatter } from '@/types/remark';
 
 import BaseLayout from './base-layout.astro';
+import Breadcrumb from '@/ui/breadcrumb.astro';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
@@ -33,20 +34,51 @@ const wordCount = readingTime.words;
 <BaseLayout title={title} description={description}>
 	<ScrollProgressBar />
 	<main>
-		<div class={cx(contentClasses, css({ mx: 'auto' }))}>
-			<article>
-				<header></header>
-				<h1>{title}</h1>
-				<p>{description}</p>
-				<p>By {author}</p>
-				<p>Published on {publishedDate}</p>
-				<p>Last modified on {modifiedTime}</p>
-				<p>Estimated reading time: {displayMinutesRead}</p>
-				{wordCount && <p>Word count: {wordCount}</p>}
-				<div>
-					<slot />
-				</div>
-			</article>
+		<div
+			class={cx(css({ maxWidth: '800px', mx: 'auto', mb: '48px', px: '4' }))}
+		>
+			<Breadcrumb
+				crumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Blog', href: '/blog' },
+          { label: title },
+        ]}
+				variant="underline"
+				size="sm"
+				class={css({ my: '16px' })}
+			/>
+			<Breadcrumb
+				crumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Blog', href: '/blog' },
+          { label: title },
+        ]}
+				size="md"
+				class={css({ my: '16px' })}
+			/>
+			<Breadcrumb
+				crumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Blog', href: '/blog' },
+          { label: title },
+        ]}
+				variant="underline"
+				size="lg"
+				class={css({ my: '16px' })}
+			/>
 		</div>
+		<article class={cx(contentClasses, css({ mx: 'auto' }))}>
+			<header></header>
+			<h1>{title}</h1>
+			<p>{description}</p>
+			<p>By {author}</p>
+			<p>Published on {publishedDate}</p>
+			<p>Last modified on {modifiedTime}</p>
+			<p>Estimated reading time: {displayMinutesRead}</p>
+			{wordCount && <p>Word count: {wordCount}</p>}
+			<div>
+				<slot />
+			</div>
+		</article>
 	</main>
 </BaseLayout>
