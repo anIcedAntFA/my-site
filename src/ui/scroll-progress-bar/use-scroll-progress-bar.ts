@@ -35,28 +35,28 @@ export const useScrollProgressBar = (
 	const progress = useSignal(0);
 	const isVisible = useSignal(false);
 
-	const state = useStore({
+	const metric = useStore({
 		documentHeight: 0,
 		windowHeight: 0,
 		lastRun: 0,
 	});
 
 	const measureSize$ = $(() => {
-		state.documentHeight = document.documentElement.scrollHeight;
-		state.windowHeight = window.innerHeight;
+		metric.documentHeight = document.documentElement.scrollHeight;
+		metric.windowHeight = window.innerHeight;
 	});
 
 	const calculateProgress$ = $(() => {
 		// Throttle the execution to improve performance
 		const now = performance.now();
-		if (now - state.lastRun < throttleTime) return;
-		state.lastRun = now;
+		if (now - metric.lastRun < throttleTime) return;
+		metric.lastRun = now;
 
-		if (state.documentHeight === 0) {
+		if (metric.documentHeight === 0) {
 			measureSize$();
 		}
 
-		const scrollableHeight = state.documentHeight - state.windowHeight;
+		const scrollableHeight = metric.documentHeight - metric.windowHeight;
 		if (scrollableHeight <= 0) return;
 
 		const scrolled = window.scrollY;

@@ -30,6 +30,15 @@ export const keyframes = defineKeyframes({
 		'0%': { opacity: 1, transform: 'translateY(0)' },
 		'100%': { opacity: 0, transform: 'translateY(-8px)' },
 	},
+	// Skeleton animations
+	'fade-in': {
+		'0%': { opacity: 0 },
+		'100%': { opacity: 1 },
+	},
+	'bg-position': {
+		'0%': { backgroundPosition: 'var(--animate-from, 200%) 0' },
+		'100%': { backgroundPosition: 'var(--animate-to, -200%) 0' },
+	},
 	// Theme icon wrapper animations (Option B)
 	wrapperPop: {
 		'0%': { transform: 'scale(1) rotate(0deg)' },

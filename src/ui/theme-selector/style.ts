@@ -1,5 +1,5 @@
 import { css } from '@/styled-system/css';
-import { square } from '@/styled-system/patterns';
+import { box } from '@/styled-system/patterns';
 
 const selectRootStyles = css({
 	pos: 'relative',
@@ -67,12 +67,8 @@ const checkIconStyles = css({
 	maskImage: '{assets.check}',
 });
 
-// Skeleton loader while theme is being determined
-const skeletonStyles = square({
-	size: '8',
-	rounded: 'sm',
-	bg: 'bg.emphasized',
-	animation: 'pulse',
+const skeletonIconStyles = box({
+	boxSize: '8',
 });
 
 // Base styles for stacked icons (position absolute, hidden by default)
@@ -106,6 +102,6 @@ export {
 	scaleBounceActiveStyles,
 	scaleBounceInactiveStyles,
 	selectRootStyles,
-	skeletonStyles,
+	skeletonIconStyles,
 	stackedIconStyles,
 };
