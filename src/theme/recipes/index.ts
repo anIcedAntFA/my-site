@@ -3,6 +3,7 @@ import { inlineCodeRecipe } from './inline-code';
 import { linkRecipe } from './link';
 import { prose } from './prose';
 import { proseBu } from './prose-bu';
+import { skeletonRecipe } from './skeleton';
 
 export const recipes = {
 	icon: iconRecipe,
@@ -10,4 +11,5 @@ export const recipes = {
 	link: linkRecipe,
 	prose,
 	proseBu,
+	skeleton: skeletonRecipe,
 };

@@ -3,7 +3,7 @@ import { $, component$, useSignal, useVisibleTask$ } from '@builder.io/qwik';
 import { Select } from '@qwik-ui/headless';
 
 import { cx } from '@/styled-system/css';
-import { icon, iconButton } from '@/styled-system/recipes';
+import { icon, iconButton, skeleton } from '@/styled-system/recipes';
 
 import { THEME_OPTION } from './config';
 import {
@@ -15,7 +15,7 @@ import {
 	scaleBounceActiveStyles,
 	scaleBounceInactiveStyles,
 	selectRootStyles,
-	skeletonStyles,
+	skeletonIconStyles,
 	stackedIconStyles,
 } from './style';
 import type { ThemePreference } from './theme-script';
@@ -23,10 +23,11 @@ import { getInitialTheme, isThemePreference, useTheme } from './use-theme';
 
 export const ThemeSelector = component$(() => {
 	const iconBtnClasses = iconButton({ size: 'md', variant: 'ghost' });
-	const iconClasses = icon({ mode: 'mask', size: 'lg' });
+	const iconClass = icon({ mode: 'mask', size: 'lg' });
+	const skeletonClass = skeleton({ loading: true, variant: 'pulse' });
 
 	// Start with 'system' on server, will be synced on client
-	const selectedTheme = useSignal<ThemePreference>(getInitialTheme());
+	const selectedTheme = useSignal<ThemePreference>('system');
 	// Track if client has synced the theme
 	const isReady = useSignal(false);
 
@@ -41,8 +42,8 @@ export const ThemeSelector = component$(() => {
 	});
 
 	const onSelectTheme$ = $((value: string | string[]) => {
-		const theme = Array.isArray(value) ? value[0] : value;
-		if (isThemePreference(theme)) setTheme(theme);
+		const option = Array.isArray(value) ? value[0] : value;
+		if (isThemePreference(option)) setTheme(option);
 	});
 
 	return (
@@ -60,11 +61,11 @@ export const ThemeSelector = component$(() => {
 				{/* Theme icons - only show when ready */}
 				{isReady.value ? (
 					THEME_OPTION.map(({ value, maskImageClass }) => (
-						<i
+						<span
 							aria-hidden='true'
 							class={cx(
 								iconBtnClasses.icon,
-								iconClasses,
+								iconClass,
 								maskImageClass,
 								stackedIconStyles,
 								selectedTheme.value === value
@@ -76,7 +77,7 @@ export const ThemeSelector = component$(() => {
 					))
 				) : (
 					// Skeleton while loading
-					<div class={skeletonStyles} />
+					<div class={cx(skeletonIconStyles, skeletonClass)} />
 				)}
 			</Select.Trigger>
 
@@ -85,7 +86,7 @@ export const ThemeSelector = component$(() => {
 					<Select.Item class={itemStyles} key={value} value={value}>
 						<Select.ItemLabel class={itemLabelStyles}>{label}</Select.ItemLabel>
 						<Select.ItemIndicator class={itemIndicatorStyles}>
-							<i aria-hidden='true' class={cx(iconClasses, checkIconStyles)} />
+							<span aria-hidden='true' class={cx(iconClass, checkIconStyles)} />
 						</Select.ItemIndicator>
 					</Select.Item>
 				))}
