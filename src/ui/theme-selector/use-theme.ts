@@ -151,7 +151,6 @@ export const useTheme = (
 	/**
 	 * Set up matchMedia listener for real-time system theme changes
 	 */
-	// biome-ignore lint/correctness/noQwikUseVisibleTask: matchMedia requires client-side Window API
 	useVisibleTask$(
 		({ cleanup }) => {
 			const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -168,7 +167,7 @@ export const useTheme = (
 				mediaQuery.removeEventListener('change', handleChange);
 			});
 		},
-		{ strategy: 'document-ready' },
+		{ strategy: 'document-idle' },
 	);
 
 	return { setTheme };

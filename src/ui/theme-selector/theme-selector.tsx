@@ -26,7 +26,7 @@ export const ThemeSelector = component$(() => {
 	const iconClasses = icon({ mode: 'mask', size: 'lg' });
 
 	// Start with 'system' on server, will be synced on client
-	const selectedTheme = useSignal<ThemePreference>('system');
+	const selectedTheme = useSignal<ThemePreference>(getInitialTheme());
 	// Track if client has synced the theme
 	const isReady = useSignal(false);
 
@@ -34,14 +34,11 @@ export const ThemeSelector = component$(() => {
 
 	// Sync theme from localStorage/DOM on client hydration
 	// biome-ignore lint/correctness/noQwikUseVisibleTask: Need client-side DOM/localStorage access
-	useVisibleTask$(
-		() => {
-			const storedTheme = getInitialTheme();
-			selectedTheme.value = storedTheme;
-			isReady.value = true;
-		},
-		{ strategy: 'document-ready' },
-	);
+	useVisibleTask$(() => {
+		const storedTheme = getInitialTheme();
+		selectedTheme.value = storedTheme;
+		isReady.value = true;
+	});
 
 	const onSelectTheme$ = $((value: string | string[]) => {
 		const theme = Array.isArray(value) ? value[0] : value;
