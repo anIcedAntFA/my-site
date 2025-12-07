@@ -53,4 +53,10 @@ export const assets = defineTokens.assets({
 	check: {
 		value: getSvgURL('check'),
 	},
+	chevronRight: {
+		value: getSvgURL('chevron-right'),
+	},
+	slash: {
+		value: getSvgURL('slash'),
+	},
 });
