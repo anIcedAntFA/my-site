@@ -1,0 +1,95 @@
+---
+import { cx, css } from '@/styled-system/css';
+import { icon } from '@/styled-system/recipes';
+
+import {
+	cardContentStyles,
+	cardRootStyles,
+	contentStyles,
+	iconStyles,
+	labelStyles,
+	navStyles,
+	titleStyles,
+} from './style';
+
+/**
+ * Describes the data structure for a single navigational link to another post.
+ *
+ * @property {string} slug - The URL-friendly identifier for the post, used in the href attribute. Example: '/blog/my-awesome-post'
+ * @property {string} title - The full title of the post, displayed as the main text of the link.
+ */
+interface IPostLink {
+	slug: string; // The URL for the post (e.g., '/blog/my-awesome-post')
+	title: string; // The title of the post to display
+}
+
+interface Props {
+	prevPost?: IPostLink;
+	nextPost?: IPostLink;
+}
+
+const { prevPost, nextPost } = Astro.props;
+
+const iconClass = icon({ mode: 'mask', size: 'xl' });
+---
+
+<nav aria-label="Blog post navigation" class={navStyles}>
+	{
+		prevPost ? (
+			<a
+				aria-label={`Previous Post: ${prevPost.title}`}
+				href={prevPost.slug}
+				rel="prev"
+				class={cx('group', cardRootStyles)}
+				data-direction="previous"
+			>
+				<div class={cardContentStyles} data-direction="previous">
+					<span
+						aria-hidden="true"
+						class={cx(
+							iconClass,
+							iconStyles,
+							css({ maskImage: '{assets.arrowRight}', rotate: '180deg' }),
+						)}
+					/>
+					<div class={contentStyles}>
+						<span aria-hidden="true" class={labelStyles}>
+							Previous Post
+						</span>
+						<span class={titleStyles}>{prevPost.title}</span>
+					</div>
+				</div>
+			</a>
+		) : (
+			<div aria-hidden="true" />
+		)
+	}
+	{
+		nextPost && (
+			<a
+				aria-label={`Next Post: ${nextPost.title}`}
+				rel="next"
+				href={nextPost.slug}
+				class={cx('group', cardRootStyles)}
+				data-direction="next"
+			>
+				<div class={cardContentStyles} data-direction="next">
+					<div class={contentStyles}>
+						<span aria-hidden="true" class={labelStyles}>
+							Next Post
+						</span>
+						<span class={titleStyles}>{nextPost.title}</span>
+					</div>
+					<span
+						aria-hidden="true"
+						class={cx(
+							iconClass,
+							iconStyles,
+							css({ maskImage: '{assets.arrowRight}' }),
+						)}
+					/>
+				</div>
+			</a>
+		)
+	}
+</nav>

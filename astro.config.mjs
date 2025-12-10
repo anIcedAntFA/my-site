@@ -63,7 +63,7 @@ export default defineConfig({
 				name: 'Merriweather',
 				cssVariable: '--font-merriweather-serif',
 				display: 'swap',
-				weights: ['700'],
+				weights: ['400', '500', '700'],
 				styles: ['normal'],
 				subsets: ['latin', 'vietnamese'],
 				fallbacks: ['serif'],

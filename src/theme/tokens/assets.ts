@@ -59,4 +59,10 @@ export const assets = defineTokens.assets({
 	slash: {
 		value: getSvgURL('slash'),
 	},
+	arrowRight: {
+		value: getSvgURL('arrow-right'),
+	},
+	arrowBigRight: {
+		value: getSvgURL('arrow-big-right'),
+	},
 });

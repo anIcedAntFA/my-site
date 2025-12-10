@@ -51,4 +51,17 @@ export const keyframes = defineKeyframes({
 		'50%': { transform: 'rotateY(90deg)' },
 		'100%': { transform: 'rotateY(0deg)' },
 	},
+	// Post navigation icon nudge animations
+	'nudge-left': {
+		'0%': { transform: 'translateX(0)' },
+		'50%': { transform: 'translateX(-4px)' },
+		'75%': { transform: 'translateX(-2px)' },
+		'100%': { transform: 'translateX(0)' },
+	},
+	'nudge-right': {
+		'0%': { transform: 'translateX(0)' },
+		'50%': { transform: 'translateX(4px)' },
+		'75%': { transform: 'translateX(2px)' },
+		'100%': { transform: 'translateX(0)' },
+	},
 });
