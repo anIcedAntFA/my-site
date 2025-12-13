@@ -88,10 +88,18 @@ const postNavProps = {
 			<p>Last modified on {modifiedTime}</p>
 			<p>Estimated reading time: {displayMinutesRead}</p>
 			{wordCount && <p>Word count: {wordCount}</p>}
-			<PostNavigation {...postNavProps} />
 			<div>
 				<slot />
 			</div>
+			<div class={cx(css({ my: '48px' }))}>
+				<PostNavigation {...postNavProps} />
+			</div>
 		</article>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt ipsa
+		voluptate excepturi minus a ea totam velit, quaerat ullam ratione neque
+		voluptates animi saepe necessitatibus consectetur sapiente! Soluta impedit
+		possimus alias ab deserunt vitae pariatur voluptatem fuga dolorum, suscipit
+		placeat? Aliquam blanditiis fuga molestiae officiis inventore, nobis maiores
+		ullam corrupti?
 	</main>
 </BaseLayout>
