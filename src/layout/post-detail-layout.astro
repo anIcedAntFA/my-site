@@ -3,13 +3,14 @@ import type { CollectionEntry } from 'astro:content';
 
 import { css, cx } from '@/styled-system/css';
 import { prose } from '@/styled-system/recipes';
+import { scrollable } from '@/styled-system/patterns';
 import { ScrollProgressBar } from '@/ui/scroll-progress-bar';
 import { formatLastModified } from '@/lib/datetime';
 import type { RemarkPluginFrontmatter } from '@/types/remark';
-
-import BaseLayout from './base-layout.astro';
 import Breadcrumb from '@/ui/breadcrumb.astro';
 import { PostNavigation } from '@/ui/post-navigation';
+
+import BaseLayout from './base-layout.astro';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
@@ -78,6 +79,23 @@ const postNavProps = {
 				size="lg"
 				class={css({ my: '16px' })}
 			/>
+
+			<div
+				class={scrollable({ direction: 'vertical', hideScrollbar: true, h: '100px' })}
+			>
+				Scrollable content Lorem ipsum dolor sit amet consectetur adipisicing
+				elit. Dignissimos qui ut enim voluptatum quos magni aliquam praesentium
+				officiis consequuntur quod molestias numquam quidem necessitatibus
+				cumque alias odit in repudiandae, at vitae quam rerum tempore pariatur.
+				Possimus minima corporis sed impedit facilis ipsam fugiat architecto
+				autem dolore assumenda natus, est doloremque facere. Corporis beatae
+				consequuntur assumenda dolorem dolor ducimus atque. Quasi consequuntur
+				dolor hic numquam dolorem sit laborum esse, ullam cumque tenetur
+				consequatur odit est sunt. Deleniti magni corrupti unde perspiciatis
+				tenetur doloremque, vel, harum eos asperiores reprehenderit laboriosam!
+				Aperiam quisquam harum laborum non quasi ipsum veritatis a aspernatur
+				facere cum!
+			</div>
 		</div>
 		<article class={cx(contentClasses, css({ mx: 'auto' }))}>
 			<header></header>
