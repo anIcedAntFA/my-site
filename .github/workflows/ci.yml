@@ -23,7 +23,12 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -81,7 +86,7 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -119,7 +124,12 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -175,7 +185,7 @@ jobs:
     timeout-minutes: 5
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -208,6 +218,11 @@ jobs:
     needs: [quality, typecheck, build]
     if: always()
     steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
       - name: Check CI Results
         run: |
           if [ "${{ needs.quality.result }}" != "success" ] || [ "${{ needs.typecheck.result }}" != "success" ] || [ "${{ needs.build.result }}" != "success" ]; then
