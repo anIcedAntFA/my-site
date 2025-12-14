@@ -19,7 +19,7 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 		);
 
 		const btnClasses = button({ size: 'sm', variant: 'outlined' });
-		const iconClasses = icon({ mode: 'mask', size: 'md' });
+		const iconClass = icon({ mode: 'mask', size: 'md' });
 
 		return (
 			<div
@@ -76,18 +76,19 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 							}),
 						)}
 					>
-						<span
+						<div
 							class={square({
 								h: 'calc({sizes.full} - 0.25rem)',
 								overflow: 'hidden',
 							})}
 						>
-							<i
+							<span
 								aria-hidden='true'
 								class={cx(
-									iconClasses,
+									iconClass,
 									css({
 										maskImage: '{assets.arrowUp}',
+										bg: 'fg.muted',
 										_groupHover: {
 											animation: 'icon-cycle-up',
 											animationDuration: 'longer',
@@ -96,10 +97,11 @@ export const BackToTopButton = component$<BackToTopButtonProps>(
 									}),
 								)}
 							/>
-						</span>
+						</div>
 						<span
 							class={css({
 								srOnly: true,
+								color: 'fg.muted',
 								md: { ml: '1.5', srOnly: false },
 							})}
 						>

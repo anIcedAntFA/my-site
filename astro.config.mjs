@@ -2,8 +2,8 @@
 import cloudflare from '@astrojs/cloudflare';
 import { rehypeHeadingIds } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
-import qwikdev from '@qwikdev/astro';
 import { defineConfig, fontProviders } from 'astro/config';
+import qwikdev from '@qwikdev/astro';
 
 import { rehypeCheckbox, rehypeSectionsForHeadings } from './plugin/rehype';
 import {
@@ -46,6 +46,9 @@ export default defineConfig({
 	],
 	output: 'static',
 	site: 'https://blog.ngockhoi96.dev',
+	prefetch: {
+		defaultStrategy: 'hover',
+	},
 	experimental: {
 		fonts: [
 			{

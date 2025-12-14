@@ -1,6 +1,7 @@
 import { defineConfig } from '@pandacss/dev';
 
 import { animationStyles } from '@/theme/animations';
+import { scrollable } from '@/theme/patterns';
 
 import { breakpoints } from './src/theme/breakpoints';
 import { conditions } from './src/theme/conditions';
@@ -82,8 +83,8 @@ export default defineConfig({
 	// Decides which syntax to use when writing CSS.
 	syntax: 'object-literal',
 
-	// // Whether to use lightningcss instead of postcss for css optimization.
-	// lightningcss: true,
+	// Whether to use lightningcss instead of postcss for css optimization.
+	lightningcss: true,
 
 	// // Browserslist query to target specific browsers.
 	// // Only used when lightningcss is set to `true`.
@@ -130,6 +131,13 @@ export default defineConfig({
 			borderLeft,
 			borderRight,
 			borderBottom,
+		},
+	},
+
+	// Common styling or layout patterns for your project.
+	patterns: {
+		extend: {
+			scrollable,
 		},
 	},
 
