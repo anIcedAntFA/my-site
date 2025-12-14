@@ -5,4 +5,6 @@ export const conditions = {
 	// Extend the default `dark` condition
 	dark: '.dark &, [data-theme="dark"] &',
 	blank: '&[target="_blank"]',
+	previous: '&[data-direction="previous"]',
+	next: '&[data-direction="next"]',
 };

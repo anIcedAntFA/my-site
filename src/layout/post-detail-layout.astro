@@ -9,6 +9,7 @@ import type { RemarkPluginFrontmatter } from '@/types/remark';
 
 import BaseLayout from './base-layout.astro';
 import Breadcrumb from '@/ui/breadcrumb.astro';
+import { PostNavigation } from '@/ui/post-navigation';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
@@ -29,6 +30,17 @@ const modifiedTime = formatLastModified(lastModified);
 const roundedMinutesRead = Math.ceil(readingTime.minutes);
 const displayMinutesRead = `${roundedMinutesRead} min read`;
 const wordCount = readingTime.words;
+
+const postNavProps = {
+	prevPost: {
+		slug: '/blog/adding-new-posts',
+		title: 'Adding new posts in AstroPaper theme',
+	},
+	nextPost: {
+		slug: '/blog/how-to-add-latex',
+		title: 'How to add LaTeX Equations in Astro blog posts',
+	},
+};
 ---
 
 <BaseLayout title={title} description={description}>
@@ -79,6 +91,15 @@ const wordCount = readingTime.words;
 			<div>
 				<slot />
 			</div>
+			<div class={cx(css({ my: '48px' }))}>
+				<PostNavigation {...postNavProps} />
+			</div>
 		</article>
+		Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt ipsa
+		voluptate excepturi minus a ea totam velit, quaerat ullam ratione neque
+		voluptates animi saepe necessitatibus consectetur sapiente! Soluta impedit
+		possimus alias ab deserunt vitae pariatur voluptatem fuga dolorum, suscipit
+		placeat? Aliquam blanditiis fuga molestiae officiis inventore, nobis maiores
+		ullam corrupti?
 	</main>
 </BaseLayout>

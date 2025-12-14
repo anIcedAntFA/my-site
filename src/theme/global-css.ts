@@ -4,12 +4,14 @@ export const globalCSS = defineGlobalStyles({
 	'*, *::before, *::after': {
 		transitionTimingFunction: 'ease-in-out',
 	},
+	html: {
+		scrollBehavior: 'smooth',
+	},
 	body: {
 		bg: 'bg',
 		color: 'fg',
 		minHeight: '100vh',
 		lineHeight: 'normal',
-		scrollBehavior: 'smooth',
 		fontFamily: 'body',
 		transitionProperty: 'background-color, color',
 		transitionDuration: 'slow',

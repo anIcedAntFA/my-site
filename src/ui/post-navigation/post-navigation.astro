@@ -1,0 +1,82 @@
+---
+import { cx } from '@/styled-system/css';
+import { icon, navLinkCard } from '@/styled-system/recipes';
+
+import { navStyles } from './style';
+
+/**
+ * Describes the data structure for a single navigational link to another post.
+ *
+ * @property {string} slug - The URL-friendly identifier for the post, used in the href attribute. Example: '/blog/my-awesome-post'
+ * @property {string} title - The full title of the post, displayed as the main text of the link.
+ */
+interface PostLink {
+	slug: string; // The URL for the post (e.g., '/blog/my-awesome-post')
+	title: string; // The title of the post to display
+}
+
+interface Props {
+	prevPost?: PostLink;
+	nextPost?: PostLink;
+}
+
+const { prevPost, nextPost } = Astro.props;
+
+const cardClasses = navLinkCard();
+const iconClass = icon({
+	size: { base: 'md', xs: 'lg', '2xl': 'xl' },
+});
+---
+
+<nav aria-label="Blog post navigation" class={navStyles}>
+	{
+		prevPost ? (
+			<a
+				aria-label={`Previous Post: ${prevPost.title}`}
+				href={prevPost.slug}
+				rel="prev"
+				class={cx('group', cardClasses.root)}
+				data-direction="previous"
+			>
+				<div class={cardClasses.content} data-direction="previous">
+					<span
+						aria-hidden="true"
+						class={cx(cardClasses.icon, iconClass)}
+					/>
+					<div class={cardClasses.inner}>
+						<span aria-hidden="true" class={cardClasses.title}>
+							Previous Post
+						</span>
+						<span class={cardClasses.description}>{prevPost.title}</span>
+					</div>
+				</div>
+			</a>
+		) : (
+			<div aria-hidden="true" />
+		)
+	}
+	{
+		nextPost && (
+			<a
+				aria-label={`Next Post: ${nextPost.title}`}
+				rel="next"
+				href={nextPost.slug}
+				class={cx('group', cardClasses.root)}
+				data-direction="next"
+			>
+				<div class={cardClasses.content} data-direction="next">
+					<div class={cardClasses.inner}>
+						<span aria-hidden="true" class={cardClasses.title}>
+							Next Post
+						</span>
+						<span class={cardClasses.description}>{nextPost.title}</span>
+					</div>
+					<span
+						aria-hidden="true"
+						class={cx(cardClasses.icon,iconClass)}
+					/>
+				</div>
+			</a>
+		)
+	}
+</nav>
