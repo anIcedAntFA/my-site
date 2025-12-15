@@ -28,6 +28,9 @@
 			// Optional
 			"@/theme/*": ["./src/theme/*"],
 			"@/plugin/*": ["./plugin/*"]
-		}
+		},
+		"sourceMap": true,
+		"inlineSources": true,
+		"skipLibCheck": true
 	}
 }

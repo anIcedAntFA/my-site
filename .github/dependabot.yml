@@ -32,11 +32,11 @@ updates:
         patterns:
           - "@pandacss/*"
           - "@pandabox/*"
-      eslint:
-        patterns:
-          - "eslint*"
-          - "@eslint/*"
-          - "@typescript-eslint/*"
+      # eslint:
+      #   patterns:
+      #     - "eslint*"
+      #     - "@eslint/*"
+      #     - "@typescript-eslint/*"
       typescript:
         patterns:
           - "typescript"

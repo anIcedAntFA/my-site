@@ -25,10 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v6
+      #   with:
+      #     node-version: 24.12.0
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -36,7 +36,7 @@ jobs:
           bun-version: latest
 
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.bun/install/cache
@@ -50,7 +50,7 @@ jobs:
         # Note: Panda CSS generation now runs automatically via prepare script
 
       - name: Cache styled-system
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: styled-system
           key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/theme/**/*.ts', 'src/**/*.{ts,tsx,astro}') }}
@@ -88,13 +88,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v6
+      #   with:
+      #     node-version: 24.12.0
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
       - name: Restore dependencies cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.bun/install/cache
@@ -108,7 +113,7 @@ jobs:
         # Note: Panda CSS generation now runs automatically via prepare script
 
       - name: Restore Panda cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: styled-system
           key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/theme/**/*.ts', 'src/**/*.{ts,tsx,astro}') }}
@@ -126,10 +131,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v6
+      #   with:
+      #     node-version: 24.12.0
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -137,7 +142,7 @@ jobs:
           bun-version: latest
 
       - name: Restore dependencies cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.bun/install/cache
@@ -151,7 +156,7 @@ jobs:
         # Note: Panda CSS generation now runs automatically via prepare script
 
       - name: Restore Panda cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: styled-system
           key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/theme/**/*.ts', 'src/**/*.{ts,tsx,astro}') }}
@@ -160,7 +165,7 @@ jobs:
         run: bun run build
 
       - name: Cache build artifacts
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: dist
           key: ${{ runner.os }}-build-${{ github.sha }}
@@ -191,7 +196,7 @@ jobs:
         uses: oven-sh/setup-bun@v2
 
       - name: Restore build cache
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: dist
           key: ${{ runner.os }}-build-${{ github.sha }}
@@ -218,11 +223,6 @@ jobs:
     needs: [quality, typecheck, build]
     if: always()
     steps:
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
-
       - name: Check CI Results
         run: |
           if [ "${{ needs.quality.result }}" != "success" ] || [ "${{ needs.typecheck.result }}" != "success" ] || [ "${{ needs.build.result }}" != "success" ]; then

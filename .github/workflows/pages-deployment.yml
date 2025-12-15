@@ -41,10 +41,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v6
+      #   with:
+      #     node-version: 24
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -52,7 +52,7 @@ jobs:
           bun-version: latest
 
       - name: Cache dependencies
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/.bun/install/cache
@@ -62,7 +62,7 @@ jobs:
             ${{ runner.os }}-bun-
 
       - name: Cache styled-system
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: styled-system
           key: ${{ runner.os }}-panda-${{ hashFiles('panda.config.ts', 'src/theme/**/*.ts', 'src/**/*.{ts,tsx,astro}') }}
