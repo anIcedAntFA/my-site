@@ -2,6 +2,7 @@ import { breadcrumbRecipe } from './breadcrumb';
 import { buttonRecipe } from './button';
 import { iconButtonRecipe } from './icon-button';
 import { navLinkCardRecipe } from './nav-link-card';
+import { tagSlotRecipe } from './tag';
 import { tooltipRecipe } from './tooltip';
 
 export const slotRecipes = {
@@ -9,5 +10,6 @@ export const slotRecipes = {
 	button: buttonRecipe,
 	iconButton: iconButtonRecipe,
 	navLinkCard: navLinkCardRecipe,
+	tag: tagSlotRecipe,
 	tooltip: tooltipRecipe,
 };

@@ -1,0 +1,41 @@
+export const TAG_VARIANTS = [
+	'javascript',
+	'css',
+	'typescript',
+	'testing',
+	'reactjs',
+	'astro',
+	'vuejs',
+	'cloudflare',
+	'git',
+	'linux',
+	'coding',
+	'qwik',
+	'pandacss',
+	'markdown',
+	'golang',
+	'postgres',
+	'docker',
+] as const;
+
+export type TagVariant = (typeof TAG_VARIANTS)[number];
+
+export const TAG_CONFIG: Record<TagVariant, { label: string }> = {
+	javascript: { label: 'javascript' },
+	css: { label: 'css' },
+	typescript: { label: 'typescript' },
+	testing: { label: 'testing' },
+	reactjs: { label: 'react.js' },
+	astro: { label: 'astro' },
+	vuejs: { label: 'vue.js' },
+	cloudflare: { label: 'cloudflare' },
+	git: { label: 'git' },
+	linux: { label: 'linux' },
+	coding: { label: 'coding' },
+	qwik: { label: 'qwik' },
+	pandacss: { label: 'pandacss' },
+	markdown: { label: 'markdown' },
+	golang: { label: 'golang' },
+	postgres: { label: 'postgres' },
+	docker: { label: 'docker' },
+};

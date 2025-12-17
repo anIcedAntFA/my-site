@@ -1,15 +1,16 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 
-import { css, cx } from '@/styled-system/css';
-import { prose } from '@/styled-system/recipes';
-import { scrollable } from '@/styled-system/patterns';
-import { ScrollProgressBar } from '@/ui/scroll-progress-bar';
 import { formatLastModified } from '@/lib/datetime';
+import { css, cx } from '@/styled-system/css';
+import { scrollable } from '@/styled-system/patterns';
+import { prose } from '@/styled-system/recipes';
 import type { RemarkPluginFrontmatter } from '@/types/remark';
 import Breadcrumb from '@/ui/breadcrumb.astro';
 import { PostNavigation } from '@/ui/post-navigation';
+import { ScrollProgressBar } from '@/ui/scroll-progress-bar';
 
+import { Tag } from '@/ui/tag';
 import BaseLayout from './base-layout.astro';
 
 interface Props {
@@ -110,6 +111,71 @@ const postNavProps = {
 				<slot />
 			</div>
 			<div class={cx(css({ my: '48px' }))}>
+				<div
+					class={css({mt: '4', display: 'flex', flexWrap: 'wrap', gap: '3'})}
+				>
+					<Tag variant="javascript" size="sm" />
+					<Tag variant="css" size="sm" />
+					<Tag variant="typescript" size="sm" />
+					<Tag variant="astro" size="sm" />
+					<Tag variant="pandacss" size="sm" />
+					<Tag variant="qwik" size="sm" />
+					<Tag variant="cloudflare" size="sm" />
+					<Tag variant="git" size="sm" count={24} />
+					<Tag variant="reactjs" size="sm" />
+					<Tag variant="coding" size="sm" count={3} />
+					<Tag variant="linux" size="sm" count={2} />
+					<Tag variant="vuejs" size="sm" count={15} />
+					<Tag variant="testing" size="sm" count={6} />
+					<Tag variant="markdown" size="sm" />
+					<Tag variant="golang" size="sm" />
+					<Tag variant="postgres" size="sm" />
+					<Tag variant="docker" size="sm" />
+				</div>
+				<br />
+				<div
+					class={css({mt: '4', display: 'flex', flexWrap: 'wrap', gap: '4'})}
+				>
+					<Tag variant="javascript" size="md" count={15} />
+					<Tag variant="css" size="md" count={3} />
+					<Tag variant="typescript" size="md" count={7} />
+					<Tag variant="cloudflare" size="md" count={24} />
+					<Tag variant="astro" size="sm" />
+					<Tag variant="git" size="md" count={6} />
+					<Tag variant="reactjs" size="md" count={2} />
+					<Tag variant="coding" size="md" />
+					<Tag variant="linux" size="md" />
+					<Tag variant="vuejs" size="md" />
+					<Tag variant="testing" size="md" />
+					<Tag variant="qwik" size="md" count={8} />
+					<Tag variant="pandacss" size="md" count={5} />
+					<Tag variant="markdown" size="md" count={4} />
+					<Tag variant="golang" size="md" count={10} />
+					<Tag variant="postgres" size="md" count={7} />
+					<Tag variant="docker" size="md" count={12} />
+				</div>
+				<br />
+				<div
+					class={css({mt: '4', display: 'flex', flexWrap: 'wrap', gap: '5'})}
+				>
+					<Tag variant="javascript" size="lg" count={15} />
+					<Tag variant="css" size="lg" count={3} />
+					<Tag variant="typescript" size="lg" count={7} />
+					<Tag variant="reactjs" size="lg" count={2} />
+					<Tag variant="cloudflare" size="lg" count={4} />
+					<Tag variant="git" size="lg" count={6} />
+					<Tag variant="astro" size="lg" />
+					<Tag variant="coding" size="lg" />
+					<Tag variant="linux" size="lg" />
+					<Tag variant="vuejs" size="lg" />
+					<Tag variant="testing" size="lg" />
+					<Tag variant="qwik" size="lg" count={8} />
+					<Tag variant="pandacss" size="lg" count={5} />
+					<Tag variant="markdown" size="lg" count={4} />
+					<Tag variant="golang" size="lg" count={10} />
+					<Tag variant="postgres" size="lg" count={7} />
+					<Tag variant="docker" size="lg" count={12} />
+				</div>
 				<PostNavigation {...postNavProps} />
 			</div>
 		</article>

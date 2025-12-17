@@ -1,0 +1,37 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+import { TAG_CONFIG, type TagVariant } from '@/config/tag.config';
+import { slugifyStr } from '@/lib/text';
+import { cx } from '@/styled-system/css';
+import { tag } from '@/styled-system/recipes';
+
+interface Props extends HTMLAttributes<'a'> {
+	variant: TagVariant;
+	size?: 'sm' | 'md' | 'lg';
+	count?: number;
+}
+
+const {
+	variant,
+	size = 'sm',
+	count,
+	class: className,
+	...anchorAttrs
+} = Astro.props;
+
+const label = TAG_CONFIG[variant].label;
+
+const tagClasses = tag({ variant, size });
+---
+
+<a
+	href={`/tags/${slugifyStr(label)}`}
+	aria-label={`Tag: ${label}`}
+	class={cx(tagClasses.root, className)}
+	{...anchorAttrs}
+>
+	<span aria-hidden="true" class={tagClasses.startElement} />
+	<span class={tagClasses.label}>{label}</span>
+	{count && <span aria-label={`${count} posts`} class={tagClasses.endElement}>{count}</span>}
+</a>
