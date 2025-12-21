@@ -1,0 +1,227 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+import type { TagVariant } from '@/config/tag.config';
+
+import { css, cx } from '@/styled-system/css';
+
+import { Tag } from '../tag';
+import { center, hstack, vstack } from '@/styled-system/patterns';
+import { flex } from '@/styled-system/patterns';
+import { stack } from '@/styled-system/patterns';
+import { wrap } from '@/styled-system/patterns';
+
+interface Props extends HTMLAttributes<'div'> {
+	modifiedDate: string;
+	readingTime: string;
+	title: string;
+	description: string;
+	thumbnail: string;
+	tags: TagVariant[];
+	postURL: string;
+}
+
+const {
+	modifiedDate,
+	readingTime,
+	title,
+	description,
+	thumbnail,
+	tags,
+	postURL,
+	class: classWrapper,
+} = Astro.props;
+
+// Styles defined inline using Panda CSS
+const postCardWrapper = css({
+	containerType: 'inline-size',
+	containerName: '',
+});
+
+const postCard = flex({
+	flexDir: 'column',
+	alignItems: 'start',
+	h: 'full',
+	border: 'md',
+	borderColor: '{colors.slate.700}',
+	rounded: {
+		base: 'md',
+		'@/xs': 'lg',
+		'@/sm': 'xl',
+	},
+	bg: 'bg.panel',
+	boxShadow: '3px 6px 0px 0px {colors.slate.700}',
+	translate: 'auto',
+	transitionProperty: 'border-color, translate',
+	transitionDuration: 'slow',
+	_supportHover: {
+		_hover: {
+			y: {
+				base: '-4px',
+				'@/xs': '-8px',
+				'@/sm': '-12px',
+			},
+		},
+	},
+});
+
+const thumbnailWrapper = cx(
+	'group',
+	center({
+		pos: 'relative',
+		h: { base: '220px', '@/xs': '240px' },
+		marginBlockStart: { base: '3', '@/xs': '4' },
+		marginBlockEnd: '8px',
+		mx: { base: '3', '@/xs': '4' },
+		rounded: {
+			base: 'sm',
+			'@/xs': 'md',
+			'@/sm': 'lg',
+		},
+		overflow: 'hidden',
+		_before: {
+			content: '""',
+			pos: 'absolute',
+			inset: '0',
+			zIndex: '1',
+			boxSize: 'full',
+			rounded: {
+				base: 'sm',
+				'@/xs': 'md',
+				'@/sm': 'lg',
+			},
+			bg: 'blackAlpha.400',
+			opacity: 0,
+			pointerEvents: 'none',
+			transitionProperty: 'opacity',
+			transitionDuration: 'slow',
+		},
+		_supportHover: {
+			_hover: {
+				_before: {
+					opacity: 1,
+				},
+			},
+		},
+	}),
+);
+
+const thumbnailStyle = css({
+	boxSize: 'full',
+	rounded: 'md',
+	objectFit: 'cover',
+	transitionProperty: 'transform',
+	transitionDuration: 'slower',
+	_supportHover: {
+		_groupHover: {
+			transform: 'scale(1.05)',
+		},
+	},
+});
+
+const header = hstack({
+	gap: '3',
+	px: { base: '3', '@/xs': '4' },
+	color: 'text.subtle',
+});
+
+const modifiedDateClass = css({
+	textStyle: 'sm',
+	whiteSpace: 'nowrap',
+});
+
+const readingTimeClass = css({
+	textStyle: 'sm',
+	whiteSpace: 'nowrap',
+});
+
+const body = vstack({
+	flexGrow: 1,
+	justifyContent: 'space-between',
+	gap: '2',
+	paddingBlockStart: '2',
+	px: { base: '3', '@/xs': '4' },
+});
+
+const heading = css({
+	cursor: 'pointer',
+	textStyle: 'xl',
+	fontWeight: 'bold',
+	'& a': {
+		bgGradient: 'to-r',
+		gradientFrom: 'color-mix(in srgb, {colors.accent} 60%, transparent)',
+		gradientTo: 'color-mix(in srgb, {colors.accent} 40%, transparent)',
+		bgRepeat: 'no-repeat',
+		bgPosition: 'left bottom',
+		bgSize: '0 40%',
+		transitionProperty: 'background-size',
+		transitionDuration: 'slow',
+	},
+	_supportHover: {
+		_hover: {
+			'& a': {
+				bgSize: '100% 40%',
+			},
+		},
+	},
+});
+
+const descriptionStyle = css({
+	color: 'text.muted',
+	textStyle: 'sm',
+	lineClamp: { base: '2', '@/xs': '3' },
+});
+
+const footer = flex({
+	paddingBlockStart: '3',
+	paddingBlockEnd: { base: '3', '@/xs': '4' },
+	px: { base: '3', '@/xs': '4' },
+});
+
+const tagList = wrap({
+	gap: '2',
+});
+---
+
+<div class={cx(postCardWrapper, classWrapper)}>
+	<article class={cx( postCard)}>
+		<a
+			aria-label={`Read article: ${title}`}
+			href={postURL}
+			class={thumbnailWrapper}
+		>
+			<img
+				src={thumbnail}
+				alt={`Thumbnail for ${title}`}
+				class={thumbnailStyle}
+			/>
+		</a>
+
+		<header class={header}>
+			<time datetime={modifiedDate} class={modifiedDateClass}>
+				Updated {modifiedDate}
+			</time>
+			<span aria-hidden="true">—</span>
+			<small class={readingTimeClass}>{readingTime}</small>
+		</header>
+
+		<div class={body}>
+			<h3 class={heading}>
+				<a href={postURL}>{title}</a>
+			</h3>
+			<p class={descriptionStyle}>{description}</p>
+		</div>
+
+		<footer class={footer}>
+			<ul class={tagList} aria-label="Article tags">
+				{
+					tags.map((tag) => (
+						<li>
+							<Tag variant={tag} size='sm'  />
+						</li>
+					))
+				}
+			</ul>
+		</footer>
+	</article>
+</div>

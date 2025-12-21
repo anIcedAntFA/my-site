@@ -11,6 +11,7 @@
 		"source.formatDocument": "always",
 		"source.organizeImports.biome": "explicit",
 		"source.action.useSortedAttributes.biome": "explicit",
+		"source.action.useSortedProperties.biome": "explicit",
 		"source.fixAll.biome": "always"
 	},
 

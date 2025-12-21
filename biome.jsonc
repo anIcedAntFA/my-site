@@ -158,7 +158,7 @@
 					"source": {
 						"organizeImports": "off",
 						"useSortedAttributes": "on",
-						"useSortedProperties": "on"
+						"useSortedProperties": "off"
 					}
 				}
 			}

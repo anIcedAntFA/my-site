@@ -120,6 +120,11 @@ export default defineConfig({
 			recipes,
 			slotRecipes,
 			breakpoints,
+			containerNames: ['post-card-wrapper'],
+			containerSizes: {
+				xs: '360px',
+				sm: '400px',
+			},
 		},
 	},
 

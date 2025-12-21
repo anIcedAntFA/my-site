@@ -1,0 +1,253 @@
+---
+import type { TagVariant } from '@/config/tag.config';
+import BaseLayout from '@/layout/base-layout.astro';
+import { cx } from '@/styled-system/css';
+import { container } from '@/styled-system/patterns';
+import { PostCard } from '@/ui/post-card';
+
+const articles = [
+	{
+		modifiedDate: 'July 4, 2025',
+		readingTime: '15 min read',
+		title: 'How to Build a Custom Tab Component in React.js and TypeScript',
+		description:
+			'A deep dive into creating accessible and reusable tab components from scratch using modern React features and TypeScript.',
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['reactjs', 'typescript', 'coding'],
+		postURL: '/articles/custom-tab-component',
+	},
+	{
+		modifiedDate: 'June 28, 2025',
+		readingTime: '8 min read',
+		title: 'Getting Started with Astro and View Transitions',
+		description:
+			"Discover how to build blazingly fast websites with Astro's unique island architecture and implement seamless page transitions.",
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['astro', 'javascript', 'linux'],
+		postURL: '/articles/getting-started-with-astro',
+	},
+	{
+		modifiedDate: 'June 15, 2025',
+		readingTime: '12 min read',
+		title: 'A Deep Dive into Modern CSS Styling',
+		description:
+			'Explore the power of CSS Modules, utility classes, and other modern techniques for creating scalable and maintainable styles.',
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['css', 'cloudflare'],
+		postURL: '/articles/modern-css-styling',
+	},
+	{
+		modifiedDate: 'June 10, 2025',
+		readingTime: '10 min read',
+		title: 'Advanced TypeScript Patterns for React Development',
+		description:
+			'Master advanced TypeScript techniques to build more robust and type-safe React applications with better developer experience.',
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['typescript', 'reactjs'],
+		postURL: '/articles/advanced-typescript-patterns',
+	},
+	{
+		modifiedDate: 'May 28, 2025',
+		readingTime: '6 min read',
+		title: 'Optimizing Web Performance with Modern Tools',
+		description:
+			'Learn how to use modern tools and techniques to optimize your web applications for better performance and user experience.',
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['javascript', 'cloudflare'],
+		postURL: '/articles/web-performance-optimization',
+	},
+	{
+		modifiedDate: 'May 15, 2025',
+		readingTime: '9 min read',
+		title: 'Building Scalable CSS Architecture',
+		description:
+			'Discover best practices for organizing and structuring CSS in large-scale applications using modern methodologies.',
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['css', 'astro'],
+		postURL: '/articles/scalable-css-architecture',
+	},
+	{
+		modifiedDate: 'May 2, 2025',
+		readingTime: '7 min read',
+		title: 'Understanding Modern JavaScript ES2024 Features',
+		description:
+			'Explore the latest JavaScript features introduced in ES2024, including new array methods, temporal API, and performance improvements.',
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['javascript', 'typescript'],
+		postURL: '/articles/javascript-es2024-features',
+	},
+	{
+		modifiedDate: 'April 20, 2025',
+		readingTime: '11 min read',
+		title: 'Building Accessible Web Components with ARIA',
+		description:
+			'Learn how to create inclusive web components that work for everyone using proper ARIA attributes and semantic HTML.',
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['css', 'javascript'],
+		postURL: '/articles/accessible-web-components',
+	},
+	{
+		modifiedDate: 'April 8, 2025',
+		readingTime: '5 min read',
+		title: 'Server-Side Rendering vs Static Site Generation',
+		description:
+			'Compare SSR and SSG approaches to understand when to use each rendering strategy for optimal performance.',
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['astro', 'reactjs'],
+		postURL: '/articles/ssr-vs-ssg-comparison',
+	},
+	{
+		modifiedDate: 'March 25, 2025',
+		readingTime: '13 min read',
+		title: 'Advanced Git Workflows for Development Teams',
+		description:
+			"Master complex Git workflows, branching strategies, and collaboration techniques to improve your team's development process.",
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['cloudflare', 'javascript'],
+		postURL: '/articles/advanced-git-workflows',
+	},
+	{
+		modifiedDate: 'March 12, 2025',
+		readingTime: '8 min read',
+		title: 'CSS Grid vs Flexbox: When to Use Each',
+		description:
+			'A comprehensive guide to choosing between CSS Grid and Flexbox based on your layout requirements and design patterns.',
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['css', 'astro'],
+		postURL: '/articles/css-grid-vs-flexbox',
+	},
+	{
+		modifiedDate: 'February 28, 2025',
+		readingTime: '14 min read',
+		title: 'Implementing Real-time Features with WebSockets',
+		description:
+			'Build interactive real-time applications using WebSockets, including chat systems, live updates, and collaborative features.',
+		thumbnail: 'vegetables-card-thumbnail.jpg',
+		tags: ['typescript', 'javascript'],
+		postURL: '/articles/websockets-real-time-features',
+	},
+];
+---
+
+<BaseLayout title="Blog - ngockhoi96">
+	<div class={cx(container(), 'blog-page')}>
+		<header class="blog-header">
+			<h1>Latest Articles</h1>
+			<p>Thoughts on web development, programming, and technology</p>
+		</header>
+
+		<section class="post-grid" aria-label="Blog articles">
+			{
+				articles.slice(0, 1).map((article) => (
+					<PostCard {...article} tags={article.tags as TagVariant[]} />
+				))
+			}
+		</section>
+
+		<nav class="blog-navigation" aria-label="Blog navigation">
+			<a href="/blog/my-go-to-css-pseudo-element-use-cases">
+				My Go-To CSS Pseudo-Element Use Cases
+			</a>
+		</nav>
+	</div>
+</BaseLayout>
+
+<style>
+	.blog-page {
+		padding-block: rem(32px);
+	}
+
+	.blog-header {
+		margin-block-end: rem(48px);
+		text-align: center;
+	}
+
+	.blog-header h1 {
+		margin-block-end: rem(12px);
+		color: var(--clr-text-primary);
+		font-size: var(--fs-2xl);
+		font-weight: var(--fw-bold);
+	}
+
+	.blog-header p {
+		color: var(--clr-text-muted);
+		font-size: var(--fs-lg);
+	}
+
+	.post-grid {
+		display: grid;
+		/* grid-template-columns: repeat(3, 1fr); */
+		gap: 1.5rem;
+		margin-block-end: 3rem;
+	}
+
+	/* Tablet and smaller desktop - 2 columns */
+	@media (--xl) {
+		.post-grid {
+			grid-template-columns: repeat(2, 1fr);
+			gap: rem(32px);
+		}
+
+		.blog-header {
+			margin-block-end: rem(36px);
+		}
+	}
+
+	@media (--lg) {
+		.post-grid {
+			gap: rem(24px);
+		}
+		.blog-header {
+			margin-block-end: rem(24px);
+		}
+	}
+
+	/* Mobile - 1 column */
+	@media (--md) {
+		.post-grid {
+			grid-template-columns: 1fr;
+			gap: rem(20px);
+		}
+
+		.blog-page {
+			padding-block: rem(24px);
+		}
+
+		.blog-header {
+			margin-block-end: rem(24px);
+		}
+
+		.blog-header h1 {
+			font-size: var(--fs-xl);
+		}
+
+		.blog-header p {
+			font-size: var(--fs-md);
+		}
+	}
+
+	/* Small screens */
+	@media (--sm) {
+		.post-grid {
+			gap: rem(16px);
+		}
+	}
+
+	.blog-navigation {
+		text-align: center;
+		padding-block-start: rem(24px);
+		border-top: 1px solid var(--clr-border);
+	}
+
+	.blog-navigation a {
+		color: var(--clr-primary);
+		text-decoration: none;
+		font-weight: var(--fw-medium);
+		transition: color var(--td-normal);
+	}
+
+	.blog-navigation a:hover {
+		color: var(--clr-primary-hover);
+		text-decoration: underline;
+	}
+</style>
