@@ -12,7 +12,7 @@ const types = [
 	'✅ test',
 	'⬆️ update-deps',
 	'🔧 configs',
-	'♻️ chore',
+	'🔨 chore',
 	'💥 breaking',
 	'🚀 deploy',
 ];
